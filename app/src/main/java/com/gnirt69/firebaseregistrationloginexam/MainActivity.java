@@ -12,10 +12,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
-    public void btnRegistration_Click(View v) {
-        Intent i = new Intent(MainActivity.this, RegistrationActivity.class);
-        startActivity(i);
-    }
     public void btnLogin_Click(View v) {
         Intent i = new Intent(MainActivity.this, LoginActivity.class);
         startActivity(i);

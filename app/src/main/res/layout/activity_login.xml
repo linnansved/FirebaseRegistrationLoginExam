@@ -73,11 +73,31 @@
         android:layout_centerInParent="true"
         android:textAlignment="center"
         android:typeface="monospace"
-        android:layout_below="@+id/txtEmailLogin"
-/>
+        android:layout_below="@+id/txtEmailLogin" />
+
+    <TextView
+        android:id="@+id/new_user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtPasswordLogin"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:text=" Add a new user!"
+        android:onClick="btnRegistration_Click"
+        android:clickable="true"/>
+
+    <TextView
+        android:id="@+id/forgot_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/new_user"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text=" Forgot your password?"
+        android:clickable="true"
+        android:onClick="gotoForgotPass"/>
 
     <Button
-
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Log in"
@@ -89,6 +109,32 @@
         android:background="@drawable/green_but"
         android:textColor="#FFFFFF"
         android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/new_us_but"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_below="@+id/txtPasswordLogin"
+        android:layout_marginTop="23dp"
+        android:layout_toLeftOf="@id/new_user"
+        android:background="@drawable/blue_but_small"
+        android:text="+"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:onClick="btnRegistration_Click" />
+
+    <Button
+        android:id="@+id/forgot_pas_but"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_below="@+id/new_user"
+        android:layout_marginTop="8dp"
+        android:layout_toLeftOf="@id/forgot_password"
+        android:background="@drawable/blue_but_small"
+        android:text="@string/question"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:onClick="gotoForgotPass"/>
 
 </RelativeLayout>
 
