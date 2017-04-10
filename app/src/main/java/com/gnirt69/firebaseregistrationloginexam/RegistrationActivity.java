@@ -22,7 +22,8 @@ public class RegistrationActivity extends AppCompatActivity {
     private EditText txtEmailAddress;
     private EditText txtPassword;
     private FirebaseAuth firebaseAuth;
-    private EditText txtUsername;
+    private EditText txtPassword2;
+    public EditText txtNickname;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +31,8 @@ public class RegistrationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_registration);
         txtEmailAddress = (EditText) findViewById(R.id.txtEmailRegistration);
         txtPassword = (EditText) findViewById(R.id.txtPasswordRegistration);
-        txtUsername = (EditText) findViewById(R.id.txtUsernameRegistration);
+        txtPassword2 = (EditText) findViewById(R.id.txtPasswordRegistration2);
+        txtNickname = (EditText) findViewById(R.id.txtNicknameRegistration);
         firebaseAuth = FirebaseAuth.getInstance();
     }
     public void btnRegistrationUser_Click(View v) {
