@@ -7,51 +7,89 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.gnirt69.firebaseregistrationloginexam.LoginActivity">
+    tools:context="com.gnirt69.firebaseregistrationloginexam.LoginActivity"
+    android:background="@drawable/background">
 
-    <TextView
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/tapetaplogo"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/linear" />
+
+
+    <LinearLayout
+        android:id="@+id/linear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Email Address:"
-        android:id="@+id/textView"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true">
+
+        <ImageView
+            android:id="@+id/whitesq2"
+            android:layout_width="250dp"
+            android:layout_height="300dp"
+            android:src="@drawable/whiteback"/>
+
+    </LinearLayout>
+    <TextView
+        android:id="@+id/heading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/linear"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="30dp"
+        android:background="@android:color/transparent"
+        android:ems="10"
+        android:text="LOG IN BELOW!"
+        android:textAlignment="center"
+        android:textColor="#0080ff"
+        android:textStyle="bold"
+        android:typeface="monospace" />
+
 
     <EditText
+        android:id="@+id/txtEmailLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/txtEmailLogin"
-        android:layout_below="@+id/textView"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
+        android:layout_marginTop="20dp"
+        android:hint="Enter email"
+        android:inputType="textEmailAddress"
+        android:layout_alignStart="@+id/txtPasswordLogin"
+        android:layout_alignEnd="@+id/txtPasswordLogin"
+        android:textAlignment="center"
+        android:typeface="monospace"
+        android:layout_below="@+id/heading"
         />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Password"
-        android:id="@+id/textView2"
-        android:layout_below="@+id/txtEmailLogin"
-        android:layout_alignParentStart="true" />
-
     <EditText
+        android:id="@+id/txtPasswordLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:inputType="textPassword"
         android:ems="10"
-        android:id="@+id/txtPasswordLogin"
-        android:layout_below="@+id/textView2"
-        android:layout_alignParentStart="true"
-        android:layout_alignEnd="@+id/txtEmailLogin" />
+        android:hint="Enter password"
+        android:layout_centerInParent="true"
+        android:textAlignment="center"
+        android:typeface="monospace"
+        android:layout_below="@+id/txtEmailLogin"
+/>
 
     <Button
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Login"
+        android:text="Log in"
         android:id="@+id/btnUserLogin"
         android:onClick="btnUserLogin_Click"
-        android:layout_below="@+id/txtPasswordLogin"
-        android:layout_centerHorizontal="true" />
+        android:layout_below="@+id/linear"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/green_but"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold" />
+
 </RelativeLayout>
+
+
