@@ -9,6 +9,16 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.gnirt69.firebaseregistrationloginexam.RegistrationActivity">
 
+    <EditText
+        android:id="@+id/editText3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/txtEmailRegistration"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView2"
+        android:ems="10"
+        android:inputType="textPassword" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -44,14 +54,53 @@
         android:layout_below="@+id/textView2"
         android:layout_alignParentStart="true"
         android:layout_alignEnd="@+id/txtEmailRegistration" />
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Repeat Pass"
+        android:id="@+id/textView3"
+        android:layout_below="@+id/txtPasswordRegistration"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/txtPasswordAgain"
+        android:layout_below="@+id/textView3"
+        android:layout_alignParentStart="true"
+        android:layout_alignEnd="@+id/txtEmailRegistration" />
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Username"
+        android:id="@+id/textView4"
+        android:layout_below="@+id/txtPasswordAgain"
+        android:layout_alignParentStart="true" />
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/usernameRegistration"
+        android:layout_below="@+id/textView4"
+        android:layout_marginTop="10dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignEnd="@+id/txtEmailRegistration" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Registration"
+        android:text="Register"
         android:id="@+id/btnRegistrationUser"
         android:onClick="btnRegistrationUser_Click"
-        android:layout_below="@+id/txtPasswordRegistration"
-        android:layout_centerHorizontal="true" />
+        android:layout_below="@+id/usernameRegistration"
+        android:layout_toEndOf="@+id/textView"
+        android:layout_marginTop="104dp" />
 
 </RelativeLayout>
