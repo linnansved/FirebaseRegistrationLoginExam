@@ -35,22 +35,25 @@ public class RegistrationActivity extends AppCompatActivity {
         txtNickname = (EditText) findViewById(R.id.txtNicknameRegistration);
         firebaseAuth = FirebaseAuth.getInstance();
     }
+
     public void btnRegistrationUser_Click(View v) {
+
+       //if(checkPass()){
 
         final ProgressDialog progressDialog = ProgressDialog.show(RegistrationActivity.this, "Please wait...", "Processing...", true);
         (firebaseAuth.createUserWithEmailAndPassword(txtEmailAddress.getText().toString(), txtPassword.getText().toString()))
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
+
             public void onComplete(@NonNull Task<AuthResult> task) {
                 progressDialog.dismiss();
-
 
                 if (task.isSuccessful()) {
                     Toast.makeText(RegistrationActivity.this, "Registration successful", Toast.LENGTH_LONG).show();
                     Intent i = new Intent(RegistrationActivity.this, LoginActivity.class);
                     startActivity(i);
                 }
-                else 
+                else
                 {
                     Log.e("ERROR", task.getException().toString());
                     Toast.makeText(RegistrationActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
@@ -58,4 +61,13 @@ public class RegistrationActivity extends AppCompatActivity {
             }
         });
     }
+  //  }
+  /*  private boolean checkPass() {
+        if (txtPassword == txtPassword2){
+            Toast.makeText(RegistrationActivity.this, "Matching password", Toast.LENGTH_LONG).show();
+            return true;
+        }else {
+            return false;
+        }
+    }*/
 }

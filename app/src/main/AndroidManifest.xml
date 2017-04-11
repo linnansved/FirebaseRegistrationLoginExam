@@ -19,7 +19,10 @@
         </activity>
         <activity android:name=".RegistrationActivity" />
         <activity android:name=".ProfileActivity" />
-        <activity android:name=".EditUser"></activity>
+        <activity android:name=".EditUser" />
+        <activity android:name=".ForgotPassword" />
+        <activity android:name=".UserInfo"></activity>
+
     </application>
 
 </manifest>

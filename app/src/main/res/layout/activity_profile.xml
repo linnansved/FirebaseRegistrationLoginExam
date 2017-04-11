@@ -35,4 +35,14 @@
         android:layout_marginTop="70dp"
         android:layout_toEndOf="@+id/textView3"
         android:text="Log Out" />
+    <Button
+        android:id="@+id/editUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvEmailProfile"
+        android:layout_marginTop="140dp"
+        android:layout_toEndOf="@+id/textView3"
+        android:text="Edit user"
+        android:onClick="editUser_Click"/>
+
 </RelativeLayout>

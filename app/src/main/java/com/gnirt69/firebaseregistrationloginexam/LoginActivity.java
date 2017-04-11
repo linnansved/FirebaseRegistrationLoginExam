@@ -56,4 +56,10 @@ public class LoginActivity extends AppCompatActivity {
         Intent i = new Intent(LoginActivity.this, RegistrationActivity.class);
         startActivity(i);
     }
+
+    public void btnForgotPwd_Click(View v) {
+        Intent i = new Intent(LoginActivity.this, ForgotPassword.class);
+        startActivity(i);
+    }
+
 }

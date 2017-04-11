@@ -29,7 +29,8 @@
             android:id="@+id/whitesq2"
             android:layout_width="250dp"
             android:layout_height="300dp"
-            android:src="@drawable/whiteback"/>
+            android:background="@android:color/transparent"
+            />
 
     </LinearLayout>
     <TextView
@@ -96,7 +97,7 @@
         android:layout_marginTop="10dp"
         android:text=" Forgot your password?"
         android:clickable="true"
-        android:onClick="gotoForgotPass"/>
+        android:onClick="btnForgotPwd_Click"/>
 
     <Button
         android:layout_width="wrap_content"
@@ -135,7 +136,8 @@
         android:text="@string/question"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
-        android:onClick="gotoForgotPass"/>
+        android:onClick="btnForgotPwd_Click"/>
+
 
 </RelativeLayout>
 

@@ -3,6 +3,7 @@ package com.gnirt69.firebaseregistrationloginexam;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Button;
 import android.content.Intent;
@@ -46,6 +47,9 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             startActivity(new Intent(this, LoginActivity.class));
         }
     }
-
+    public void editUser_Click(View v) {
+        Intent i = new Intent(ProfileActivity.this, EditUser.class);
+        startActivity(i);
+    }
 
 }
