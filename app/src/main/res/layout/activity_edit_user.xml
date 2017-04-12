@@ -20,6 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:layout_centerHorizontal="true"
         android:layout_below="@+id/tapetaplogo"
         android:paddingBottom="@dimen/activity_vertical_margin"
         android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -29,85 +30,120 @@
 
         <EditText
             android:id="@+id/old_email"
-            android:layout_width="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="old_email"
+            android:layout_marginTop="0dp"
+            android:ems="10"
+            android:hint="Enter old e-mail"
             android:inputType="textEmailAddress"
             android:maxLines="1"
-            android:singleLine="true" />
+            android:textAlignment="center"
+            android:typeface="monospace"
+            android:singleLine="true"
+            />
+
 
         <EditText
             android:id="@+id/new_email"
-            android:layout_width="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="new_email"
+            android:layout_marginTop="10dp"
+            android:ems="10"
+            android:hint="Enter new e-mail"
             android:inputType="textEmailAddress"
             android:maxLines="1"
-            android:singleLine="true" />
+            android:textAlignment="center"
+            android:typeface="monospace"
+            android:singleLine="true"
+            />
+
 
         <EditText
             android:id="@+id/password"
-            android:layout_width="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:ems="10"
+            android:hint="Enter old password"
             android:focusableInTouchMode="true"
-            android:hint="prompt_password"
             android:imeActionId="@+id/login"
             android:imeOptions="actionUnspecified"
             android:inputType="textPassword"
             android:maxLines="1"
-            android:singleLine="true" />
+            android:singleLine="true"
+            android:textAlignment="center"
+            android:typeface="monospace"
+            />
 
         <EditText
             android:id="@+id/newPassword"
-            android:layout_width="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:ems="10"
+            android:hint="Enter new password"
             android:focusableInTouchMode="true"
-            android:hint="new_pass"
             android:imeActionId="@+id/login"
             android:imeOptions="actionUnspecified"
             android:inputType="textPassword"
             android:maxLines="1"
-            android:singleLine="true" />
+            android:singleLine="true"
+            android:textAlignment="center"
+            android:typeface="monospace"
+            />
 
         <Button
             android:id="@+id/changeEmail"
+            android:layout_gravity="center_horizontal"
             style="?android:textAppearanceSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/green_but"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
             android:layout_marginTop="16dp"
-            android:background="@color/colorPrimaryDark"
-            android:text="btn_change_email"
-            android:textColor="@android:color/white"
-            android:textStyle="bold" />
+            android:text="    SAVE CHANGES   "/>
 
         <Button
             android:id="@+id/changePass"
+            android:layout_gravity="center_horizontal"
             style="?android:textAppearanceSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/green_but"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
             android:layout_marginTop="16dp"
-            android:background="@color/colorPrimaryDark"
-            android:text="btn_change_pwd"
-            android:textColor="@android:color/white"
-            android:textStyle="bold" />
+            android:text="    SAVE CHANGES   "/>
+
 
         <Button
             android:id="@+id/change_email_button"
+            android:layout_gravity="center_horizontal"
             style="?android:textAppearanceSmall"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/blue_big_but"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
             android:layout_marginTop="16dp"
-            android:text="Change e-mail"
-            android:textStyle="bold" />
-
+            android:text="    CHANGE E-MAIL   "/>
         <Button
             android:id="@+id/change_password_button"
+            android:layout_gravity="center_horizontal"
             style="?android:textAppearanceSmall"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/blue_big_but"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
             android:layout_marginTop="16dp"
-            android:text="Change password"
-            android:textStyle="bold" />
+            android:text="    CHANGE PASSWORD   "/>
+
 
     </LinearLayout>
 
