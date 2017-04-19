@@ -44,4 +44,18 @@
         android:text="Edit user"
         android:onClick="editUser_Click"/>
 
+
+    <Button
+        android:id="@+id/addPhoto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvEmailProfile"
+        android:layout_marginTop="210dp"
+        android:layout_toEndOf="@+id/textView3"
+        android:text="Add Photo"
+        android:onClick="addPhoto_Click"/>
+
+
+
+
 </RelativeLayout>

@@ -21,8 +21,8 @@
         <activity android:name=".ProfileActivity" />
         <activity android:name=".EditUser" />
         <activity android:name=".ForgotPassword" />
-        <activity android:name=".UserInfo"></activity>
-
+        <activity android:name=".UserInfo" />
+        <activity android:name=".AddPhoto"></activity>
     </application>
 
 </manifest>
