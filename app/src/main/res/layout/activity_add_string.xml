@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context=".EditUser"
+    tools:context="com.gnirt69.firebaseregistrationloginexam.AddString"
     android:background="@drawable/background">
 
     <ImageView
@@ -28,36 +27,35 @@
         android:paddingTop="@dimen/activity_vertical_margin"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/buttonChoose"
-            android:text="Choose photo"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/green_but"
-            android:textColor="#FFFFFF"
-            android:textStyle="bold"/>
+    <EditText
+        android:id="@+id/photoString"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:hint="Enter word"
+        android:focusableInTouchMode="true"
+        android:imeActionId="@+id/login"
+        android:imeOptions="actionUnspecified"
+        android:inputType="textPassword"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:textAlignment="center"
+        android:typeface="monospace"
+        />
 
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/buttonUpload"
-            android:text="Upload photo"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/green_but"
-            android:textColor="#FFFFFF"
-            android:textStyle="bold"
-            android:layout_marginTop="10dp"
-            />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/showUploadedPic"
-            tools:layout_editor_absoluteY="8dp"
-            tools:layout_editor_absoluteX="8dp" />
-
+    <Button
+        android:id="@+id/saveString"
+        android:layout_gravity="center_horizontal"
+        style="?android:textAppearanceSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/green_but"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp"
+        android:text="    SAVE WORD   "/>
     </LinearLayout>
 
 </RelativeLayout>

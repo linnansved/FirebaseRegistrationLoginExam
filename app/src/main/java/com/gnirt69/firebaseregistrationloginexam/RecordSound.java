@@ -1,7 +1,4 @@
 package com.gnirt69.firebaseregistrationloginexam;
-
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.app.ProgressDialog;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
@@ -33,6 +30,8 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+
+
 public class RecordSound extends AppCompatActivity {
 
     private static final String LOG_TAG = "AudioRecordTest";
@@ -45,7 +44,7 @@ public class RecordSound extends AppCompatActivity {
     private PlayButton   mPlayButton = null;
     private MediaPlayer   mPlayer = null;
 
-    //private Button mUploadButton = null;
+    private Button mUploadButton = null;
 
     private StorageReference mUpload;
 
@@ -60,39 +59,6 @@ public class RecordSound extends AppCompatActivity {
     // Requesting permission to RECORD_AUDIO
     private boolean permissionToRecordAccepted = false;
     private String [] permissions = {Manifest.permission.RECORD_AUDIO};
-
-    @Override
-    public void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
-
-        //mRecordButton = (RecordButton) findViewById(R.id.RecordButton);
-        //mPlayButton = (PlayButton) findViewById(R.id.PlayButton);
-
-        mUpload = FirebaseStorage.getInstance().getReference();
-        mProgress = new ProgressDialog(this);
-
-        // Record to the external cache directory for visibility
-        mAudioName = getExternalCacheDir().getAbsolutePath();
-        mAudioName += "/" +generateRandom().toString()+".3gp";
-
-        ActivityCompat.requestPermissions(this, permissions, REQUEST_RECORD_AUDIO_PERMISSION);
-
-
-        LinearLayout ll = new LinearLayout(this);
-        mRecordButton = new RecordButton(this);
-        ll.addView(mRecordButton,
-                new LinearLayout.LayoutParams(
-                        ViewGroup.LayoutParams.WRAP_CONTENT,
-                        ViewGroup.LayoutParams.WRAP_CONTENT,
-                        0));
-        mPlayButton = new PlayButton(this);
-        ll.addView(mPlayButton,
-                new LinearLayout.LayoutParams(
-                        ViewGroup.LayoutParams.WRAP_CONTENT,
-                        ViewGroup.LayoutParams.WRAP_CONTENT,
-                        0));
-        setContentView(ll);
-    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -113,6 +79,7 @@ public class RecordSound extends AppCompatActivity {
             stopRecording();
         }
     }
+
 
     private void onPlay(boolean start) {
         if (start) {
@@ -206,6 +173,34 @@ public class RecordSound extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onCreate(Bundle icicle) {
+        super.onCreate(icicle);
+
+        mUpload = FirebaseStorage.getInstance().getReference();
+        mProgress = new ProgressDialog(this);
+
+        // Record to the external cache directory for visibility
+        mAudioName = getExternalCacheDir().getAbsolutePath();
+        mAudioName += "/" +generateRandom().toString()+".3gp";
+
+        ActivityCompat.requestPermissions(this, permissions, REQUEST_RECORD_AUDIO_PERMISSION);
+
+        LinearLayout ll = new LinearLayout(this);
+        mRecordButton = new RecordButton(this);
+        ll.addView(mRecordButton,
+                new LinearLayout.LayoutParams(
+                        ViewGroup.LayoutParams.WRAP_CONTENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT,
+                        0));
+        mPlayButton = new PlayButton(this);
+        ll.addView(mPlayButton,
+                new LinearLayout.LayoutParams(
+                        ViewGroup.LayoutParams.WRAP_CONTENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT,
+                        0));
+        setContentView(ll);
+    }
 
     @Override
     public void onStop() {
@@ -252,6 +247,7 @@ public class RecordSound extends AppCompatActivity {
         });
     }
 
+
     private String generateRandom() {
 
         String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
@@ -259,6 +255,3 @@ public class RecordSound extends AppCompatActivity {
         return timeStamp;
     }
 }
-
-
-

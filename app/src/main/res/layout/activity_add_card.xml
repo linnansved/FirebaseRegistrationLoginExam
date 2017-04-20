@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.gnirt69.firebaseregistrationloginexam.AddCard"
+    android:background="@drawable/background">
+
+
+    <Button
+        android:id="@+id/addPhoto"
+        android:layout_gravity="center_horizontal"
+        style="?android:textAppearanceSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/blue_big_but"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:text="    Upload photo   "
+        android:onClick="goToAddPhoto_Click"/>
+
+    <Button
+        android:id="@+id/addAudio"
+        android:layout_gravity="center_horizontal"
+        style="?android:textAppearanceSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/blue_big_but"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:layout_marginTop="150dp"
+        android:text="    Record the word   "
+        android:onClick="goToAddSound_Click"
+        />
+    <Button
+        android:id="@+id/addString"
+        android:layout_gravity="center_horizontal"
+        style="?android:textAppearanceSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/blue_big_but"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:layout_marginTop="250dp"
+        android:text="   Set name of word   "
+        android:onClick="goToAddString_Click"/>
+
+
+</RelativeLayout>

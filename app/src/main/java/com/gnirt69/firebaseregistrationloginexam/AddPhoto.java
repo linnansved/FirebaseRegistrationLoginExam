@@ -82,11 +82,9 @@ public class AddPhoto extends AppCompatActivity implements
                 photoString.setVisibility(View.GONE);
                 saveString.setVisibility(View.GONE);
                 imageView.setVisibility(View.VISIBLE);
-                Intent i = new Intent(AddPhoto.this, RecordSound.class);
-                startActivity(i);
+
             }
         });
-
     }
 
     private void showFileChooser() {

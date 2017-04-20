@@ -52,8 +52,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         startActivity(i);
     }
 
-    public void addPhoto_Click(View v) {
-        Intent i = new Intent(ProfileActivity.this, AddPhoto.class);
+    public void addCard_Click(View v) {
+        Intent i = new Intent(ProfileActivity.this, AddCard.class);
         startActivity(i);
     }
 

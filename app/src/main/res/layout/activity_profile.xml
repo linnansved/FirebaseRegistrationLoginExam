@@ -56,7 +56,7 @@
         android:layout_marginTop="210dp"
         android:layout_toEndOf="@+id/textView3"
         android:text="Add Photo"
-        android:onClick="addPhoto_Click"/>
+        android:onClick="addCard_Click"/>
 
     <Button
         android:id="@+id/UserClick"
