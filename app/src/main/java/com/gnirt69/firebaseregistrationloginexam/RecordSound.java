@@ -78,7 +78,6 @@ public class RecordSound extends AppCompatActivity {
         ActivityCompat.requestPermissions(this, permissions, REQUEST_RECORD_AUDIO_PERMISSION);
 
 
-
         LinearLayout ll = new LinearLayout(this);
         mRecordButton = new RecordButton(this);
         ll.addView(mRecordButton,
@@ -94,7 +93,6 @@ public class RecordSound extends AppCompatActivity {
                         0));
         setContentView(ll);
     }
-
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -253,7 +251,6 @@ public class RecordSound extends AppCompatActivity {
 
         });
     }
-
 
     private String generateRandom() {
 
