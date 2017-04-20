@@ -24,8 +24,6 @@ public class AddPhoto extends AppCompatActivity implements
     private ImageView imageView, logo;
     private Button buttonChoose, buttonUpload;
     private Uri filePath;
-    private Button addPhoto, addAudio, addString, saveString;
-    private EditText photoString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,54 +35,13 @@ public class AddPhoto extends AppCompatActivity implements
         imageView = (ImageView) findViewById(R.id.showUploadedPic);
         buttonChoose = (Button) findViewById(R.id.buttonChoose);
         buttonUpload = (Button) findViewById(R.id.buttonUpload);
-        addPhoto = (Button) findViewById(R.id.addPhoto);
-        addAudio = (Button) findViewById(R.id.addAudio);
-        addString = (Button) findViewById(R.id.addString);
-        photoString = (EditText) findViewById(R.id.photoString);
-        saveString = (Button) findViewById(R.id.saveString);
         buttonChoose.setOnClickListener(this);
         buttonUpload.setOnClickListener(this);
 
-        buttonChoose.setVisibility(View.GONE);
-        buttonUpload.setVisibility(View.GONE);
-        photoString.setVisibility(View.GONE);
-        saveString.setVisibility(View.GONE);
-        imageView.setVisibility(View.GONE);
+        buttonChoose.setVisibility(View.VISIBLE);
+        buttonUpload.setVisibility(View.VISIBLE);
+        imageView.setVisibility(View.VISIBLE);
 
-        addPhoto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                buttonChoose.setVisibility(View.VISIBLE);
-                buttonUpload.setVisibility(View.VISIBLE);
-                photoString.setVisibility(View.GONE);
-                saveString.setVisibility(View.GONE);
-                imageView.setVisibility(View.VISIBLE);
-                logo.setVisibility(View.GONE);
-            }
-        });
-
-        addString.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                buttonChoose.setVisibility(View.GONE);
-                buttonUpload.setVisibility(View.GONE);
-                photoString.setVisibility(View.VISIBLE);
-                saveString.setVisibility(View.VISIBLE);
-                imageView.setVisibility(View.VISIBLE);
-            }
-        });
-
-        addAudio.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                buttonChoose.setVisibility(View.GONE);
-                buttonUpload.setVisibility(View.GONE);
-                photoString.setVisibility(View.GONE);
-                saveString.setVisibility(View.GONE);
-                imageView.setVisibility(View.VISIBLE);
-
-            }
-        });
     }
 
     private void showFileChooser() {
@@ -106,6 +63,7 @@ public class AddPhoto extends AppCompatActivity implements
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             progressDialog.dismiss();
                             Toast.makeText(getApplicationContext(), "File Uploaded", Toast.LENGTH_LONG).show();
+                            Intent i = new Intent(AddPhoto.this, AddString.class);
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
