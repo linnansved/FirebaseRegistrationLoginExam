@@ -39,8 +39,8 @@ public class AddPhoto extends AppCompatActivity implements
         buttonUpload.setOnClickListener(this);
 
         buttonChoose.setVisibility(View.VISIBLE);
-        buttonUpload.setVisibility(View.VISIBLE);
-        imageView.setVisibility(View.VISIBLE);
+        buttonUpload.setVisibility(View.GONE);
+        imageView.setVisibility(View.GONE);
 
     }
 
@@ -48,6 +48,9 @@ public class AddPhoto extends AppCompatActivity implements
         Intent intent = new Intent();
         intent.setType("image/jpg"); intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent, "Select an Image"), PICK_IMAGE_REQUES);
+        buttonChoose.setVisibility(View.GONE);
+        buttonUpload.setVisibility(View.VISIBLE);
+        imageView.setVisibility(View.VISIBLE);
     }
 
     private void uploadFile() {
