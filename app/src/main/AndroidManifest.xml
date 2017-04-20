@@ -22,7 +22,8 @@
         <activity android:name=".EditUser" />
         <activity android:name=".ForgotPassword" />
         <activity android:name=".UserInfo" />
-        <activity android:name=".AddPhoto"></activity>
+        <activity android:name=".AddPhoto" />
+        <activity android:name=".RecordSound"></activity>
     </application>
 
 </manifest>

@@ -88,7 +88,6 @@
             android:layout_marginTop="16dp"
             android:text="    SAVE WORD   "/>
 
-
         <Button
             android:id="@+id/addPhoto"
             android:layout_gravity="center_horizontal"
@@ -100,6 +99,7 @@
             android:textStyle="bold"
             android:layout_marginTop="16dp"
             android:text="    Upload photo   "/>
+
         <Button
             android:id="@+id/addAudio"
             android:layout_gravity="center_horizontal"
