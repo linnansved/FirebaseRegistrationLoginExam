@@ -57,4 +57,9 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         startActivity(i);
     }
 
+    public void seeUser_Click(View v) {
+        Intent i = new Intent(ProfileActivity.this, UserInfo.class);
+        startActivity(i);
+    }
+
 }

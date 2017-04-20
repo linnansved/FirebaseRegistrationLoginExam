@@ -19,13 +19,19 @@ public class UserInfo extends AppCompatActivity {
 
         private TextView tvEmail;
 
+        //private TextView tvNickname;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_info);
         tvEmail = (TextView) findViewById(R.id.tvEmailProfile);
+        //tvNickname = (TextView) findViewById(R.id.tvNickname);
 
         tvEmail.setText(getIntent().getExtras().getString("Email"));
+        //tvNickname.setText(getIntent().getExtras().getString("nickname"));
+
         firebaseAuth = FirebaseAuth.getInstance();
         if(firebaseAuth.getCurrentUser() == null){
             finish();

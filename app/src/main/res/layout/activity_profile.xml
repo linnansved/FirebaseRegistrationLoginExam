@@ -9,22 +9,25 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.gnirt69.firebaseregistrationloginexam.ProfileActivity">
 
+
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Welcome:"
-        android:id="@+id/textView3"
-        android:layout_alignParentTop="true"
+        android:text="Welcome Email"
+        android:id="@+id/tvEmailProfile"
         android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Email"
-        android:id="@+id/tvEmailProfile"
-        android:layout_alignParentStart="true" />
+        android:text="Nickname"
+        android:id="@+id/tvNickname"
+        android:layout_below="@+id/tvEmailProfile"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="30dp" />
 
     <Button
         android:id="@+id/LogOutBtn"
@@ -54,6 +57,15 @@
         android:layout_toEndOf="@+id/textView3"
         android:text="Add Photo"
         android:onClick="addPhoto_Click"/>
+
+    <Button
+        android:id="@+id/UserClick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvEmailProfile"
+        android:layout_marginTop="260dp"
+        android:text="See Userinfo"
+        android:onClick="seeUser_Click"/>
 
 
 

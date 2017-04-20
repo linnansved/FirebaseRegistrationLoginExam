@@ -49,32 +49,21 @@
         android:textSize="20sp"
         android:background="@android:color/transparent"/>
 
-    <EditText
-        android:id="@+id/editNickname"
+    <TextView
+        android:id="@+id/nickname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/linear"
         android:layout_centerInParent="true"
         android:layout_marginTop="50dp"
         android:ems="10"
-        android:hint="Username"
+        android:hint="Nickname"
         android:inputType="textPersonName"
         android:textAlignment="center"
         android:typeface="monospace"/>
 
-    <EditText
-        android:id="@+id/editPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/linear"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="100dp"
-        android:ems="10"
-        android:hint="Password"
-        android:inputType="textPassword"
-        android:textAlignment="center" />
 
-    <EditText
+    <TextView
         android:id="@+id/editEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -83,7 +72,6 @@
         android:layout_marginTop="150dp"
         android:ems="10"
         android:hint="E-mail"
-        android:inputType="textEmailAddress"
         android:textAlignment="center"
         android:typeface="monospace"/>
 
