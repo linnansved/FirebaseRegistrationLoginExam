@@ -64,6 +64,7 @@ public class AddPhoto extends AppCompatActivity implements
                             progressDialog.dismiss();
                             Toast.makeText(getApplicationContext(), "File Uploaded", Toast.LENGTH_LONG).show();
                             Intent i = new Intent(AddPhoto.this, AddString.class);
+                            startActivity(i);
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
