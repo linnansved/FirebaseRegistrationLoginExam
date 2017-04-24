@@ -134,6 +134,7 @@ public class AddPhoto extends AppCompatActivity {
     public void onClickImage(View view) {
         if (view == buttonImageChoose) {
             chooseImage();
+            
         } else {
             Toast.makeText(getApplicationContext(), "hej", Toast.LENGTH_LONG).show();
         }

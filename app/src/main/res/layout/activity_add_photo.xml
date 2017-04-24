@@ -15,79 +15,61 @@
         android:src="@drawable/tapetaplogo"
         android:layout_centerHorizontal="true" />
 
-    <LinearLayout
-        android:id="@+id/linear"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/tapetaplogo"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/chooseImage"
-            android:text="Choose photo"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/green_but"
-            android:textColor="#FFFFFF"
-            android:textStyle="bold"
-            android:onClick="onClickImage"/>
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/imageView"
-            tools:layout_editor_absoluteY="8dp"
-            tools:layout_editor_absoluteX="8dp" />
-
         <Button
             android:id="@+id/RecordButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Record"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="24dp"
-            android:layout_marginRight="8dp"
-            app:layout_constraintRight_toRightOf="parent"
-            android:layout_marginLeft="8dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/red_but"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_below="@id/tapetaplogo"
+            android:layout_centerHorizontal="true"
+            android:background="@mipmap/record"
             android:textColor="#FFFFFF"
             android:textStyle="bold"
             android:onClick="onClickRecord"/>
 
+    <Button
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:id="@+id/chooseImage"
+        android:layout_below="@id/tapetaplogo"
+        android:layout_toLeftOf="@id/RecordButton"
+        android:background="@mipmap/camera"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:onClick="onClickImage"/>
+
         <Button
             android:id="@+id/PlayButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Play"
-            android:layout_marginTop="10dp"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_below="@id/tapetaplogo"
+            android:layout_toRightOf="@id/RecordButton"
+            android:layout_toEndOf="@id/RecordButton"
             android:layout_gravity="center_horizontal"
-            android:background="@drawable/green_but"
+            android:background="@mipmap/play"
             android:textColor="#FFFFFF"
             android:textStyle="bold"
             android:onClick="onClickPlay"/>
 
-        <Button
-            android:id="@+id/UploadButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Upload"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/blue_but"
-            android:textColor="#FFFFFF"
-            android:textStyle="bold"
-            android:onClick="onClickUpload"
-            />
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:id="@+id/imageView"
+            android:layout_below="@id/RecordButton"
+            android:layout_centerHorizontal="true"
+            tools:layout_editor_absoluteY="8dp"
+            tools:layout_editor_absoluteX="8dp"
+            android:background="@drawable/whiteback"/>
+    <Button
+        android:id="@+id/UploadButton"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@id/imageView"
+        android:layout_centerHorizontal="true"
+        android:background="@mipmap/upload"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:onClick="onClickUpload"
+        />
 
-    </LinearLayout>
 
 </RelativeLayout>
