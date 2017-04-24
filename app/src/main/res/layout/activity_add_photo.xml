@@ -58,8 +58,7 @@
             android:layout_centerHorizontal="true"
             tools:layout_editor_absoluteY="8dp"
             tools:layout_editor_absoluteX="8dp"
-            android:scaleType="centerInside"
-            android:background="@drawable/text_back_white"/>
+            android:scaleType="centerInside" />
 
     <EditText
         android:layout_width="200dp"
