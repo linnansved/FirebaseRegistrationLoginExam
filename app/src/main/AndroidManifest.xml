@@ -25,7 +25,6 @@
         <activity android:name=".AddPhoto" />
         <activity android:name=".RecordSound" />
         <activity android:name=".AddString" />
-        <activity android:name=".AddCard"></activity>
     </application>
 
 </manifest>
