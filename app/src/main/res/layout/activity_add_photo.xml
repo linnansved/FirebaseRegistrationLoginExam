@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".EditUser"
+    tools:context=".AddPhoto"
     android:background="@drawable/background">
 
     <ImageView
@@ -31,30 +31,18 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/buttonChoose"
+            android:id="@+id/chooseImage"
             android:text="Choose photo"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/green_but"
             android:textColor="#FFFFFF"
-            android:textStyle="bold"/>
-
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/buttonUpload"
-            android:text="Upload"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/green_but"
-            android:textColor="#FFFFFF"
             android:textStyle="bold"
-            android:layout_marginTop="10dp"
-            />
+            android:onClick="onClickImage"/>
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/showUploadedPic"
+            android:id="@+id/imageView"
             tools:layout_editor_absoluteY="8dp"
             tools:layout_editor_absoluteX="8dp" />
 
@@ -72,7 +60,8 @@
             android:layout_gravity="center_horizontal"
             android:background="@drawable/red_but"
             android:textColor="#FFFFFF"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:onClick="onClickRecord"/>
 
         <Button
             android:id="@+id/PlayButton"
@@ -83,19 +72,20 @@
             android:layout_gravity="center_horizontal"
             android:background="@drawable/green_but"
             android:textColor="#FFFFFF"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:onClick="onClickPlay"/>
 
         <Button
             android:id="@+id/UploadButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Upload"
-            android:onClick="btn_uploadCar_Click"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="5dp"
             android:background="@drawable/blue_but"
             android:textColor="#FFFFFF"
             android:textStyle="bold"
+            android:onClick="onClickUpload"
             />
 
     </LinearLayout>
