@@ -6,37 +6,43 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.content.Intent;
 
-import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.*;
 
-import static com.gnirt69.firebaseregistrationloginexam.R.id.LogOutBtn;
 
 public class UserInfo extends AppCompatActivity {
 
-        private FirebaseAuth firebaseAuth;
-
-        private Button LogOutBtn;
-
-        private TextView tvEmail;
-
-        //private TextView tvNickname;
-
+    private TextView tvNick, tvEmail;
+    private FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_info);
-        tvEmail = (TextView) findViewById(R.id.tvEmailProfile);
-        //tvNickname = (TextView) findViewById(R.id.tvNickname);
-
-        tvEmail.setText(getIntent().getExtras().getString("Email"));
-        //tvNickname.setText(getIntent().getExtras().getString("nickname"));
 
         firebaseAuth = FirebaseAuth.getInstance();
+        tvEmail = (TextView) findViewById(R.id.currentEmail);
+
+        tvEmail.setText("Your current email:"+ getIntent().getExtras().getString("Email"));
+
+        //tvNick = (TextView) findViewById(R.id.currentNickname);
+       // tvNick.setText(getIntent().getExtras().getString("Nickname"));
+
+
         if(firebaseAuth.getCurrentUser() == null){
             finish();
             startActivity(new Intent(this, LoginActivity.class));
         }
     }
 
+    public void editUser_Click(View v) {
+        Intent i = new Intent(UserInfo.this, EditUser.class);
+        startActivity(i);
+    }
 }
+

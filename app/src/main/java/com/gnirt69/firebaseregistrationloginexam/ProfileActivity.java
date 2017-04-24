@@ -8,7 +8,7 @@ import android.widget.TextView;
 import android.widget.Button;
 import android.content.Intent;
 
-import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.*;
 
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -16,13 +16,16 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     private Button LogOutBtn;
 
-    private TextView tvEmail;
+    private TextView tvEmail,tvNick;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         tvEmail = (TextView) findViewById(R.id.tvEmailProfile);
         tvEmail.setText(getIntent().getExtras().getString("Email"));
+
+        /*tvNick = (TextView) findViewById(R.id.tvNickname);
+        tvNick.setText(getIntent().getExtras().getString("Nickname"));*/
 
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -53,12 +56,14 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     public void addCard_Click(View v) {
-        Intent i = new Intent(ProfileActivity.this, AddCard.class);
+        Intent i = new Intent(ProfileActivity.this, AddPhoto.class);
         startActivity(i);
     }
 
     public void seeUser_Click(View v) {
         Intent i = new Intent(ProfileActivity.this, UserInfo.class);
+        i.putExtra("Email", firebaseAuth.getCurrentUser().getEmail());
+        //i.putExtra("Nickname", firebaseAuth.getCurrentUser().getNickname());
         startActivity(i);
     }
 

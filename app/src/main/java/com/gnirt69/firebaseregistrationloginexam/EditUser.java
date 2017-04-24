@@ -20,9 +20,9 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class EditUser extends AppCompatActivity {
 
-    private Button btnChangeEmail, btnChangePassword, changeEmail, changePassword;
+    private Button btnChangeEmail, btnChangePassword, btnChangeNick, changeEmail, changePassword, changeNickname;
 
-    private EditText oldEmail, newEmail, password, newPassword;
+    private EditText oldEmail, newEmail, password, newPassword, newNickname;
     private FirebaseAuth.AuthStateListener authListener;
     private FirebaseAuth auth;
 
@@ -52,13 +52,16 @@ public class EditUser extends AppCompatActivity {
 
         btnChangeEmail = (Button) findViewById(R.id.change_email_button);
         btnChangePassword = (Button) findViewById(R.id.change_password_button);
+        btnChangeNick = (Button) findViewById(R.id.change_nickname_button);
         changeEmail = (Button) findViewById(R.id.changeEmail);
         changePassword = (Button) findViewById(R.id.changePass);
+        changeNickname= (Button) findViewById(R.id.changeNick);
 
         oldEmail = (EditText) findViewById(R.id.old_email);
         newEmail = (EditText) findViewById(R.id.new_email);
         password = (EditText) findViewById(R.id.password);
         newPassword = (EditText) findViewById(R.id.newPassword);
+        newNickname = (EditText) findViewById(R.id.newNickname);
 
         oldEmail.setVisibility(View.GONE);
         newEmail.setVisibility(View.GONE);
@@ -66,6 +69,8 @@ public class EditUser extends AppCompatActivity {
         newPassword.setVisibility(View.GONE);
         changeEmail.setVisibility(View.GONE);
         changePassword.setVisibility(View.GONE);
+        newNickname.setVisibility(View.GONE);
+        changeNickname.setVisibility(View.GONE);
 
         btnChangeEmail.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,6 +81,8 @@ public class EditUser extends AppCompatActivity {
                 newPassword.setVisibility(View.GONE);
                 changeEmail.setVisibility(View.VISIBLE);
                 changePassword.setVisibility(View.GONE);
+                newNickname.setVisibility(View.GONE);
+                changeNickname.setVisibility(View.GONE);
             }
         });
 
@@ -111,6 +118,8 @@ public class EditUser extends AppCompatActivity {
                 newPassword.setVisibility(View.VISIBLE);
                 changeEmail.setVisibility(View.GONE);
                 changePassword.setVisibility(View.VISIBLE);
+                newNickname.setVisibility(View.GONE);
+                changeNickname.setVisibility(View.GONE);
             }
         });
 
@@ -143,6 +152,52 @@ public class EditUser extends AppCompatActivity {
                 }
             }
         });
+
+        btnChangeNick.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                oldEmail.setVisibility(View.GONE);
+                newEmail.setVisibility(View.GONE);
+                password.setVisibility(View.GONE);
+                newPassword.setVisibility(View.GONE);
+                changeEmail.setVisibility(View.GONE);
+                changePassword.setVisibility(View.GONE);
+                newNickname.setVisibility(View.VISIBLE);
+                changeNickname.setVisibility(View.VISIBLE);
+            }
+        });
+
+
+
+     /*   changeNickname.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (user != null && !newNickname.getText().toString().trim().equals("")) {
+                    if (newNickname.getText().toString().trim().length() < 0) {
+                        newNickname.setError("Enter Nickname");
+
+                    } else {
+                        user.updatePassword(newNickname.getText().toString().trim())
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()) {
+                                            Toast.makeText(EditUser.this, "Nickname is updated!", Toast.LENGTH_SHORT).show();
+                                            signOut();
+
+                                        } else {
+                                            Toast.makeText(EditUser.this, "Failed to update nickname!", Toast.LENGTH_SHORT).show();
+
+                                        }
+                                    }
+                                });
+                    }
+                } else if (newPassword.getText().toString().trim().equals("")) {
+                    newPassword.setError("Enter password");
+                }
+            }
+        });*/
 
     }
 

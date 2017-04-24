@@ -96,6 +96,24 @@
             android:typeface="monospace"
             />
 
+        <EditText
+            android:id="@+id/newNickname"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:ems="10"
+            android:hint="Enter new nickname"
+            android:focusableInTouchMode="true"
+            android:imeActionId="@+id/login"
+            android:imeOptions="actionUnspecified"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textAlignment="center"
+            android:typeface="monospace"
+            />
+
         <Button
             android:id="@+id/changeEmail"
             android:layout_gravity="center_horizontal"
@@ -110,6 +128,18 @@
 
         <Button
             android:id="@+id/changePass"
+            android:layout_gravity="center_horizontal"
+            style="?android:textAppearanceSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/green_but"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"
+            android:text="    SAVE CHANGES   "/>
+
+        <Button
+            android:id="@+id/changeNick"
             android:layout_gravity="center_horizontal"
             style="?android:textAppearanceSmall"
             android:layout_width="wrap_content"
@@ -143,6 +173,18 @@
             android:textStyle="bold"
             android:layout_marginTop="16dp"
             android:text="    CHANGE PASSWORD   "/>
+
+        <Button
+            android:id="@+id/change_nickname_button"
+            android:layout_gravity="center_horizontal"
+            style="?android:textAppearanceSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/blue_big_but"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"
+            android:text=" CHANGE NICKNAME "/>
 
 
     </LinearLayout>

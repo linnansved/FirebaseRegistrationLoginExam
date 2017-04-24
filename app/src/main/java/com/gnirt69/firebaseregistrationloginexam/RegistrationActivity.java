@@ -16,6 +16,11 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class RegistrationActivity extends AppCompatActivity {
 
@@ -24,6 +29,7 @@ public class RegistrationActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private EditText txtPassword2;
     public EditText txtNickname;
+    private StorageReference storageNick;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +40,7 @@ public class RegistrationActivity extends AppCompatActivity {
         txtPassword2 = (EditText) findViewById(R.id.txtPasswordRegistration2);
         txtNickname = (EditText) findViewById(R.id.txtNicknameRegistration);
         firebaseAuth = FirebaseAuth.getInstance();
+        storageNick = FirebaseStorage.getInstance().getReference();
     }
 
     public void btnRegistrationUser_Click(View v) {
@@ -50,6 +57,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
                 if (task.isSuccessful()) {
                     Toast.makeText(RegistrationActivity.this, "Registration successful", Toast.LENGTH_LONG).show();
+                    //registerNick();
                     Intent i = new Intent(RegistrationActivity.this, LoginActivity.class);
                     startActivity(i);
                 }
@@ -61,6 +69,12 @@ public class RegistrationActivity extends AppCompatActivity {
             }
         });
     }
+
+
+   /* public void registerNick() {
+        txtNickname.getText().toString();
+    }*/
+
   //  }
   /*  private boolean checkPass() {
         if (txtPassword == txtPassword2){
