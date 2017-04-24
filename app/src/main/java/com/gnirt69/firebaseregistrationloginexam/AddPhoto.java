@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -25,6 +26,7 @@ import com.google.firebase.storage.StorageReference;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -38,16 +40,22 @@ public class AddPhoto extends AppCompatActivity {
     private boolean booleanIsRecordAudioStarted = true;
     private MediaPlayer   mPlayer = null;
     private boolean booleanIsAudioPlayed = true;
-    private Uri filePath;
+    private Uri imageFilePath;
     private ImageView imageView;
     private static final int PICK_IMAGE_REQUES = 234;
     public Button buttonImageChoose;
     private String imageName;
-    private String audioName;
+    private String stringName;
     private StorageReference storageReference;
-    public Uri downloadUrl;
+    public Uri downloadImageUrl;
+    public Uri downloadAudioUrl;
     private DatabaseReference mDatabase;
     private DatabaseReference imageRef;
+    private DatabaseReference audioRef;
+    private DatabaseReference stringRef;
+    public String cardID;
+    public ArrayList<String> arrayCardID = new ArrayList<String>();
+    public int i = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -122,9 +130,9 @@ public class AddPhoto extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PICK_IMAGE_REQUES && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            filePath = data.getData();
+            imageFilePath = data.getData();
             try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageFilePath);
                 imageView.setImageBitmap(bitmap);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -140,9 +148,13 @@ public class AddPhoto extends AppCompatActivity {
         }
     }
     public void onClickUpload(View view) {
-        if (mAudioName!=null && filePath!=null) {
+        if (mAudioName!=null && imageFilePath !=null) {
+            cardID = UUID.randomUUID().toString();
             uploadImage();
             uploadAudio();
+            uploadTextStringToDatabase(view);
+            arrayCardID.add(i, cardID);
+            i++;
         } else {
             Toast.makeText(getApplicationContext(), "du måste lägga till bild och ljud", Toast.LENGTH_LONG).show();
         }
@@ -150,13 +162,12 @@ public class AddPhoto extends AppCompatActivity {
     private void uploadImage() {
         imageName = "image_"+generateRandom().toString()+".jpeg";
         StorageReference riversRef = storageReference.child("images/").child(imageName);
-        riversRef.putFile(filePath)
+        riversRef.putFile(imageFilePath)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         Toast.makeText(getApplicationContext(), "File Uploaded", Toast.LENGTH_LONG).show();
-                        //downloadUrl = taskSnapshot.getDownloadUrl();
-                        //ImagesDB();
+                        uploadImageToDatabase();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -176,6 +187,7 @@ public class AddPhoto extends AppCompatActivity {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         Toast.makeText(getApplicationContext(), "File Uploaded", Toast.LENGTH_LONG).show();
+                        uploadAudioToDatabase();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -184,5 +196,31 @@ public class AddPhoto extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), exception.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
+    }
+
+    private void uploadImageToDatabase() {
+        imageRef = mDatabase.child("Cards").child(cardID);
+        Map<String, String> images = new HashMap<>();
+        images.put("Name",imageName);
+        images.put("URL", downloadImageUrl.toString());
+        imageRef = mDatabase.child("Cards").child(cardID).child("Images");
+        imageRef.setValue(images);
+    }
+    private void uploadAudioToDatabase(){
+        audioRef = mDatabase.child("Cards").child(cardID);
+        Map<String, String> audio = new HashMap<>();
+        audio.put("Name", mAudioName);
+        audio.put("URL", downloadAudioUrl.toString());
+        audioRef = mDatabase.child("Cards").child(cardID).child("Audio");
+        audioRef.setValue(audio);
+    }
+    private void uploadTextStringToDatabase(View view){
+        EditText editText = (EditText) findViewById(R.id.textString);
+        String message = editText.getText().toString();
+        Log.v(LOG_TAG, message);
+        stringRef = mDatabase.child("Cards").child(cardID);
+        Map<String, String> string = new HashMap<>();
+        string.put("picName", message);
+        stringRef.setValue(string);
     }
 }
