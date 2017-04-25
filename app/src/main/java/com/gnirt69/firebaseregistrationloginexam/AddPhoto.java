@@ -152,9 +152,11 @@ public class AddPhoto extends AppCompatActivity {
             cardID = UUID.randomUUID().toString();
             uploadImage();
             uploadAudio();
-            uploadTextStringToDatabase(view);
+            //uploadTextStringToDatabase(view);
+
             arrayCardID.add(i, cardID);
             i++;
+
         } else {
             Toast.makeText(getApplicationContext(), "du måste lägga till bild och ljud", Toast.LENGTH_LONG).show();
         }
@@ -167,6 +169,7 @@ public class AddPhoto extends AppCompatActivity {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         Toast.makeText(getApplicationContext(), "File Uploaded", Toast.LENGTH_LONG).show();
+                        //downloadImageUrl = taskSnapshot.getDownloadUrl();
                         uploadImageToDatabase();
                     }
                 })
@@ -187,6 +190,7 @@ public class AddPhoto extends AppCompatActivity {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         Toast.makeText(getApplicationContext(), "File Uploaded", Toast.LENGTH_LONG).show();
+                        //downloadAudioUrl = taskSnapshot.getDownloadUrl();
                         uploadAudioToDatabase();
                     }
                 })

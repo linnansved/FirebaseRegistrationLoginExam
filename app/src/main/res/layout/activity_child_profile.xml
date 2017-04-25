@@ -43,19 +43,19 @@
     <de.hdodenhof.circleimageview.CircleImageView
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/album1"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
         android:src="@drawable/cloudblue"
         app:civ_border_width="6dp"
         app:civ_border_color="#FFFFFF"
         android:layout_below="@id/tvNickname"
-        android:layout_marginLeft="30dp"
+        android:layout_marginLeft="50dp"
         />
     <de.hdodenhof.circleimageview.CircleImageView
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/album2"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
         android:src="@drawable/dog"
         app:civ_border_width="6dp"
         app:civ_border_color="#FFFFFF"
@@ -67,13 +67,13 @@
     <de.hdodenhof.circleimageview.CircleImageView
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/album3"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
         android:src="@drawable/carrot"
         app:civ_border_width="6dp"
         app:civ_border_color="#FFFFFF"
         android:layout_below="@id/album1"
-        android:layout_marginLeft="30dp"
+        android:layout_marginLeft="50dp"
         android:layout_marginTop="10dp"
         />
 
