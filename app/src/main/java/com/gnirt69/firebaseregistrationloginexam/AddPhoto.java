@@ -218,6 +218,7 @@ public class AddPhoto extends AppCompatActivity {
         audioRef = mDatabase.child("Cards").child(cardID).child("Audio");
         audioRef.setValue(audio);
     }
+
     private void uploadTextStringToDatabase(View view){
         EditText editText = (EditText) findViewById(R.id.textString);
         String message = editText.getText().toString();
