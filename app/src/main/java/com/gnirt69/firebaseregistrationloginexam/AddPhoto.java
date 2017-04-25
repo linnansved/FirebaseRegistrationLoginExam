@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -152,11 +153,12 @@ public class AddPhoto extends AppCompatActivity {
             cardID = UUID.randomUUID().toString();
             uploadImage();
             uploadAudio();
-            //uploadTextStringToDatabase(view);
+            uploadTextStringToDatabase(view);
 
             arrayCardID.add(i, cardID);
             i++;
-
+            Intent i = new Intent(AddPhoto.this, ChildProfile.class);
+            startActivity(i);
         } else {
             Toast.makeText(getApplicationContext(), "du måste lägga till bild och ljud", Toast.LENGTH_LONG).show();
         }
@@ -169,7 +171,7 @@ public class AddPhoto extends AppCompatActivity {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         Toast.makeText(getApplicationContext(), "File Uploaded", Toast.LENGTH_LONG).show();
-                        //downloadImageUrl = taskSnapshot.getDownloadUrl();
+                        downloadImageUrl = taskSnapshot.getDownloadUrl();
                         uploadImageToDatabase();
                     }
                 })
@@ -190,7 +192,7 @@ public class AddPhoto extends AppCompatActivity {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         Toast.makeText(getApplicationContext(), "File Uploaded", Toast.LENGTH_LONG).show();
-                        //downloadAudioUrl = taskSnapshot.getDownloadUrl();
+                        downloadAudioUrl = taskSnapshot.getDownloadUrl();
                         uploadAudioToDatabase();
                     }
                 })
