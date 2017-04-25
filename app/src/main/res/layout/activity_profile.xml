@@ -19,9 +19,23 @@
         app:civ_border_width="6dp"
         app:civ_border_color="#FFFFFF"
         android:layout_above="@+id/linear"
-        android:layout_marginBottom="10dp"
         android:layout_centerHorizontal="true" />
 
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/unlock"
+        android:layout_alignParentEnd="true"
+        android:clickable="true"
+        android:onClick="toChild_Click"/>
+    <Button
+        android:id="@+id/LogOutBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/red_but"
+        android:textColor="#FFFFFF"
+        android:text="Log Out" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -33,47 +47,74 @@
         android:layout_below="@+id/profile_image"
         android:layout_centerHorizontal="true" />
 
-    <Button
-        android:id="@+id/LogOutBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:background="@drawable/red_but"
-        android:textColor="#FFFFFF"
-        android:text="Log Out" />
-    <Button
-        android:id="@+id/editUser"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tvNickname"
-        android:text="Edit user"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/blue_but"
-        android:textColor="#FFFFFF"
-        android:layout_centerHorizontal="true"
-        android:onClick="editUser_Click"/>
 
-    <Button
-        android:id="@+id/addPhoto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/editUser"
-        android:text="Add Card/photo"
-        android:background="@drawable/blue_but"
-        android:textColor="#FFFFFF"
-        android:layout_centerHorizontal="true"
-        android:onClick="addCard_Click"/>
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/album1"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/cloudblue"
+        app:civ_border_width="6dp"
+        app:civ_border_color="#FFFFFF"
+        android:layout_below="@id/tvNickname"
+        android:layout_marginLeft="30dp"
+        />
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/album2"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/dog"
+        app:civ_border_width="6dp"
+        app:civ_border_color="#FFFFFF"
+        android:layout_below="@id/tvNickname"
+        android:layout_toRightOf="@id/album1"
+        android:layout_toEndOf="@id/album1"
+        android:layout_marginLeft="30dp"
+        />
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/album3"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/carrot"
+        app:civ_border_width="6dp"
+        app:civ_border_color="#FFFFFF"
+        android:layout_below="@id/album1"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="10dp"
+        />
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/album4"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/plus"
+        app:civ_border_width="6dp"
+        app:civ_border_color="#FFFFFF"
+        android:layout_below="@id/album2"
+        android:layout_toRightOf="@id/album3"
+        android:layout_toEndOf="@id/album3"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="10dp"
+        android:clickable="true"
+        android:onClick="addCard_Click"
+
+        />
+
 
     <Button
         android:id="@+id/UserClick"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/addPhoto"
         android:text="See Userinfo"
+        android:layout_below="@+id/album4"
+        android:layout_marginTop="10dp"
         android:background="@drawable/blue_but"
         android:layout_centerHorizontal="true"
         android:textColor="#FFFFFF"
         android:onClick="seeUser_Click"/>
+
 
     <TextView
         android:layout_width="wrap_content"

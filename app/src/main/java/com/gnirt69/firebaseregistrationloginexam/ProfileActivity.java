@@ -59,6 +59,10 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         Intent i = new Intent(ProfileActivity.this, AddPhoto.class);
         startActivity(i);
     }
+    public void toChild_Click(View v) {
+        Intent i = new Intent(ProfileActivity.this, ChildProfile.class);
+        startActivity(i);
+    }
 
     public void seeUser_Click(View v) {
         Intent i = new Intent(ProfileActivity.this, UserInfo.class);
