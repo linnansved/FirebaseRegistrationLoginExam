@@ -156,15 +156,7 @@
         android:textColor="#FFFFFF"
         android:textStyle="bold"
         android:onClick="btnForgotPwd_Click"/>
-    <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:src="@drawable/bird"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:id="@+id/greenbird"/>
 
-    
 </RelativeLayout>
 
 
