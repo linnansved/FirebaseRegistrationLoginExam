@@ -139,7 +139,6 @@
         android:textStyle="bold"
         android:onClick="btnForgotPwd_Click"/>
 
-
 </RelativeLayout>
 
 

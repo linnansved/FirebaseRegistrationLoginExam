@@ -14,12 +14,27 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
 
     private EditText txtEmailLogin;
     private EditText txtPwd;
     private FirebaseAuth firebaseAuth;
+    private FirebaseAuth firebaseFindUid;
+    private DatabaseReference userRef;
+    private DatabaseReference mDatabase;
+    public String userID;
+    public ArrayList<String> arrayDeckID = new ArrayList<>();
+    public ArrayList<String> arrayUserID = new ArrayList<>();
+    private static final String LOG_TAG = "LoginActivity";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,10 +42,13 @@ public class LoginActivity extends AppCompatActivity {
         txtEmailLogin = (EditText) findViewById(R.id.txtEmailLogin);
         txtPwd = (EditText) findViewById(R.id.txtPasswordLogin);
         firebaseAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
     }
 
     public void btnUserLogin_Click(View v) {
         final ProgressDialog progressDialog = ProgressDialog.show(LoginActivity.this, "Please wait...", "Proccessing...", true);
+
 
         (firebaseAuth.signInWithEmailAndPassword(txtEmailLogin.getText().toString(), txtPwd.getText().toString()))
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -43,6 +61,8 @@ public class LoginActivity extends AppCompatActivity {
                             Intent i = new Intent(LoginActivity.this, ProfileActivity.class);
                             i.putExtra("Email", firebaseAuth.getCurrentUser().getEmail());
                             startActivity(i);
+                            uploadUserToDatabase();
+
                         } else {
                             Log.e("ERROR", task.getException().toString());
                             Toast.makeText(LoginActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
@@ -50,6 +70,7 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     }
                 });
+
     }
 
     public void btnRegistration_Click(View v) {
@@ -60,6 +81,32 @@ public class LoginActivity extends AppCompatActivity {
     public void btnForgotPwd_Click(View v) {
         Intent i = new Intent(LoginActivity.this, ForgotPassword.class);
         startActivity(i);
+    }
+
+    public void uploadUserToDatabase(){
+        try{
+            String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            Log.d(LOG_TAG, userID);
+
+            EditText editText = (EditText) findViewById(R.id.nickname);
+            String message = editText.getText().toString();
+            Log.v(LOG_TAG, message);
+
+            userRef = mDatabase.child("Users").child(userID);
+            Map<String, String> info = new HashMap<>();
+            info.put("nickname", message);
+            //info.put("decks", arrayUserID);
+            userRef.setValue(info);
+
+            /*arrayUserID.add(i, deckID);
+            i++;*/
+
+        }
+        catch (Exception e){
+            Log.e(LOG_TAG, e.getMessage());
+
+        }
+
     }
 
 }
