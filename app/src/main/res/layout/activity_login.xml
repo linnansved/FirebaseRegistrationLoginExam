@@ -15,8 +15,16 @@
         android:layout_height="150dp"
         android:src="@drawable/tapetaplogo"
         android:layout_centerHorizontal="true"
-        android:layout_above="@+id/linear" />
+        android:layout_above="@+id/linear"
+        android:id="@+id/tapetaplogo"/>
 
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/cloud2"
+        android:layout_centerInParent="true"
+         />
 
     <LinearLayout
         android:id="@+id/linear"
@@ -33,18 +41,26 @@
             />
 
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/bannerplane"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/plane"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="90dp" />
     <TextView
         android:id="@+id/heading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/linear"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="30dp"
+        android:layout_alignRight="@id/bannerplane"
+        android:layout_marginTop="20dp"
         android:background="@android:color/transparent"
         android:ems="10"
-        android:text="Log in below!"
+        android:text="  GET STARTED!"
         android:textAlignment="center"
-        android:textColor="#0080ff"
+        android:textColor="#000000"
         android:textSize="20sp"
         android:textStyle="bold"
         android:typeface="monospace" />
@@ -60,6 +76,7 @@
         android:layout_alignStart="@+id/txtPasswordLogin"
         android:layout_alignEnd="@+id/txtPasswordLogin"
         android:textAlignment="center"
+        android:ems="10"
         android:typeface="monospace"
         android:layout_below="@+id/heading"
         />
@@ -77,6 +94,7 @@
         android:typeface="monospace"
         android:layout_below="@+id/txtEmailLogin"
         />
+
 
     <TextView
         android:id="@+id/new_user"
@@ -138,7 +156,13 @@
         android:textColor="#FFFFFF"
         android:textStyle="bold"
         android:onClick="btnForgotPwd_Click"/>
-
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/bird"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:id="@+id/greenbird"/>
 
 </RelativeLayout>
 
