@@ -68,6 +68,8 @@
         app:civ_border_color="#FFFFFF"
         android:layout_below="@id/tvNickname"
         android:layout_marginLeft="35dp"
+        android:clickable="true"
+        android:onClick="toGallery_Click"
         />
     <de.hdodenhof.circleimageview.CircleImageView
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -123,7 +125,7 @@
         android:background="@drawable/blue_but"
         android:layout_centerHorizontal="true"
         android:textColor="#FFFFFF"
-        android:onClick="seeUser_Click"/>
+        android:onClick="editUser_Click"/>
 
 
     <TextView

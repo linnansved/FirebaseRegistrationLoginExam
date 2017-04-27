@@ -162,7 +162,7 @@
         android:src="@drawable/bird"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:id="@+id/greenbird"/>
+        android:id="@+id/greenbird" />
 
 
     <EditText
