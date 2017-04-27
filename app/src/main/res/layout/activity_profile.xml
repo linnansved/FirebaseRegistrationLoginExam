@@ -22,12 +22,22 @@
         android:layout_centerHorizontal="true" />
 
     <ImageView
+        android:id="@+id/unlock"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:background="@drawable/unlock"
         android:layout_alignParentEnd="true"
         android:clickable="true"
         android:onClick="toChild_Click"/>
+
+    <ImageView
+        android:id="@+id/lock"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/lock"
+        android:layout_alignParentEnd="true"
+        android:clickable="true"
+        android:onClick="toParent_Click"/>
     <Button
         android:id="@+id/LogOutBtn"
         android:layout_width="wrap_content"
@@ -127,5 +137,36 @@
         android:layout_marginTop="30dp"
         android:id="@+id/tvEmailProfile"
         />
+
+    <TextView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:id="@+id/textSqParent"
+        android:textAlignment="center"
+        android:layout_centerInParent="true"
+        android:background="@drawable/whiteback"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Type parent to enter admin page"/>
+
+
+        <EditText
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:id="@+id/answerParent"
+            android:layout_centerInParent="true"
+            android:inputType="text"
+            />
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:text="ENTER"
+        android:id="@+id/enterBtn"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/answerParent"
+        android:background="@drawable/green_but"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:onClick="testParent"/>
+
 
 </RelativeLayout>

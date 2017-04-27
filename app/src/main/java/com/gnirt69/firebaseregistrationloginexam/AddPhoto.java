@@ -5,7 +5,6 @@ import android.graphics.Bitmap;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.net.Uri;
-import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -18,7 +17,6 @@ import android.widget.ImageView;
 import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -50,13 +48,18 @@ public class AddPhoto extends AppCompatActivity {
     private StorageReference storageReference;
     public Uri downloadImageUrl;
     public Uri downloadAudioUrl;
-    private DatabaseReference mDatabase;
     private DatabaseReference imageRef;
     private DatabaseReference audioRef;
     private DatabaseReference stringRef;
     public String cardID;
     public ArrayList<String> arrayCardID = new ArrayList<String>();
     public int i = 0;
+    private DatabaseReference userRef;
+    private DatabaseReference mDatabase;
+    public String userID;
+    public ArrayList<String> arrayDeckID = new ArrayList<>();
+    public ArrayList<String> arrayUserID = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -222,7 +225,7 @@ public class AddPhoto extends AppCompatActivity {
     }
 
     private void uploadTextStringToDatabase(View view){
-        EditText editText = (EditText) findViewById(R.id.textString);
+        EditText editText = (EditText) findViewById(R.id.picName);
         String message = editText.getText().toString();
         Log.v(LOG_TAG, message);
         stringRef = mDatabase.child("Cards").child(cardID);
@@ -230,4 +233,6 @@ public class AddPhoto extends AppCompatActivity {
         string.put("picName", message);
         stringRef.setValue(string);
     }
+
+
 }
