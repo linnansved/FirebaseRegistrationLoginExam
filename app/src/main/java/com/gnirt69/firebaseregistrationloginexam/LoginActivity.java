@@ -9,17 +9,29 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 
 public class LoginActivity extends AppCompatActivity {
-
     private EditText txtEmailLogin;
     private EditText txtPwd;
     private FirebaseAuth firebaseAuth;
+    private FirebaseAuth firebaseFindUid;
+    private DatabaseReference userRef;
+    private DatabaseReference mDatabase;
+    public String userID;
+    public ArrayList<String> arrayDeckID = new ArrayList<>();
+    public ArrayList<String> arrayUserID = new ArrayList<>();
+    private static final String LOG_TAG = "LoginActivity";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
