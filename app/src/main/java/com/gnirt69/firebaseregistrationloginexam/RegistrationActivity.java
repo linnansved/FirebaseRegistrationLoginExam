@@ -40,14 +40,13 @@ public class RegistrationActivity extends AppCompatActivity {
     public EditText txtNickname;
     private StorageReference storageNick;
     private static final String LOG_TAG = "AudioRecordTest";
+    String pwd1;
+    String pwd2;
     /*private DatabaseReference userRef;
     private DatabaseReference mDatabase;
     public String userID;
     public ArrayList<String> arrayDeckID = new ArrayList<>();
     public ArrayList<String> arrayUserID = new ArrayList<>();*/
-
-
-
 
 
     @Override
@@ -64,43 +63,40 @@ public class RegistrationActivity extends AppCompatActivity {
 
     public void btnRegistrationUser_Click(View v) {
 
-       //if(checkPass()){
-
-        final ProgressDialog progressDialog = ProgressDialog.show(RegistrationActivity.this, "Please wait...", "Processing...", true);
-        (firebaseAuth.createUserWithEmailAndPassword(txtEmailAddress.getText().toString(), txtPassword.getText().toString()))
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        progressDialog.dismiss();
-                        Log.d(LOG_TAG, "createUserWithEmail:onComplete" + task.isSuccessful());
-
-                        if (task.isSuccessful()) {
-                            FirebaseUser user = task.getResult().getUser();
-                            Log.d(LOG_TAG, "onComplete: uid =" + user.getUid());
-                            Toast.makeText(RegistrationActivity.this, "Registration successful", Toast.LENGTH_LONG).show();
-                            //registerNick();
-
-                            //uploadUserToDatabase();
-
-                            Intent i = new Intent(RegistrationActivity.this, LoginActivity.class);
-                            startActivity(i);
+        //if (checkPass()) {
 
 
+            final ProgressDialog progressDialog = ProgressDialog.show(RegistrationActivity.this, "Please wait...", "Processing...", true);
+            (firebaseAuth.createUserWithEmailAndPassword(txtEmailAddress.getText().toString(), txtPassword.getText().toString()))
+                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            progressDialog.dismiss();
+                            Log.d(LOG_TAG, "createUserWithEmail:onComplete" + task.isSuccessful());
+
+                            if (task.isSuccessful()) {
+                                FirebaseUser user = task.getResult().getUser();
+                                Log.d(LOG_TAG, "onComplete: uid =" + user.getUid());
+                                Toast.makeText(RegistrationActivity.this, "Registration successful", Toast.LENGTH_LONG).show();
+                                //registerNick();
+
+                                //uploadUserToDatabase();
+
+                                Intent i = new Intent(RegistrationActivity.this, LoginActivity.class);
+                                startActivity(i);
 
 
-
-
-                        } else {
-                            Log.e("ERROR", task.getException().toString());
-                            Toast.makeText(RegistrationActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                            } else {
+                                Log.e("ERROR", task.getException().toString());
+                                Toast.makeText(RegistrationActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                            }
                         }
-                    }
-                });
+                    });
 
 
+        //}
 
-    }
 
    /* public void uploadUserToDatabase(){
         userRef = mDatabase.child("Users").child(userID);
@@ -112,9 +108,6 @@ public class RegistrationActivity extends AppCompatActivity {
     }*/
 
 
-
-
-
     }
 
 
@@ -122,12 +115,17 @@ public class RegistrationActivity extends AppCompatActivity {
         txtNickname.getText().toString();
     }*/
 
-  //  }
-  /*  private boolean checkPass() {
-        if (txtPassword == txtPassword2){
+    //  }
+   /* private boolean checkPass() {
+
+        pwd1 = txtPassword.getText().toString();
+        pwd2 = txtPassword2.getText().toString();
+        if (pwd1.equals(pwd2)) {
             Toast.makeText(RegistrationActivity.this, "Matching password", Toast.LENGTH_LONG).show();
             return true;
-        }else {
+        } else {
+            Toast.makeText(RegistrationActivity.this, "Wrong password", Toast.LENGTH_LONG).show();
             return false;
         }
     }*/
+}
