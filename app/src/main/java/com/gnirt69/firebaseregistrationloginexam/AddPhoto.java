@@ -59,6 +59,9 @@ public class AddPhoto extends AppCompatActivity {
     public String userID;
     public ArrayList<String> arrayDeckID = new ArrayList<>();
     public ArrayList<String> arrayUserID = new ArrayList<>();
+    private DatabaseReference deckRef;
+    public String deckID;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +73,7 @@ public class AddPhoto extends AppCompatActivity {
         buttonImageChoose = (Button) findViewById(R.id.chooseImage);
         storageReference = FirebaseStorage.getInstance().getReference();
         mDatabase = FirebaseDatabase.getInstance().getReference();
+        deckID = UUID.randomUUID().toString();
     }
     public void startRecording(View view) {
         mRecorder = new MediaRecorder();
@@ -158,6 +162,7 @@ public class AddPhoto extends AppCompatActivity {
             uploadAudio();
             uploadTextStringToDatabase(view);
 
+
             arrayCardID.add(i, cardID);
             i++;
             Intent i = new Intent(AddPhoto.this, ChildProfile.class);
@@ -166,6 +171,21 @@ public class AddPhoto extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "du måste lägga till bild och ljud", Toast.LENGTH_LONG).show();
         }
     }
+
+    public void onClickDone(View view) {
+        createDecksToDB();
+    }
+
+    private void createDecksToDB(){
+        deckRef = mDatabase.child("Decks").child(deckID);
+        Map<String, String> cards = new HashMap<>();
+        for(int k = 0; k < arrayCardID.size(); k++){
+            cards.put("CardID"+k, arrayCardID.get(k));
+            deckRef.setValue(cards);
+        }
+    }
+
+
     private void uploadImage() {
         imageName = "image_"+generateRandom().toString()+".jpeg";
         StorageReference riversRef = storageReference.child("images/").child(imageName);
