@@ -13,26 +13,29 @@ import android.widget.EditText;
 import android.content.Intent;
 
 import com.google.firebase.auth.*;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 
 public class UserInfo extends AppCompatActivity {
 
     private TextView tvNick, tvEmail;
     private FirebaseAuth firebaseAuth;
+    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_info);
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         firebaseAuth = FirebaseAuth.getInstance();
         tvEmail = (TextView) findViewById(R.id.currentEmail);
 
         tvEmail.setText("Your current email:"+ getIntent().getExtras().getString("Email"));
 
-        //tvNick = (TextView) findViewById(R.id.currentNickname);
-       // tvNick.setText(getIntent().getExtras().getString("Nickname"));
-
+        /*tvNick = (TextView) findViewById(R.id.currentNickname);
+        tvNick.setText("Your current nickname:"+ FirebaseDatabase.getInstance().getReference("Nickname"));*/
 
         if(firebaseAuth.getCurrentUser() == null){
             finish();
