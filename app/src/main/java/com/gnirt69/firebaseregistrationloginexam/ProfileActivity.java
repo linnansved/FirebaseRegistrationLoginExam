@@ -85,7 +85,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("Cards");
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("Cards").child("Images");
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
