@@ -82,7 +82,7 @@ public class RegistrationActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 FirebaseUser user = task.getResult().getUser();
                                 Log.d(LOG_TAG, "onComplete: uid =" + user.getUid());
-                                Toast.makeText(RegistrationActivity.this, "Registration successful", Toast.LENGTH_LONG).show();
+                                Toast.makeText(RegistrationActivity.this, "Registration successful!", Toast.LENGTH_LONG).show();
                                 //registerNick();
 
                                 uploadUserToDatabase();

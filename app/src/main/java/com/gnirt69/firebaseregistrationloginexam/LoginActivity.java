@@ -19,6 +19,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+
+
 public class LoginActivity extends AppCompatActivity {
     private EditText txtEmailLogin;
     private EditText txtPwd;
