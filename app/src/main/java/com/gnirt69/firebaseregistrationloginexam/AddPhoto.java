@@ -64,8 +64,6 @@ public class AddPhoto extends AppCompatActivity {
     public String deckID;
     public String stringUri;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

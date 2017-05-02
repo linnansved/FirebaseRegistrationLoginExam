@@ -24,8 +24,6 @@ public class LoginActivity extends AppCompatActivity {
     private EditText txtPwd;
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth firebaseFindUid;
-    private DatabaseReference userRef;
-    private DatabaseReference mDatabase;
     public String userID;
     public ArrayList<String> arrayDeckID = new ArrayList<>();
     public ArrayList<String> arrayUserID = new ArrayList<>();
@@ -75,36 +73,4 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(i);
     }
 
-    public void uploadUserToDatabase(){
-        try{
-            String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-            Log.d(LOG_TAG, userID);
-
-            EditText editText = (EditText) findViewById(R.id.nickname);
-            String message = editText.getText().toString();
-            Log.v(LOG_TAG, message);
-
-            EditText editText1 = (EditText) findViewById(R.id.deckname);
-            String deckID = editText1.getText().toString();
-
-            userRef = mDatabase.child("Users").child(userID);
-            Map<String, String> info = new HashMap<>();
-
-
-            info.put("nickname", message);
-            info.put("decks", deckID);
-            //info.put("decks", arrayUserID);
-            userRef.setValue(info);
-
-
-            /*arrayUserID.add(i, deckID);
-            i++;*/
-
-        }
-        catch (Exception e){
-            Log.e(LOG_TAG, e.getMessage());
-
-        }
-
-    }
 }
