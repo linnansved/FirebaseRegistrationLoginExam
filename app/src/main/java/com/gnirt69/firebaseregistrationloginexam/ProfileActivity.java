@@ -41,6 +41,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     private String answer;
 
+    private DatabaseReference mDatabase;
+
     public ArrayList<String> Imagelist = new ArrayList<>();
 
 
@@ -81,6 +83,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
         LogOutBtn = (Button) findViewById(R.id.LogOutBtn);
 
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Cards");
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -116,7 +120,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
     public void editUser_Click(View v) {
-        Intent i = new Intent(ProfileActivity.this, EditUser.class);
+        Intent i = new Intent(ProfileActivity.this, UserInfo.class);
         startActivity(i);
     }
 
@@ -163,11 +167,11 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
-    public void seeUser_Click(View v) {
+    /*public void seeUser_Click(View v) {
         Intent i = new Intent(ProfileActivity.this, UserInfo.class);
         i.putExtra("Email", firebaseAuth.getCurrentUser().getEmail());
-        //i.putExtra("Nickname", firebaseAuth.getCurrentUser().getNickname());
+        i.putExtra("Nickname", mDatabase.getNickname());
         startActivity(i);
-    }
+    }*/
 
 }

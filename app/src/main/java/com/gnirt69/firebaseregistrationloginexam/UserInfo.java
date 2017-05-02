@@ -30,12 +30,12 @@ public class UserInfo extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         firebaseAuth = FirebaseAuth.getInstance();
-        tvEmail = (TextView) findViewById(R.id.currentEmail);
 
+        tvEmail = (TextView) findViewById(R.id.currentEmail);
         tvEmail.setText("Your current email:"+ getIntent().getExtras().getString("Email"));
 
-        tvNick = (TextView) findViewById(R.id.currentNickname);
-        tvNick.setText("Your current nickname:"+ FirebaseDatabase.getInstance().getReference("Nickname"));
+        //tvNick = (TextView) findViewById(R.id.currentNickname);
+      //  tvNick.setText("Your current nickname:"+ getIntent().getExtras().getString("Nickname");
 
         if(firebaseAuth.getCurrentUser() == null){
             finish();
