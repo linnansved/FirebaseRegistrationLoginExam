@@ -1,5 +1,6 @@
 package com.gnirt69.firebaseregistrationloginexam;
 
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,12 +13,21 @@ import android.content.Intent;
 import android.widget.Toast;
 
 import com.google.firebase.auth.*;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import android.util.Log;
 
 import org.w3c.dom.Text;
+
+import java.util.ArrayList;
 
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener {
 
     private FirebaseAuth firebaseAuth;
+
+    private StorageReference storageReference;
 
     private Button LogOutBtn, editUserBtn, enterBtn;
 
@@ -27,6 +37,10 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     private EditText answerParent;
 
     private String answer;
+
+    public ArrayList<String> Userlist = new ArrayList<>();
+    private static final String LOG_TAG = "ProfileActivity";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,8 +79,23 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
         LogOutBtn = (Button) findViewById(R.id.LogOutBtn);
 
+        storageReference = FirebaseStorage.getInstance().getReference().child("Cards");
+        storageReference.addListenerForSingleValueEvent(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        // Result will be holded Here
+                        for (DataSnapshot dsp : dataSnapshot.getChildren()) {
+                            Userlist.add(String.valueOf(dsp.geValue()));
+                        }
+                    });
+                    Log.e(LOG_TAG, Userlist);
+
         LogOutBtn.setOnClickListener(this);
     }
+
+
 
     @Override
     public void onClick(View view){
