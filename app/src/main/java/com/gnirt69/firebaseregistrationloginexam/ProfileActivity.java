@@ -14,6 +14,9 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.*;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -27,7 +30,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     private FirebaseAuth firebaseAuth;
 
-    private StorageReference storageReference;
+    private DatabaseReference databaseReference;
 
     private Button LogOutBtn, editUserBtn, enterBtn;
 
@@ -38,8 +41,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     private String answer;
 
-    public ArrayList<String> Userlist = new ArrayList<>();
-    private static final String LOG_TAG = "ProfileActivity";
+    public ArrayList<String> Imagelist = new ArrayList<>();
 
 
     @Override
@@ -79,18 +81,25 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
         LogOutBtn = (Button) findViewById(R.id.LogOutBtn);
 
-        storageReference = FirebaseStorage.getInstance().getReference().child("Cards");
-        storageReference.addListenerForSingleValueEvent(
-                new ValueEventListener() {
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("Cards");
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
 
                         // Result will be holded Here
                         for (DataSnapshot dsp : dataSnapshot.getChildren()) {
-                            Userlist.add(String.valueOf(dsp.geValue()));
+                            Imagelist.add(String.valueOf(dsp.getValue()));
                         }
-                    });
-                    Log.e(LOG_TAG, Userlist);
+                        Log.d("hej" + Imagelist, "hej");
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        //handle databaseError
+                    }
+
+    });
+        Intent intent = new Intent(ProfileActivity.this,GalleryMain.class);
+        intent.putExtra("MyImages",Imagelist);
 
         LogOutBtn.setOnClickListener(this);
     }
