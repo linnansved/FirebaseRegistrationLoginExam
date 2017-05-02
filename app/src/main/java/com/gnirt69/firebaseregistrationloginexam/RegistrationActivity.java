@@ -66,36 +66,42 @@ public class RegistrationActivity extends AppCompatActivity {
 
     public void btnRegistrationUser_Click(View v) {
 
-        //if (checkPass()) {
+
+        if (checkPass()) {
 
 
-        final ProgressDialog progressDialog = ProgressDialog.show(RegistrationActivity.this, "Please wait...", "Processing...", true);
-        (firebaseAuth.createUserWithEmailAndPassword(txtEmailAddress.getText().toString(), txtPassword.getText().toString()))
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
+            final ProgressDialog progressDialog = ProgressDialog.show(RegistrationActivity.this, "Please wait...", "Processing...", true);
+            (firebaseAuth.createUserWithEmailAndPassword(txtEmailAddress.getText().toString(), txtPassword.getText().toString()))
+                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
 
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        progressDialog.dismiss();
-                        Log.d(LOG_TAG, "createUserWithEmail:onComplete" + task.isSuccessful());
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            progressDialog.dismiss();
+                            Log.d(LOG_TAG, "createUserWithEmail:onComplete" + task.isSuccessful());
 
-                        if (task.isSuccessful()) {
-                            FirebaseUser user = task.getResult().getUser();
-                            Log.d(LOG_TAG, "onComplete: uid =" + user.getUid());
-                            Toast.makeText(RegistrationActivity.this, "Registration successful", Toast.LENGTH_LONG).show();
-                            //registerNick();
+                            if (task.isSuccessful()) {
+                                FirebaseUser user = task.getResult().getUser();
+                                Log.d(LOG_TAG, "onComplete: uid =" + user.getUid());
+                                Toast.makeText(RegistrationActivity.this, "Registration successful", Toast.LENGTH_LONG).show();
+                                //registerNick();
 
-                            uploadUserToDatabase();
+                                uploadUserToDatabase();
 
-                            Intent i = new Intent(RegistrationActivity.this, LoginActivity.class);
-                            startActivity(i);
+                                Intent i = new Intent(RegistrationActivity.this, LoginActivity.class);
+                                startActivity(i);
 
 
-                        } else {
-                            Log.e("ERROR", task.getException().toString());
-                            Toast.makeText(RegistrationActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                            } else {
+                                Log.e("ERROR", task.getException().toString());
+                                Toast.makeText(RegistrationActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                            }
                         }
-                    }
-                });
+                    });
+        } else {
+            Toast.makeText(RegistrationActivity.this, "Wrong password", Toast.LENGTH_LONG).show();
+            Intent i = new Intent(RegistrationActivity.this, RegistrationActivity.class);
+            startActivity(i);
+        }
     }
 
     public void uploadUserToDatabase(){
@@ -137,16 +143,13 @@ public class RegistrationActivity extends AppCompatActivity {
     }*/
 
 
-    }
-
 
    /* public void registerNick() {
         txtNickname.getText().toString();
     }*/
 
     //  }
-   /* private boolean checkPass() {
-
+   private boolean checkPass() {
         pwd1 = txtPassword.getText().toString();
         pwd2 = txtPassword2.getText().toString();
         if (pwd1.equals(pwd2)) {
@@ -156,5 +159,6 @@ public class RegistrationActivity extends AppCompatActivity {
             Toast.makeText(RegistrationActivity.this, "Wrong password", Toast.LENGTH_LONG).show();
             return false;
         }
-    }*/
+    }
+}
 

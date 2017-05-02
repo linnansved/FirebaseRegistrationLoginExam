@@ -91,7 +91,7 @@
         android:ems="10"
         android:hint="Set nickname"
         android:textAlignment="center"
-        android:inputType="textPassword" />
+        android:inputType="textPersonName" />
 
     <Button
         android:id="@+id/btnRegistrationUser"
