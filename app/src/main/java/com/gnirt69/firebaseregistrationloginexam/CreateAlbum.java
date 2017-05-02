@@ -87,7 +87,7 @@ public class CreateAlbum extends AppCompatActivity {
     }
 
 
-    public void uploadUserToDatabase(){
+   /*public void uploadUserToDatabase(){
         try{
             String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
             Log.d(LOG_TAG, userID);
@@ -103,8 +103,8 @@ public class CreateAlbum extends AppCompatActivity {
             userRef.setValue(info);
 
 
-            /*arrayUserID.add(i, deckID);
-            i++;*/
+            //arrayUserID.add(i, deckID);
+            //i++;
 
         }
         catch (Exception e){
@@ -112,5 +112,5 @@ public class CreateAlbum extends AppCompatActivity {
 
         }
 
-    }
+    } */
 }
