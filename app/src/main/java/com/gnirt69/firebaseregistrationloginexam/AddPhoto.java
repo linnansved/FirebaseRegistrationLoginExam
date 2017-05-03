@@ -68,8 +68,6 @@ public class AddPhoto extends AppCompatActivity {
     public ArrayList<String> arrayDeckID = new ArrayList<String>();
     public int i = 0;
     public String deckID;
-    public String userID;
-    
     public String stringUri;
 
     @Override
@@ -84,6 +82,7 @@ public class AddPhoto extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference();
         //mDisplayDatabase = FirebaseDatabase.getInstance().getReference().child("Decks").child(deckID);
         deckID = UUID.randomUUID().toString();
+
     }
     public void startRecording(View view) {
         mRecorder = new MediaRecorder();
@@ -267,12 +266,15 @@ public class AddPhoto extends AppCompatActivity {
     }
 
     private void addDeckIdToUserDB(){
+        String stringUser = getIntent().getExtras().getString("UserID");
+        System.out.print(stringUser);
         Map<String, String> decks = new HashMap<>();
         for(int k = 0; k < arrayDeckID.size(); k++){
-            userRef = mDatabase.child("Users").child(userID);
+            userRef = mDatabase.child("Users").child(stringUser);
             decks.put("deckID"+" "+k, arrayDeckID.get(k));
             userRef.setValue(decks);
         }
     }
+
 
 }

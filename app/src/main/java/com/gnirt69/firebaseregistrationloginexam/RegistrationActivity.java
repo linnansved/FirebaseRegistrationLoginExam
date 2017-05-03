@@ -41,6 +41,7 @@ public class RegistrationActivity extends AppCompatActivity {
     private DatabaseReference storageNick;
     private DatabaseReference userRef;
     private DatabaseReference mDatabase;
+    public String userID;
     String nickname;
     private static final String LOG_TAG = "AudioRecordTest";
     String pwd1;
@@ -62,6 +63,11 @@ public class RegistrationActivity extends AppCompatActivity {
         txtNickname = (EditText) findViewById(R.id.txtNicknameRegistration);
         firebaseAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
+
+        Intent intent = new Intent(getBaseContext(), AddPhoto.class);
+        intent.putExtra("UserID", userID);
+        startActivity(intent);
+
     }
 
     public void btnRegistrationUser_Click(View v) {
