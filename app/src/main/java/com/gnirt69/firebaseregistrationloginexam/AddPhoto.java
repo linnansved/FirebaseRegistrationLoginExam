@@ -5,6 +5,7 @@ package com.gnirt69.firebaseregistrationloginexam;
         import android.media.MediaPlayer;
         import android.media.MediaRecorder;
         import android.net.Uri;
+        import android.provider.ContactsContract;
         import android.provider.MediaStore;
         import android.support.annotation.NonNull;
         import android.support.v7.app.AppCompatActivity;
@@ -12,10 +13,12 @@ package com.gnirt69.firebaseregistrationloginexam;
         import android.util.Log;
         import android.view.View;
         import android.widget.Button;
+        import android.widget.EditText;
         import android.widget.ImageView;
         import android.widget.Toast;
         import com.google.android.gms.tasks.OnFailureListener;
         import com.google.android.gms.tasks.OnSuccessListener;
+        import com.google.firebase.auth.FirebaseAuth;
         import com.google.firebase.database.ChildEventListener;
         import com.google.firebase.database.DataSnapshot;
         import com.google.firebase.database.DatabaseError;
@@ -55,13 +58,18 @@ public class AddPhoto extends AppCompatActivity {
     private DatabaseReference imageRef;
     private DatabaseReference audioRef;
     private DatabaseReference deckRef;
+    private DatabaseReference userRef;
+    private DatabaseReference stringRef;
     //private DatabaseReference mDisplayDatabase;
     public ArrayList<Uri> imageUrlList = new ArrayList<>();
     public ArrayList<Uri> audioUrlList = new ArrayList<>();
     public String cardID;
     public ArrayList<String> arrayCardID = new ArrayList<String>();
+    public ArrayList<String> arrayDeckID = new ArrayList<String>();
     public int i = 0;
     public String deckID;
+    public String userID;
+    
     public String stringUri;
 
     @Override
@@ -161,6 +169,7 @@ public class AddPhoto extends AppCompatActivity {
             cardID = UUID.randomUUID().toString();
             uploadImage();
             uploadAudio();
+            uploadStringToDatabase(view);
             arrayCardID.add(i, cardID);
             i++;
         } else {
@@ -169,6 +178,7 @@ public class AddPhoto extends AppCompatActivity {
     }
     public void onClickDone(View view) {
         createDecksToDB();
+        addDeckIdToUserDB();
         //displayFiles();
     }
     private void createDecksToDB(){
@@ -243,6 +253,26 @@ public class AddPhoto extends AppCompatActivity {
         audio.put("URL", downloadAudioUrl.toString());
         audioRef = mDatabase.child("Cards").child(cardID).child("Audio");
         audioRef.setValue(audio);
+    }
+
+    private void uploadStringToDatabase(View view){
+        EditText editText = (EditText) findViewById(R.id.picName);
+        String message = editText.getText().toString();
+        Log.v(LOG_TAG, message);
+        DatabaseReference stringRef = mDatabase.child("Cards").child(cardID);
+        Map<String, String> string = new HashMap<>();
+        string.put("picName", message);
+        stringRef.setValue(string);
+
+    }
+
+    private void addDeckIdToUserDB(){
+        Map<String, String> decks = new HashMap<>();
+        for(int k = 0; k < arrayDeckID.size(); k++){
+            userRef = mDatabase.child("Users").child(userID);
+            decks.put("deckID"+" "+k, arrayDeckID.get(k));
+            userRef.setValue(decks);
+        }
     }
 
 }
