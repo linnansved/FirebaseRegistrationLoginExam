@@ -39,7 +39,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     private ImageView unLocked, locked, addAlbum;
 
-    private TextView tvEmail,tvNick, textSqParent, nicknameView;
+    private TextView tvEmail,tvNick, textSqParent;
     private EditText answerParent;
 
     private String answer;
@@ -68,8 +68,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         enterBtn = (Button) findViewById(R.id.enterBtn);
         textSqParent = (TextView)findViewById(R.id.textSqParent);
         answerParent = (EditText) findViewById(R.id.answerParent);
-        nicknameView = (TextView) findViewById(R.id.tvNickname);
-
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
         if(firebaseAuth.getCurrentUser() == null){
@@ -102,8 +100,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                 nickname = dataSnapshot.getValue(String.class);
                 //Log.d("nickname is fine", nickname.toString());
                 tvEmail = (TextView) findViewById(R.id.tvEmailProfile);
-                nicknameView.setText(nickname);
-                tvEmail.setVisibility(View.GONE);
+                tvEmail.setText(nickname);
+                tvEmail.setVisibility(View.VISIBLE);
             }
 
             @Override
