@@ -27,6 +27,7 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 
 import static android.R.attr.data;
+import static android.R.attr.tag;
 
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -43,6 +44,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     private String answer;
 
+    public String nickname;
+
     private DatabaseReference mDatabase;
     private DatabaseReference hej;
 
@@ -53,8 +56,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        tvEmail = (TextView) findViewById(R.id.tvEmailProfile);
-        //tvEmail.setText(getIntent().getExtras().getString("Email"));
+
 
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -76,7 +78,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         //FirebaseUser user = firebaseAuth.getCurrentUser();
 
         unLocked.setVisibility(View.VISIBLE);
-        tvEmail.setVisibility(View.VISIBLE);
         locked.setVisibility(View.GONE);
         //LogOutBtn.setVisibility(View.VISIBLE);
         addAlbum.setVisibility(View.VISIBLE);
@@ -91,7 +92,23 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
         hej = mDatabase.child("Users").child(userID).child("nickname");
-        System.out.println(hej);
+        Log.d("hej", hej.toString());
+        hej.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Log.d("we enter on datachange", hej.toString());
+                nickname = dataSnapshot.getValue(String.class);
+                //Log.d("nickname is fine", nickname.toString());
+                tvEmail = (TextView) findViewById(R.id.tvEmailProfile);
+                tvEmail.setText(nickname);
+                tvEmail.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Cards").child("Images");
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -114,6 +131,9 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         intent.putExtra("MyImages",Imagelist);
 
         LogOutBtn.setOnClickListener(this);
+
+
+        //tvEmail.setText(getIntent().getExtras().getString("Email"));
     }
 
 
