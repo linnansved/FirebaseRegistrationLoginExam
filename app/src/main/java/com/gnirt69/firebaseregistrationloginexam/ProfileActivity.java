@@ -42,6 +42,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     private String answer;
 
     private DatabaseReference mDatabase;
+    private DatabaseReference hej;
 
     public ArrayList<String> Imagelist = new ArrayList<>();
 
@@ -51,7 +52,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         tvEmail = (TextView) findViewById(R.id.tvEmailProfile);
-        tvEmail.setText(getIntent().getExtras().getString("Email"));
+        //tvEmail.setText(getIntent().getExtras().getString("Email"));
+
 
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -71,7 +73,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         //FirebaseUser user = firebaseAuth.getCurrentUser();
 
         unLocked.setVisibility(View.VISIBLE);
-        tvEmail.setVisibility(View.GONE);
+        tvEmail.setVisibility(View.VISIBLE);
         locked.setVisibility(View.GONE);
         //LogOutBtn.setVisibility(View.VISIBLE);
         addAlbum.setVisibility(View.VISIBLE);
@@ -84,6 +86,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         LogOutBtn = (Button) findViewById(R.id.LogOutBtn);
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
+        hej = mDatabase.child("Users").child("nickname");
+        System.out.println(hej);
 
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Cards").child("Images");
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -167,11 +171,11 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
-    /*public void seeUser_Click(View v) {
+    public void seeUser_Click(View v) {
         Intent i = new Intent(ProfileActivity.this, UserInfo.class);
         i.putExtra("Email", firebaseAuth.getCurrentUser().getEmail());
-        i.putExtra("Nickname", mDatabase.getNickname());
+        //i.putExtra("Nickname", mDatabase.child("Users").child("nickname"));
         startActivity(i);
-    }*/
+    }
 
 }
