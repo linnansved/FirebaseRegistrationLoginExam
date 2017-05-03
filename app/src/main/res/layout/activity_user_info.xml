@@ -15,30 +15,22 @@
         android:src="@drawable/alva"
         app:civ_border_width="6dp"
         app:civ_border_color="#FFFFFF"
-        android:layout_above="@+id/linear"
-        android:layout_marginBottom="10dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true" />
-
-    <LinearLayout
-        android:id="@+id/linear"
+    <ImageView
+        android:id="@+id/bannerplane"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:src="@drawable/your_info"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true">
-
-        <ImageView
-            android:id="@+id/whitesq2"
-            android:layout_width="250dp"
-            android:layout_height="250dp"
-            android:background="@android:color/transparent" />
-
-    </LinearLayout>
+        android:layout_marginTop="120dp" />
 
     <TextView
-        android:id="@+id/heading"
+        android:id="@+id/currentNickname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/linear"
+        android:layout_below="@id/bannerplane"
         android:layout_marginTop="20dp"
         android:layout_centerInParent="true"
         android:ems="10"
@@ -50,13 +42,11 @@
         android:textSize="20sp"
         android:background="@android:color/transparent"/>
 
-
-
     <TextView
         android:id="@+id/currentEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/linear"
+        android:layout_below="@+id/currentNickname"
         android:layout_centerInParent="true"
         android:layout_marginTop="100dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -66,22 +56,12 @@
         android:textColor="#FFFFFF"
         android:text="Hejehjehej"/>
 
-    <TextView
-        android:id="@+id/currentNickname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/linear"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="50dp"
-        android:ems="10"
-        android:textAlignment="center"
-        android:typeface="monospace"/>
 
     <Button
         android:id="@+id/saveEditUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/linear"
+        android:layout_below="@+id/currentEmail"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:background="@drawable/red_but"

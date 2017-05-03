@@ -33,10 +33,10 @@ public class UserInfo extends AppCompatActivity {
 
         tvEmail = (TextView) findViewById(R.id.currentEmail);
         //tvEmail.setText("Your current email:"+ getIntent().getExtras().getString("Email"));
-        tvEmail.setText("Your current email:"+ getIntent().getExtras().getString("Nickname"));
+        tvEmail.setText("Your current email:"+ getIntent().getExtras().getString("Email"));
 
-        //tvNick = (TextView) findViewById(R.id.currentNickname);
-      //  tvNick.setText("Your current nickname:"+ getIntent().getExtras().getString("Nickname");
+        tvNick = (TextView) findViewById(R.id.currentNickname);
+        tvNick.setText("Your current nickname:"+ getIntent().getExtras().getString("Nickname"));
 
         if(firebaseAuth.getCurrentUser() == null){
             finish();
