@@ -66,6 +66,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         enterBtn = (Button) findViewById(R.id.enterBtn);
         textSqParent = (TextView)findViewById(R.id.textSqParent);
         answerParent = (EditText) findViewById(R.id.answerParent);
+        FirebaseUser user = firebaseAuth.getCurrentUser();
 
         if(firebaseAuth.getCurrentUser() == null){
             finish();
@@ -86,9 +87,10 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
 
         LogOutBtn = (Button) findViewById(R.id.LogOutBtn);
+        String userID = user.getUid();
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        hej = mDatabase.child("Users").child("nickname");
+        hej = mDatabase.child("Users").child(userID).child("nickname");
         System.out.println(hej);
 
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Cards").child("Images");
