@@ -26,6 +26,8 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
+import static android.R.attr.data;
+
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener {
 
     private FirebaseAuth firebaseAuth;
