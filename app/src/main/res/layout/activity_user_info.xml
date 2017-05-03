@@ -7,6 +7,14 @@
     tools:context="com.gnirt69.firebaseregistrationloginexam.UserInfo"
     android:background="@drawable/background">
 
+    <ImageView
+        android:id="@+id/bannerplane"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/your_profile"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp" />
+
     <de.hdodenhof.circleimageview.CircleImageView
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/profile_image"
@@ -15,73 +23,29 @@
         android:src="@drawable/alva"
         app:civ_border_width="6dp"
         app:civ_border_color="#FFFFFF"
-        android:layout_above="@+id/linear"
-        android:layout_marginBottom="10dp"
+        android:="10dp"
+        android:layout_below="@+id/bannerplane"
         android:layout_centerHorizontal="true" />
-
-    <LinearLayout
-        android:id="@+id/linear"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true">
-
-        <ImageView
-            android:id="@+id/whitesq2"
-            android:layout_width="250dp"
-            android:layout_height="250dp"
-            android:background="@android:color/transparent" />
-
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/heading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/linear"
-        android:layout_marginTop="20dp"
-        android:layout_centerInParent="true"
-        android:ems="10"
-        android:text="User Info"
-        android:textAlignment="center"
-        android:textColor="#0080ff"
-        android:textStyle="bold"
-        android:typeface="monospace"
-        android:textSize="20sp"
-        android:background="@android:color/transparent"/>
-
-
 
     <TextView
         android:id="@+id/currentEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/linear"
-        android:layout_centerInParent="true"
+        android:layout_below="@id/profile_image"
         android:layout_marginTop="100dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:ems="10"
         android:textAlignment="center"
         android:typeface="monospace"
         android:textColor="#FFFFFF"
-        android:text="Hejehjehej"/>
+        android:text=""/>
 
-    <TextView
-        android:id="@+id/currentNickname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/linear"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="50dp"
-        android:ems="10"
-        android:textAlignment="center"
-        android:typeface="monospace"/>
 
     <Button
         android:id="@+id/saveEditUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/linear"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:background="@drawable/red_but"
@@ -89,5 +53,40 @@
         android:textColor="#FFFFFF"
         android:textStyle="bold"
         android:onClick="editUser_Click"/>
+
+    <ImageView
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/pratbubbla"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="40dp"
+        android:id="@+id/pratbubbla" />
+
+    <TextView
+        android:id="@+id/currentNickname"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="50dp"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:background="@android:color/transparent"
+        android:ems="10"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30dp"
+        android:textColor="#0080ff"
+        android:textStyle="bold"
+        android:typeface="monospace"
+        />
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginRight="20dp"
+        android:src="@drawable/bird"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:id="@+id/greenbird" />
 </RelativeLayout>
 
