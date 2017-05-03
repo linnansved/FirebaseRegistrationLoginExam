@@ -201,5 +201,10 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         //i.putExtra("Nickname", mDatabase.child("Users").child("nickname"));
         startActivity(i);
     }
+//MARKUS AVSNITT
+    public void dynamicLink_Click(View v) {
+        //MARKUS KOD
+    }
+
 
 }

@@ -170,5 +170,16 @@
         android:textStyle="bold"
         android:onClick="testParent"/>
 
+    <Button
+    android:layout_width="100dp"
+    android:layout_height="50dp"
+    android:text="MARKUS"
+    android:id="@+id/dynamicLinkBtn"
+    android:layout_centerHorizontal="true"
+    android:layout_below="@id/tvEmailProfile"
+    android:background="@drawable/green_but"
+    android:textColor="#FFFFFF"
+    android:textStyle="bold"
+    android:onClick="dynamicLink_Click"/>
 
 </RelativeLayout>
