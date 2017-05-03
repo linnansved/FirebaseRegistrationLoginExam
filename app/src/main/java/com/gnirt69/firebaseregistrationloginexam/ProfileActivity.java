@@ -147,10 +147,11 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             startActivity(new Intent(this, LoginActivity.class));
         }
     }
-    public void editUser_Click(View v) {
+   /* public void editUser_Click(View v) {
         Intent i = new Intent(ProfileActivity.this, UserInfo.class);
+        i.putExtra("Nickname", nickname);
         startActivity(i);
-    }
+    }*/
 
     public void addCard_Click(View v) {
         Intent i = new Intent(ProfileActivity.this, AddPhoto.class);
@@ -198,7 +199,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     public void seeUser_Click(View v) {
         Intent i = new Intent(ProfileActivity.this, UserInfo.class);
         i.putExtra("Email", firebaseAuth.getCurrentUser().getEmail());
-        //i.putExtra("Nickname", mDatabase.child("Users").child("nickname"));
+        i.putExtra("Nickname", nickname);
         startActivity(i);
     }
 //MARKUS AVSNITT

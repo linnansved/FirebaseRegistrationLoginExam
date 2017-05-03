@@ -125,7 +125,7 @@
         android:background="@drawable/blue_but"
         android:layout_centerHorizontal="true"
         android:textColor="#FFFFFF"
-        android:onClick="editUser_Click"/>
+        android:onClick="seeUser_Click"/>
 
 
     <TextView
