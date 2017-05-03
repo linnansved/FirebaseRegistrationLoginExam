@@ -46,6 +46,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     public String nickname;
 
+    public String url_name;
+
     private DatabaseReference mDatabase;
     private DatabaseReference hej;
 
@@ -112,23 +114,31 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             }
         });
 
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("Cards").child("Images");
+ // Skapa en loop sen som gar igenom alla cardIDs
+        String cardID = "afcfc25c-3d29-4a16-918b-63709f7cb09b";
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("Cards").child(cardID).child("Images").child("URL");
+        Log.d("tjena", databaseReference.toString());
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot2) {
+                url_name = dataSnapshot2.getValue(String.class);
+                Imagelist.add(url_name);
 
-                        // Result will be holded Here
-                        for (DataSnapshot dsp : dataSnapshot.getChildren()) {
+                Log.d("string", Imagelist.toString());
+
+                        /* Result will be holded Here
+                        for (DataSnapshot dsp : dataSnapshot2.getChildren()) {
                             Imagelist.add(String.valueOf(dsp.getValue()));
                         }
-                        Log.d("hej" + Imagelist, "hej");
-                    }
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        //handle databaseError
-                    }
+                        Log.d("hello", Imagelist.toString());*/
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                //handle databaseError
+            }
 
-    });
+        });
+
         Intent intent = new Intent(ProfileActivity.this,GalleryMain.class);
         intent.putExtra("MyImages",Imagelist);
 
