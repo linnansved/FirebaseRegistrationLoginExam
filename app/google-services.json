@@ -103,10 +103,70 @@
       },
       "oauth_client": [
         {
+          "client_id": "308240917442-9q9pprc77gqdisnjuo5kikug6e4n6dc3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gnirt69.firebaseregistrationloginexam",
+            "certificate_hash": "d7cff0c581e3d7ec12b370f1a343ccbb84216eb8"
+          }
+        },
+        {
+          "client_id": "308240917442-dcro0nk4hv9cd7l49vsbojojth0d3cgh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gnirt69.firebaseregistrationloginexam",
+            "certificate_hash": "306090978329b76d2263c0599f328ff1cfc21b26"
+          }
+        },
+        {
           "client_id": "308240917442-0hgfsakucp0fjo41v8mt5cq9d43orcjl.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.gnirt69.firebaseregistrationloginexam",
+            "certificate_hash": "b64cbb7ec2af8c44a099592d1034261ceb11487e"
+          }
+        },
+        {
+          "client_id": "308240917442-obisd19d85slaeavengea61jf9ttoege.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0SEkRbRKqC5RQ4Rqja501lvl8NEx5APA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "308240917442-obisd19d85slaeavengea61jf9ttoege.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:308240917442:android:887f2329c850ffa9",
+        "android_client_info": {
+          "package_name": "com.example.linnansved.audio"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "308240917442-gfue651rio75dv8vh6u0eoi5nljh302v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.linnansved.audio",
             "certificate_hash": "b64cbb7ec2af8c44a099592d1034261ceb11487e"
           }
         },
