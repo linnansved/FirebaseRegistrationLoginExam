@@ -27,11 +27,45 @@
         android:layout_marginTop="120dp" />
 
     <TextView
-        android:id="@+id/currentNickname"
+        android:id="@+id/currentEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/bannerplane"
-        android:layout_marginTop="20dp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="10dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:ems="10"
+        android:textAlignment="center"
+        android:typeface="monospace"
+        android:textColor="#FFFFFF"
+        android:text="Hejehjehej"/>
+
+    <Button
+        android:id="@+id/saveEditUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/currentEmail"
+        android:layout_centerHorizontal="true"
+
+        android:background="@drawable/red_but"
+        android:text="EDIT INFO"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:onClick="editUser_Click"/>
+
+    <ImageView
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/pratbubbla"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="40dp"
+        android:id="@+id/prat" />
+
+    <TextView
+        android:id="@+id/currentNickname"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
         android:layout_centerInParent="true"
         android:ems="10"
         android:text="User Info"
@@ -40,34 +74,18 @@
         android:textStyle="bold"
         android:typeface="monospace"
         android:textSize="20sp"
-        android:background="@android:color/transparent"/>
-
-    <TextView
-        android:id="@+id/currentEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/currentNickname"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="100dp"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:ems="10"
-        android:textAlignment="center"
-        android:typeface="monospace"
-        android:textColor="#FFFFFF"
-        android:text="Hejehjehej"/>
+        android:background="@android:color/transparent"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30dp"/>
 
 
-    <Button
-        android:id="@+id/saveEditUser"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/currentEmail"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/red_but"
-        android:text="EDIT INFO"
-        android:textColor="#FFFFFF"
-        android:textStyle="bold"
-        android:onClick="editUser_Click"/>
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginRight="20dp"
+        android:src="@drawable/bird"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:id="@+id/greenbird" />
 </RelativeLayout>
 
