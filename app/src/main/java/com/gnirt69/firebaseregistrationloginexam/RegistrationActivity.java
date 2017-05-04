@@ -88,6 +88,8 @@ public class RegistrationActivity extends AppCompatActivity {
                                 Toast.makeText(RegistrationActivity.this, "Registration successful!", Toast.LENGTH_LONG).show();
                                 //registerNick();
 
+                                uploadUserToDatabase();
+
                                 Intent i = new Intent(RegistrationActivity.this, LoginActivity.class);
                                 startActivity(i);
 
@@ -108,7 +110,6 @@ public class RegistrationActivity extends AppCompatActivity {
     public void uploadUserToDatabase(){
         try{
             String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-            Log.d(LOG_TAG, userID);
 
             EditText nickname = (EditText) findViewById(R.id.txtNicknameRegistration);
             String message = nickname.getText().toString();

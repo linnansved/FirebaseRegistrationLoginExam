@@ -64,11 +64,13 @@ public class AddPhoto extends AppCompatActivity {
     public ArrayList<Uri> audioUrlList = new ArrayList<>();
     public String cardID;
     public ArrayList<String> arrayCardID = new ArrayList<String>();
-    public ArrayList<String> arrayUserID = new ArrayList<String>();
-    //public ArrayList<String> deckID = new ArrayList<String>();
+    public ArrayList<String> arrayDeckID = new ArrayList<String>();
     public int i = 0;
+    public int j = 0;
     public String deckID;
-    public String stringUri;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -172,6 +174,8 @@ public class AddPhoto extends AppCompatActivity {
             arrayCardID.add(i, cardID);
             i++;
 
+
+
         } else {
             Toast.makeText(getApplicationContext(), "du måste lägga till bild och ljud", Toast.LENGTH_LONG).show();
         }
@@ -179,32 +183,36 @@ public class AddPhoto extends AppCompatActivity {
 
 
     public void onClickDone(View view) {
-        //createDecksToDB();
-        //createUserInDecksToDB();
-        //displayFiles();
+
+        createDecksToUser();
+        arrayDeckID.add(j, deckID);
+        j++;
+
+        createCardIdInDecksToDB();
     }
 
-    /*
-    private void createDecksToDB(){
+
+    private void createCardIdInDecksToDB() {
         Map<String, String> cards = new HashMap<>();
-        for(int k = 0; k < arrayCardID.size(); k++){
-            deckRef = mDatabase.child("Decks").child(deckID);
-            cards.put("CardID"+" "+k, arrayCardID.get(k));
+        for (int k = 0; k < arrayCardID.size(); k++) {
+            deckRef = mDatabase.child("Decks").child(deckID).child("Cards");
+            cards.put("CardID" + " " + k, arrayCardID.get(k));
             deckRef.setValue(cards);
         }
     }
-*/
 
-    /*
-    private void createUserInDecksToDB(){
+    public void createDecksToUser(){
         String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        Map<String, String> ownerUserID = new HashMap<>();
-        for(int k = 0; k < arrayUserID.size(); k++){
-            deckRef = mDatabase.child("Decks").child(deckID);
-            ownerUserID.put("ownerUser", userID);
-            deckRef.setValue(ownerUserID);
+        Log.v(LOG_TAG, "SE HIT" + userID); //hit funkar det
+        Map<String, String> decks = new HashMap<>(); //Hit funkar det också, men inte innanför for-loopen
+        // Här vill vi Lägga till if-sats som gör att bara ett deck-id med samma id kan lagras under user
+        for(int m = 0; m < arrayDeckID.size(); m++){
+            Log.v(LOG_TAG, "SE HIT1 " + userID);
+            userRef = mDatabase.child("Users").child(userID).child("Decks");
+            decks.put("DeckID"+" " + m, arrayDeckID.get(m));
+            userRef.setValue(decks);
         }
-    }*/
+    }
 
 
     private void uploadImage() {
@@ -216,7 +224,7 @@ public class AddPhoto extends AppCompatActivity {
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         int x = 0;
                         Toast.makeText(getApplicationContext(), "File Uploaded", Toast.LENGTH_LONG).show();
-                        //downloadImageUrl = taskSnapshot.getDownloadUrl();
+                        downloadImageUrl = taskSnapshot.getDownloadUrl();
                         imageUrlList.add(x, downloadImageUrl);
                         uploadImageToDatabase();
                         x++;
@@ -245,7 +253,7 @@ public class AddPhoto extends AppCompatActivity {
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         int y=0;
                         Toast.makeText(getApplicationContext(), "File Uploaded", Toast.LENGTH_LONG).show();
-                        //downloadAudioUrl = taskSnapshot.getDownloadUrl();
+                        downloadAudioUrl = taskSnapshot.getDownloadUrl();
                         audioUrlList.add(y, downloadAudioUrl);
                         uploadAudioToDatabase();
                         y++;
@@ -278,7 +286,7 @@ public class AddPhoto extends AppCompatActivity {
         EditText editText = (EditText) findViewById(R.id.picName);
         String message = editText.getText().toString();
         Log.v(LOG_TAG, message);
-        DatabaseReference stringRef = mDatabase.child("Cards").child(cardID);
+        stringRef = mDatabase.child("Cards").child(cardID);
         Map<String, String> string = new HashMap<>();
         string.put("picName", message);
         stringRef.setValue(string);
@@ -289,7 +297,7 @@ public class AddPhoto extends AppCompatActivity {
         EditText editText2 = (EditText) findViewById(R.id.albumName);
         String message2 = editText2.getText().toString();
         Log.v(LOG_TAG, message2);
-        DatabaseReference deckRef = mDatabase.child("Decks").child(deckID);
+        deckRef = mDatabase.child("Decks").child(deckID);
         Map<String, String> string2 = new HashMap<>();
         string2.put("albumName", message2);
         deckRef.setValue(string2);
