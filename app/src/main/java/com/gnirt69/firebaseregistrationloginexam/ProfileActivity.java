@@ -139,15 +139,17 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
         });
 
-        Intent intent = new Intent(ProfileActivity.this,GalleryMain.class);
-        intent.putExtra("MyImages",Imagelist);
 
         LogOutBtn.setOnClickListener(this);
 
 
-        //tvEmail.setText(getIntent().getExtras().getString("Email"));
     }
 
+    public void toGallery_Click(View v) {
+        Intent i = new Intent(ProfileActivity.this, GalleryMain.class);
+        i.putExtra("MyImages", Imagelist);
+        startActivity(i);
+    }
 
 
     @Override
@@ -169,10 +171,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         Intent i = new Intent(ProfileActivity.this, AddPhoto.class);
         startActivity(i);
     }
-    public void toGallery_Click(View v) {
-        Intent i = new Intent(ProfileActivity.this, GalleryMain.class);
-        startActivity(i);
-    }
+
    public void toChild_Click(View v) {
        unLocked.setVisibility(View.GONE);
        locked.setVisibility(View.VISIBLE);
