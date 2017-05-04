@@ -59,6 +59,7 @@ public class AddPhoto extends AppCompatActivity {
     private DatabaseReference audioRef;
     private DatabaseReference deckRef;
     private DatabaseReference userRef;
+    private DatabaseReference userRef1;
     private DatabaseReference stringRef;
     //private DatabaseReference mDisplayDatabase;
     public ArrayList<Uri> imageUrlList = new ArrayList<>();
@@ -83,7 +84,12 @@ public class AddPhoto extends AppCompatActivity {
         //mDisplayDatabase = FirebaseDatabase.getInstance().getReference().child("Decks").child(deckID);
         deckID = UUID.randomUUID().toString();
 
-    }
+        /*String s = getIntent().getStringExtra("userID");
+            Log.e(LOG_TAG, "userID");*/
+            //The key argument here must match that used in the other activity
+        }
+
+
     public void startRecording(View view) {
         mRecorder = new MediaRecorder();
         mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
@@ -177,7 +183,7 @@ public class AddPhoto extends AppCompatActivity {
     }
     public void onClickDone(View view) {
         createDecksToDB();
-        addDeckIdToUserDB();
+        //addDeckIdToUserDB();
         //displayFiles();
     }
     private void createDecksToDB(){
@@ -186,8 +192,19 @@ public class AddPhoto extends AppCompatActivity {
             deckRef = mDatabase.child("Decks").child(deckID);
             cards.put("CardID"+" "+k, arrayCardID.get(k));
             deckRef.setValue(cards);
+
+            /*String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            Log.d(LOG_TAG, userID);
+            userRef1 = mDatabase.child("Decks").child(deckID);
+            Map<String, String> info1 = new HashMap<>();
+            info1.put("deckId", userID);
+            userRef1.setValue(info1);
+
+
+*/
         }
     }
+
     private void uploadImage() {
         imageName = "image_"+generateRandom().toString()+".jpeg";
         StorageReference riversRef = storageReference.child("images/").child(imageName);
@@ -265,7 +282,7 @@ public class AddPhoto extends AppCompatActivity {
 
     }
 
-    private void addDeckIdToUserDB(){
+    /*private void addDeckIdToUserDB(){
         String stringUser = getIntent().getExtras().getString("UserID");
         System.out.print(stringUser);
         Map<String, String> decks = new HashMap<>();
@@ -274,7 +291,7 @@ public class AddPhoto extends AppCompatActivity {
             decks.put("deckID"+" "+k, arrayDeckID.get(k));
             userRef.setValue(decks);
         }
-    }
+    }*/
 
 
 }

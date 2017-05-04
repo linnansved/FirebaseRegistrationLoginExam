@@ -64,9 +64,9 @@ public class RegistrationActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        Intent intent = new Intent(getBaseContext(), AddPhoto.class);
-        intent.putExtra("UserID", userID);
-        startActivity(intent);
+        /*Intent intent = new Intent(getBaseContext(), AddPhoto.class);
+        intent.putExtra("userID", userID);
+        startActivity(intent); */
 
     }
 
@@ -134,6 +134,8 @@ public class RegistrationActivity extends AppCompatActivity {
 
         }
     }
+
+
 
 
         //}
