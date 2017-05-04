@@ -88,8 +88,6 @@ public class RegistrationActivity extends AppCompatActivity {
                                 Toast.makeText(RegistrationActivity.this, "Registration successful!", Toast.LENGTH_LONG).show();
                                 //registerNick();
 
-                                uploadUserToDatabase();
-
                                 Intent i = new Intent(RegistrationActivity.this, LoginActivity.class);
                                 startActivity(i);
 
@@ -122,6 +120,9 @@ public class RegistrationActivity extends AppCompatActivity {
             info.put("nickname", message);
             userRef.setValue(info);
 
+
+
+
             /*arrayUserID.add(i, deckID);
             i++;*/
 
@@ -131,6 +132,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
         }
     }
+
 
 
         //}
