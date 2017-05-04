@@ -1,5 +1,6 @@
 package com.gnirt69.firebaseregistrationloginexam;
 
+import android.content.Intent;
 import android.os.Bundle;
         import android.support.v4.app.Fragment;
         import android.support.v4.app.FragmentManager;
@@ -7,12 +8,15 @@ import android.os.Bundle;
         import android.support.v4.view.ViewPager;
         import android.support.v7.app.AppCompatActivity;
         import android.support.v7.widget.Toolbar;
-        import android.view.LayoutInflater;
+import android.util.Log;
+import android.view.LayoutInflater;
         import android.view.Menu;
         import android.view.MenuItem;
-        import android.view.View;
+import android.view.MotionEvent;
+import android.view.View;
         import android.view.ViewGroup;
-        import android.widget.ImageView;
+import android.widget.Button;
+import android.widget.ImageView;
 
         import com.bumptech.glide.Glide;
 
@@ -41,6 +45,7 @@ public class GalleryDetailActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
         setSupportActionBar(toolbar);
 
+
         data = getIntent().getParcelableArrayListExtra("data");
         pos = getIntent().getIntExtra("pos", 0);
 
@@ -55,6 +60,7 @@ public class GalleryDetailActivity extends AppCompatActivity {
 
         mViewPager.setAdapter(mSectionsPagerAdapter);
         mViewPager.setCurrentItem(pos);
+
 
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -74,11 +80,42 @@ public class GalleryDetailActivity extends AppCompatActivity {
             public void onPageScrollStateChanged(int state) {
 
             }
+
+        });
+
+       //LÄGGER TILL SÅ DET GÅR ATT KLICKA PÅ BILDEN
+        mViewPager.setOnTouchListener(new View.OnTouchListener() {
+            private boolean moved;
+
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+                    moved = false;
+                }
+                if (motionEvent.getAction() == MotionEvent.ACTION_MOVE) {
+                    moved = true;
+                }
+                if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
+                    if (!moved) {
+                        view.performClick();
+                    }
+                }
+                return false;
+            }
+        });
+
+        mViewPager.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                Log.d("DET FUNKAR", "HEJSALN!");
+
+//LÄGG IN PLAY SOUND HÄR!!
+            }
         });
 
 
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -149,6 +186,7 @@ public class GalleryDetailActivity extends AppCompatActivity {
         private static final String ARG_IMG_TITLE = "image_title";
         private static final String ARG_IMG_URL = "image_url";
 
+
         @Override
         public void setArguments(Bundle args) {
             super.setArguments(args);
@@ -191,6 +229,7 @@ public class GalleryDetailActivity extends AppCompatActivity {
 
             return rootView;
         }
+
 
     }
 }
