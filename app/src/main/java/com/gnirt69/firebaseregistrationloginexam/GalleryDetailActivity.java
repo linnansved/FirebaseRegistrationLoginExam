@@ -1,6 +1,7 @@
 package com.gnirt69.firebaseregistrationloginexam;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
         import android.support.v4.app.Fragment;
         import android.support.v4.app.FragmentManager;
@@ -20,7 +21,8 @@ import android.widget.ImageView;
 
         import com.bumptech.glide.Glide;
 
-        import java.util.ArrayList;
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class GalleryDetailActivity extends AppCompatActivity {
 
@@ -31,6 +33,8 @@ public class GalleryDetailActivity extends AppCompatActivity {
     int pos;
 
     Toolbar toolbar;
+    MediaPlayer mPlayer;
+    public String mAudioName="https://firebasestorage.googleapis.com/v0/b/tapetap2.appspot.com/o/audio%2F2017.05.04.10.20.42?alt=media&token=6c5791d9-a445-41cc-8efc-0595ff072250";
 
     /**
      * The {@link ViewPager} that will host the section contents.
@@ -110,8 +114,17 @@ public class GalleryDetailActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Log.d("DET FUNKAR", "HEJSALN!");
 
-//LÄGG IN PLAY SOUND HÄR!!
+                mPlayer = new MediaPlayer();
+                try {
+                    mPlayer.setDataSource(mAudioName);
+                    mPlayer.prepare();
+                    mPlayer.start();
+                } catch (IOException e) {
+                    Log.e("GÅR EJ ATT SPELA LJUD", "prepare() failed");
+                }
             }
+
+//LÄGG IN PLAY SOUND HÄR!!}
         });
 
 

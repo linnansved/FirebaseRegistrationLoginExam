@@ -38,6 +38,7 @@ public class GalleryMain extends AppCompatActivity {
             GalleryImageModel imageModel = new GalleryImageModel();
             imageModel.setName(TextList.get(i).toString());
             imageModel.setUrl(Imagelist.get(i));
+
             data.add(imageModel);
         }
 
