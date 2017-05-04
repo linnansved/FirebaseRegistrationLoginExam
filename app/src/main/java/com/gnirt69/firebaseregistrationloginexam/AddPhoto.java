@@ -60,12 +60,12 @@ public class AddPhoto extends AppCompatActivity {
     private DatabaseReference deckRef;
     private DatabaseReference userRef;
     private DatabaseReference stringRef;
-    //private DatabaseReference mDisplayDatabase;
     public ArrayList<Uri> imageUrlList = new ArrayList<>();
     public ArrayList<Uri> audioUrlList = new ArrayList<>();
     public String cardID;
     public ArrayList<String> arrayCardID = new ArrayList<String>();
     public ArrayList<String> arrayUserID = new ArrayList<String>();
+    //public ArrayList<String> deckID = new ArrayList<String>();
     public int i = 0;
     public String deckID;
     public String stringUri;
@@ -171,15 +171,20 @@ public class AddPhoto extends AppCompatActivity {
             uploadStringToDatabase(view);
             arrayCardID.add(i, cardID);
             i++;
+
         } else {
             Toast.makeText(getApplicationContext(), "du måste lägga till bild och ljud", Toast.LENGTH_LONG).show();
         }
     }
+
+
     public void onClickDone(View view) {
-        createDecksToDB();
+        //createDecksToDB();
         //createUserInDecksToDB();
         //displayFiles();
     }
+
+    /*
     private void createDecksToDB(){
         Map<String, String> cards = new HashMap<>();
         for(int k = 0; k < arrayCardID.size(); k++){
@@ -188,6 +193,7 @@ public class AddPhoto extends AppCompatActivity {
             deckRef.setValue(cards);
         }
     }
+*/
 
     /*
     private void createUserInDecksToDB(){
@@ -210,7 +216,7 @@ public class AddPhoto extends AppCompatActivity {
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         int x = 0;
                         Toast.makeText(getApplicationContext(), "File Uploaded", Toast.LENGTH_LONG).show();
-                        downloadImageUrl = taskSnapshot.getDownloadUrl();
+                        //downloadImageUrl = taskSnapshot.getDownloadUrl();
                         imageUrlList.add(x, downloadImageUrl);
                         uploadImageToDatabase();
                         x++;
@@ -239,7 +245,7 @@ public class AddPhoto extends AppCompatActivity {
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         int y=0;
                         Toast.makeText(getApplicationContext(), "File Uploaded", Toast.LENGTH_LONG).show();
-                        downloadAudioUrl = taskSnapshot.getDownloadUrl();
+                        //downloadAudioUrl = taskSnapshot.getDownloadUrl();
                         audioUrlList.add(y, downloadAudioUrl);
                         uploadAudioToDatabase();
                         y++;
@@ -267,6 +273,7 @@ public class AddPhoto extends AppCompatActivity {
         audioRef.setValue(audio);
     }
 
+
     private void uploadStringToDatabase(View view){
         EditText editText = (EditText) findViewById(R.id.picName);
         String message = editText.getText().toString();
@@ -276,6 +283,16 @@ public class AddPhoto extends AppCompatActivity {
         string.put("picName", message);
         stringRef.setValue(string);
 
+    }
+
+    public void tryDeckDatabase(View view) {
+        EditText editText2 = (EditText) findViewById(R.id.albumName);
+        String message2 = editText2.getText().toString();
+        Log.v(LOG_TAG, message2);
+        DatabaseReference deckRef = mDatabase.child("Decks").child(deckID);
+        Map<String, String> string2 = new HashMap<>();
+        string2.put("albumName", message2);
+        deckRef.setValue(string2);
     }
 
     /*
@@ -291,4 +308,4 @@ public class AddPhoto extends AppCompatActivity {
     }*/
 
 
-}
+    }
