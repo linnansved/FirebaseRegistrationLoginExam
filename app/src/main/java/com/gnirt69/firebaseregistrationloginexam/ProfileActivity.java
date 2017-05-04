@@ -120,7 +120,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         });
 
         // Get image URL from database
-        String cardID = "afcfc25c-3d29-4a16-918b-63709f7cb09b";
+        String cardID = "fb7186d5-afd3-40c3-8edb-3937672acdd0";
         databaseReference1 = FirebaseDatabase.getInstance().getReference().child("Cards").child(cardID).child("Images").child("URL");
         Log.d("tjena", databaseReference1.toString());
         databaseReference1.addListenerForSingleValueEvent(new ValueEventListener() {

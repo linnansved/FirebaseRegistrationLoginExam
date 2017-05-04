@@ -5,7 +5,7 @@ import android.os.Parcelable;
 
 public class GalleryImageModel implements Parcelable {
 
-    String name, url;
+    String name, url, audio;
 
     public GalleryImageModel() {
 
@@ -14,6 +14,7 @@ public class GalleryImageModel implements Parcelable {
     protected GalleryImageModel(Parcel in) {
         name = in.readString();
         url = in.readString();
+        audio = in.readString();
     }
 
     public static final Creator<GalleryImageModel> CREATOR = new Creator<GalleryImageModel>() {
@@ -40,6 +41,12 @@ public class GalleryImageModel implements Parcelable {
     public void setUrl(String url) {
         this.url = url;
     }
+    public String getAudio() {
+        return audio;
+    }
+    public void setAudio(String audio) {
+        this.audio = audio;
+    }
 
     @Override
     public int describeContents() {
@@ -50,6 +57,7 @@ public class GalleryImageModel implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(name);
         dest.writeString(url);
+        dest.writeString(audio);
     }
 }
 

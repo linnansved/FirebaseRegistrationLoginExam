@@ -34,7 +34,7 @@ public class GalleryDetailActivity extends AppCompatActivity {
 
     Toolbar toolbar;
     MediaPlayer mPlayer;
-    public String mAudioName="https://firebasestorage.googleapis.com/v0/b/tapetap2.appspot.com/o/audio%2F2017.05.04.10.20.42?alt=media&token=6c5791d9-a445-41cc-8efc-0595ff072250";
+    public String mAudioName;
 
     /**
      * The {@link ViewPager} that will host the section contents.
@@ -54,6 +54,11 @@ public class GalleryDetailActivity extends AppCompatActivity {
         pos = getIntent().getIntExtra("pos", 0);
 
         setTitle(data.get(pos).getName());
+
+        mAudioName = data.get(pos).getAudio();
+        Log.d("AudioLaddas", mAudioName);
+
+
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -113,6 +118,7 @@ public class GalleryDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Log.d("DET FUNKAR", "HEJSALN!");
+
 
                 mPlayer = new MediaPlayer();
                 try {
