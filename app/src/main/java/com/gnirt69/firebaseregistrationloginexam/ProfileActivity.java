@@ -33,7 +33,9 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     private FirebaseAuth firebaseAuth;
 
-    private DatabaseReference databaseReference;
+    private DatabaseReference databaseReference1;
+    private DatabaseReference databaseReference2;
+    private DatabaseReference databaseReference3;
 
     private Button LogOutBtn, editUserBtn, enterBtn;
 
@@ -45,13 +47,16 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     private String answer;
 
     public String nickname;
-
     public String url_name;
+    public String audio_name;
+    public String text_name;
 
     private DatabaseReference mDatabase;
     private DatabaseReference hej;
 
     public ArrayList<String> Imagelist = new ArrayList<>();
+    public ArrayList<String> AudioList = new ArrayList<>();
+    public ArrayList<String> TextList = new ArrayList<>();
 
 
     @Override
@@ -114,23 +119,17 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             }
         });
 
- // Skapa en loop sen som gar igenom alla cardIDs
+        // Get image URL from database
         String cardID = "afcfc25c-3d29-4a16-918b-63709f7cb09b";
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("Cards").child(cardID).child("Images").child("URL");
-        Log.d("tjena", databaseReference.toString());
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReference1 = FirebaseDatabase.getInstance().getReference().child("Cards").child(cardID).child("Images").child("URL");
+        Log.d("tjena", databaseReference1.toString());
+        databaseReference1.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot2) {
                 url_name = dataSnapshot2.getValue(String.class);
                 Imagelist.add(url_name);
 
                 Log.d("string", Imagelist.toString());
-
-                        /* Result will be holded Here
-                        for (DataSnapshot dsp : dataSnapshot2.getChildren()) {
-                            Imagelist.add(String.valueOf(dsp.getValue()));
-                        }
-                        Log.d("hello", Imagelist.toString());*/
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -139,6 +138,41 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
         });
 
+        //Get audio URL from database
+        databaseReference2 = FirebaseDatabase.getInstance().getReference().child("Cards").child(cardID).child("Audio").child("URL");
+        Log.d("tjenis", databaseReference2.toString());
+        databaseReference2.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot3) {
+                audio_name = dataSnapshot3.getValue(String.class);
+                AudioList.add(audio_name);
+
+                Log.d("audio", AudioList.toString());
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                //handle databaseError
+            }
+
+        });
+
+        //Get text from database
+        databaseReference3 = FirebaseDatabase.getInstance().getReference().child("Cards").child(cardID).child("picName");
+        Log.d("tjaaa", databaseReference3.toString());
+        databaseReference3.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot3) {
+                text_name = dataSnapshot3.getValue(String.class);
+                TextList.add(text_name);
+
+                Log.d("text", TextList.toString());
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                //handle databaseError
+            }
+
+        });
 
         LogOutBtn.setOnClickListener(this);
 
@@ -148,6 +182,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     public void toGallery_Click(View v) {
         Intent i = new Intent(ProfileActivity.this, GalleryMain.class);
         i.putExtra("MyImages", Imagelist);
+        i.putExtra("MyAudio", AudioList);
+        i.putExtra("MyText", TextList);
         startActivity(i);
     }
 

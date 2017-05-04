@@ -27,15 +27,18 @@ public class GalleryMain extends AppCompatActivity {
         setContentView(R.layout.gallery_main);
 
         ArrayList<String> Imagelist = (ArrayList<String>) getIntent().getSerializableExtra("MyImages");
+        ArrayList<String> AudioList = (ArrayList<String>) getIntent().getSerializableExtra("MyAudio");
+        ArrayList<String> TextList = (ArrayList<String>) getIntent().getSerializableExtra("MyText");
 
+        Log.d("Transfer", AudioList.toString());
+        Log.d("Text", TextList.toString());
 
         for (int i = 0; i < Imagelist.size(); i++) {
 
             GalleryImageModel imageModel = new GalleryImageModel();
-            imageModel.setName("Image " + i);
+            imageModel.setName(TextList.get(i).toString());
             imageModel.setUrl(Imagelist.get(i));
             data.add(imageModel);
-
         }
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
