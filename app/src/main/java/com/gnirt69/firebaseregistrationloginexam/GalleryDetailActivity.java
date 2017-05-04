@@ -55,8 +55,6 @@ public class GalleryDetailActivity extends AppCompatActivity {
 
         setTitle(data.get(pos).getName());
 
-        mAudioName = data.get(pos).getAudio();
-        Log.d("AudioLaddas", mAudioName);
 
 
 
@@ -82,6 +80,8 @@ public class GalleryDetailActivity extends AppCompatActivity {
 
                 //noinspection ConstantConditions
                 setTitle(data.get(position).getName());
+                playSound(data.get(position).getAudio());
+
 
             }
 
@@ -118,21 +118,26 @@ public class GalleryDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Log.d("DET FUNKAR", "HEJSALN!");
+               // playSound(data.get(pos).getAudio());
 
-
-                mPlayer = new MediaPlayer();
-                try {
-                    mPlayer.setDataSource(mAudioName);
-                    mPlayer.prepare();
-                    mPlayer.start();
-                } catch (IOException e) {
-                    Log.e("GÅR EJ ATT SPELA LJUD", "prepare() failed");
-                }
             }
 
-//LÄGG IN PLAY SOUND HÄR!!}
         });
 
+
+    }
+
+    public void playSound(String audioUrl){
+        mAudioName = audioUrl;
+        Log.d("AudioLaddas", mAudioName);
+        mPlayer = new MediaPlayer();
+        try {
+            mPlayer.setDataSource(mAudioName);
+            mPlayer.prepare();
+            mPlayer.start();
+        } catch (IOException e) {
+            Log.e("GÅR EJ ATT SPELA LJUD", "prepare() failed");
+        }
 
     }
 
@@ -199,11 +204,12 @@ public class GalleryDetailActivity extends AppCompatActivity {
          * fragment.
          */
 
-        String name, url;
+        String name, url, audio;
         int pos;
         private static final String ARG_SECTION_NUMBER = "section_number";
         private static final String ARG_IMG_TITLE = "image_title";
         private static final String ARG_IMG_URL = "image_url";
+        //private static final String ARG_IMG_AUD = "audio_url";
 
 
         @Override
@@ -212,6 +218,7 @@ public class GalleryDetailActivity extends AppCompatActivity {
             this.pos = args.getInt(ARG_SECTION_NUMBER);
             this.name = args.getString(ARG_IMG_TITLE);
             this.url = args.getString(ARG_IMG_URL);
+          //  this.audio = args.getString(ARG_IMG_AUD);
         }
 
         /**
@@ -224,6 +231,7 @@ public class GalleryDetailActivity extends AppCompatActivity {
             args.putInt(ARG_SECTION_NUMBER, sectionNumber);
             args.putString(ARG_IMG_TITLE, name);
             args.putString(ARG_IMG_URL, url);
+          //  args.putString(ARG_IMG_AUD, audio);
             fragment.setArguments(args);
             return fragment;
         }

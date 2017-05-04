@@ -120,59 +120,75 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         });
 
         // Get image URL from database
-        String cardID = "fb7186d5-afd3-40c3-8edb-3937672acdd0";
-        databaseReference1 = FirebaseDatabase.getInstance().getReference().child("Cards").child(cardID).child("Images").child("URL");
-        Log.d("tjena", databaseReference1.toString());
-        databaseReference1.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot2) {
-                url_name = dataSnapshot2.getValue(String.class);
-                Imagelist.add(url_name);
+        ArrayList<String> cardID = new ArrayList<>();
 
-                Log.d("string", Imagelist.toString());
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                //handle databaseError
-            }
+        //Här ska vi hämta in och addera CardID - här lägger vi in manuellt
+        cardID.add("10575602-d5b0-487e-9050-05fbb429d911");
+        cardID.add("e6f1bd40-4dee-4f07-a143-7fcd89189dc9");
+        cardID.add("2f9ca101-ae77-4bb1-bc79-1a6deffe4f38");
+        cardID.add("d3dee538-79fa-4c25-bd1c-541ccef7949c");
+        cardID.add("fb7186d5-afd3-40c3-8edb-3937672acdd0");
 
-        });
+        for (int i = 0; i < cardID.size(); i++) {
+            String this_turn = cardID.get(i);
+            databaseReference1 = FirebaseDatabase.getInstance().getReference().child("Cards").child(this_turn).child("Images").child("URL");
+            Log.d("tjena", databaseReference1.toString());
+            databaseReference1.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot2) {
+                    url_name = dataSnapshot2.getValue(String.class);
+                    Imagelist.add(url_name);
 
-        //Get audio URL from database
-        databaseReference2 = FirebaseDatabase.getInstance().getReference().child("Cards").child(cardID).child("Audio").child("URL");
-        Log.d("tjenis", databaseReference2.toString());
-        databaseReference2.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot3) {
-                audio_name = dataSnapshot3.getValue(String.class);
-                AudioList.add(audio_name);
+                    Log.d("string", Imagelist.toString());
+                }
 
-                Log.d("audio", AudioList.toString());
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                //handle databaseError
-            }
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    //handle databaseError
+                }
 
-        });
+            });
 
-        //Get text from database
-        databaseReference3 = FirebaseDatabase.getInstance().getReference().child("Cards").child(cardID).child("picName");
-        Log.d("tjaaa", databaseReference3.toString());
-        databaseReference3.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot3) {
-                text_name = dataSnapshot3.getValue(String.class);
-                TextList.add(text_name);
 
-                Log.d("text", TextList.toString());
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                //handle databaseError
-            }
+            //Get audio URL from database
+            databaseReference2 = FirebaseDatabase.getInstance().getReference().child("Cards").child(this_turn).child("Audio").child("URL");
+            Log.d("tjenis", databaseReference2.toString());
+            databaseReference2.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot3) {
+                    audio_name = dataSnapshot3.getValue(String.class);
+                    AudioList.add(audio_name);
 
-        });
+                    Log.d("audio", AudioList.toString());
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    //handle databaseError
+                }
+
+            });
+
+            //Get text from database
+            databaseReference3 = FirebaseDatabase.getInstance().getReference().child("Cards").child(this_turn).child("picName");
+            Log.d("tjaaa", databaseReference3.toString());
+            databaseReference3.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot3) {
+                    text_name = dataSnapshot3.getValue(String.class);
+                    TextList.add(text_name);
+
+                    Log.d("text", TextList.toString());
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    //handle databaseError
+                }
+
+            });
+
+        }
 
         LogOutBtn.setOnClickListener(this);
 
