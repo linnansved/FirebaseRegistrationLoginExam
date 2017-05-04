@@ -64,9 +64,6 @@ public class RegistrationActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        Intent intent = new Intent(getBaseContext(), AddPhoto.class);
-        intent.putExtra("UserID", userID);
-        startActivity(intent);
 
     }
 
@@ -90,8 +87,6 @@ public class RegistrationActivity extends AppCompatActivity {
                                 Log.d(LOG_TAG, "onComplete: uid =" + user.getUid());
                                 Toast.makeText(RegistrationActivity.this, "Registration successful!", Toast.LENGTH_LONG).show();
                                 //registerNick();
-
-                                uploadUserToDatabase();
 
                                 Intent i = new Intent(RegistrationActivity.this, LoginActivity.class);
                                 startActivity(i);
@@ -125,6 +120,9 @@ public class RegistrationActivity extends AppCompatActivity {
             info.put("nickname", message);
             userRef.setValue(info);
 
+
+
+
             /*arrayUserID.add(i, deckID);
             i++;*/
 
@@ -134,6 +132,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
         }
     }
+
 
 
         //}

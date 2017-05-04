@@ -65,7 +65,7 @@ public class AddPhoto extends AppCompatActivity {
     public ArrayList<Uri> audioUrlList = new ArrayList<>();
     public String cardID;
     public ArrayList<String> arrayCardID = new ArrayList<String>();
-    public ArrayList<String> arrayDeckID = new ArrayList<String>();
+    public ArrayList<String> arrayUserID = new ArrayList<String>();
     public int i = 0;
     public String deckID;
     public String stringUri;
@@ -177,7 +177,7 @@ public class AddPhoto extends AppCompatActivity {
     }
     public void onClickDone(View view) {
         createDecksToDB();
-        addDeckIdToUserDB();
+        //createUserInDecksToDB();
         //displayFiles();
     }
     private void createDecksToDB(){
@@ -188,6 +188,19 @@ public class AddPhoto extends AppCompatActivity {
             deckRef.setValue(cards);
         }
     }
+
+    /*
+    private void createUserInDecksToDB(){
+        String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        Map<String, String> ownerUserID = new HashMap<>();
+        for(int k = 0; k < arrayUserID.size(); k++){
+            deckRef = mDatabase.child("Decks").child(deckID);
+            ownerUserID.put("ownerUser", userID);
+            deckRef.setValue(ownerUserID);
+        }
+    }*/
+
+
     private void uploadImage() {
         imageName = "image_"+generateRandom().toString()+".jpeg";
         StorageReference riversRef = storageReference.child("images/").child(imageName);
@@ -265,6 +278,7 @@ public class AddPhoto extends AppCompatActivity {
 
     }
 
+    /*
     private void addDeckIdToUserDB(){
         String stringUser = getIntent().getExtras().getString("UserID");
         System.out.print(stringUser);
@@ -274,7 +288,7 @@ public class AddPhoto extends AppCompatActivity {
             decks.put("deckID"+" "+k, arrayDeckID.get(k));
             userRef.setValue(decks);
         }
-    }
+    }*/
 
 
 }
