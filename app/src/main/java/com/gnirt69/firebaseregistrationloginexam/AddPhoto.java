@@ -41,6 +41,7 @@ public class AddPhoto extends AppCompatActivity {
     private MediaPlayer   mPlayer = null;
     private boolean booleanIsAudioPlayed = true;
     private Uri imageFilePath;
+    private String mAudioFilePath;
     private ImageView imageView;
     private static final int PICK_IMAGE_REQUES = 234;
     public Button buttonImageChoose;
@@ -67,8 +68,7 @@ public class AddPhoto extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_photo);
-        mAudioName = getExternalCacheDir().getAbsolutePath();
-        mAudioName += "/"+"audio_"+generateRandom().toString()+".3gp";
+        mAudioFilePath = getExternalCacheDir().getAbsolutePath();
         imageView = (ImageView) findViewById(R.id.imageView);
         buttonImageChoose = (Button) findViewById(R.id.chooseImage);
         storageReference = FirebaseStorage.getInstance().getReference();
@@ -83,7 +83,7 @@ public class AddPhoto extends AppCompatActivity {
         mRecorder = new MediaRecorder();
         mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
         mRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
-        mRecorder.setOutputFile(mAudioName);
+        mRecorder.setOutputFile(mAudioFilePath + "/" + mAudioName);
         mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
         try {
             mRecorder.prepare();
@@ -99,6 +99,7 @@ public class AddPhoto extends AppCompatActivity {
     }
     public void onClickRecord(View view) {
         if (booleanIsRecordAudioStarted) {
+            mAudioName = "audio_" + generateRandom().toString() + ".3gp";
             startRecording(view);
             booleanIsRecordAudioStarted = false;
         } else {
@@ -109,7 +110,7 @@ public class AddPhoto extends AppCompatActivity {
     public void startPlaying(View view) {
         mPlayer = new MediaPlayer();
         try {
-            mPlayer.setDataSource(mAudioName);
+            mPlayer.setDataSource(mAudioFilePath + "/" + mAudioName);
             mPlayer.prepare();
             mPlayer.start();
         } catch (IOException e) {
@@ -217,9 +218,8 @@ public class AddPhoto extends AppCompatActivity {
     }
 
     private void uploadAudio(){
-        Uri uri = Uri.fromFile(new File(mAudioName));
-        String uriString = generateRandom();
-        StorageReference riversRef1 = storageReference.child("audio/").child(uriString);
+        Uri uri = Uri.fromFile(new File(mAudioFilePath + "/" + mAudioName));
+        StorageReference riversRef1 = storageReference.child("audio/").child(mAudioName);
         riversRef1.putFile(uri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
@@ -242,6 +242,7 @@ public class AddPhoto extends AppCompatActivity {
     private void uploadImageToDatabase() {
         imageRef = mDatabase.child("Cards").child(cardID);
         Map<String, String> images = new HashMap<>();
+        images.put("Name", imageName);
         images.put("URL", downloadImageUrl.toString());
         imageRef = mDatabase.child("Cards").child(cardID).child("Images");
         imageRef.setValue(images);
@@ -249,6 +250,7 @@ public class AddPhoto extends AppCompatActivity {
     private void uploadAudioToDatabase(){
         audioRef = mDatabase.child("Cards").child(cardID);
         Map<String, String> audio = new HashMap<>();
+        audio.put("Name", mAudioName);
         audio.put("URL", downloadAudioUrl.toString());
         audioRef = mDatabase.child("Cards").child(cardID).child("Audio");
         audioRef.setValue(audio);
