@@ -12,6 +12,9 @@ import android.view.View;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 public class GalleryMain extends AppCompatActivity {
     GalleryAdapter mAdapter;
@@ -19,28 +22,25 @@ public class GalleryMain extends AppCompatActivity {
 
     ArrayList<GalleryImageModel> data = new ArrayList<>();
 
-    //ArrayList<String> Imagelist = getIntent().getExtras().getParcelable("MyImages");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gallery_main);
 
-        ArrayList<String> Imagelist = (ArrayList<String>) getIntent().getSerializableExtra("MyImages");
-        ArrayList<String> AudioList = (ArrayList<String>) getIntent().getSerializableExtra("MyAudio");
-        ArrayList<String> TextList = (ArrayList<String>) getIntent().getSerializableExtra("MyText");
+        HashMap<String, String> Imagelist = (HashMap<String, String>) getIntent().getSerializableExtra("MyImages");
+        HashMap<String, String> AudioList = (HashMap<String, String>) getIntent().getSerializableExtra("MyAudio");
+        HashMap<String, String> TextList = (HashMap<String, String>) getIntent().getSerializableExtra("MyText");
 
-        Log.d("Transfer", AudioList.toString());
-        Log.d("Text", TextList.toString());
 
-        for (int i = 0; i < Imagelist.size(); i++) {
-
+        for (HashMap.Entry<String, String> entry: Imagelist.entrySet()){
             GalleryImageModel imageModel = new GalleryImageModel();
-            imageModel.setName(TextList.get(i).toString());
-            imageModel.setUrl(Imagelist.get(i));
-            imageModel.setAudio(AudioList.get(i));
-
+            String key = entry.getKey();
+            imageModel.setUrl(entry.getValue());
+            imageModel.setName(TextList.get(key));
+            imageModel.setAudio(AudioList.get(key));
             data.add(imageModel);
+
         }
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

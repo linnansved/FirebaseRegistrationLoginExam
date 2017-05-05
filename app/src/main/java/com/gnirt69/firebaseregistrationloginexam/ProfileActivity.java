@@ -3,6 +3,7 @@ package com.gnirt69.firebaseregistrationloginexam;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.ArrayMap;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -25,6 +26,8 @@ import android.util.Log;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import static android.R.attr.data;
 import static android.R.attr.tag;
@@ -54,9 +57,10 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     private DatabaseReference mDatabase;
     private DatabaseReference hej;
 
-    public ArrayList<String> Imagelist = new ArrayList<>();
-    public ArrayList<String> AudioList = new ArrayList<>();
-    public ArrayList<String> TextList = new ArrayList<>();
+    public HashMap<String, String> Imagelist = new HashMap<>();
+    public HashMap<String, String> AudioList = new HashMap<>();
+    public HashMap<String, String> TextList = new HashMap<>();
+
 
 
     @Override
@@ -101,14 +105,10 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
         hej = mDatabase.child("Users").child(userID).child("nickname");
-        Log.d("hej", hej.toString());
         hej.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Log.d("we enter on datachange", hej.toString());
                 nickname = dataSnapshot.getValue(String.class);
-                //Log.d("nickname is fine", nickname.toString());
-                //tvEmail = (TextView) findViewById(R.id.tvEmailProfile);
                 tvNick.setText(nickname);
                 tvNick.setVisibility(View.VISIBLE);
             }
@@ -123,23 +123,20 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         ArrayList<String> cardID = new ArrayList<>();
 
         //Här ska vi hämta in och addera CardID - här lägger vi in manuellt
-        cardID.add("10575602-d5b0-487e-9050-05fbb429d911");
-        cardID.add("e6f1bd40-4dee-4f07-a143-7fcd89189dc9");
-        cardID.add("2f9ca101-ae77-4bb1-bc79-1a6deffe4f38");
-        cardID.add("d3dee538-79fa-4c25-bd1c-541ccef7949c");
-        cardID.add("fb7186d5-afd3-40c3-8edb-3937672acdd0");
+        cardID.add("10575602-d5b0-487e-9050-05fbb429d911"); //Sailormoon
+        cardID.add("2f9ca101-ae77-4bb1-bc79-1a6deffe4f38"); //gadda
+        cardID.add("e0c1af48-ee82-4dde-b548-ed17246f1112"); // hund
+
 
         for (int i = 0; i < cardID.size(); i++) {
-            String this_turn = cardID.get(i);
+            final String this_turn = cardID.get(i);
             databaseReference1 = FirebaseDatabase.getInstance().getReference().child("Cards").child(this_turn).child("Images").child("URL");
-            Log.d("tjena", databaseReference1.toString());
             databaseReference1.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot2) {
                     url_name = dataSnapshot2.getValue(String.class);
-                    Imagelist.add(url_name);
-
-                    Log.d("string", Imagelist.toString());
+                    Imagelist.put(this_turn, url_name);
+                    Log.d("ImageList", Imagelist.toString());
                 }
 
                 @Override
@@ -152,14 +149,12 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
             //Get audio URL from database
             databaseReference2 = FirebaseDatabase.getInstance().getReference().child("Cards").child(this_turn).child("Audio").child("URL");
-            Log.d("tjenis", databaseReference2.toString());
             databaseReference2.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot3) {
                     audio_name = dataSnapshot3.getValue(String.class);
-                    AudioList.add(audio_name);
-
-                    Log.d("audio", AudioList.toString());
+                    AudioList.put(this_turn, audio_name);
+                    Log.d("AudioList", AudioList.toString());
                 }
 
                 @Override
@@ -171,14 +166,12 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
             //Get text from database
             databaseReference3 = FirebaseDatabase.getInstance().getReference().child("Cards").child(this_turn).child("picName");
-            Log.d("tjaaa", databaseReference3.toString());
             databaseReference3.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot3) {
                     text_name = dataSnapshot3.getValue(String.class);
-                    TextList.add(text_name);
-
-                    Log.d("text", TextList.toString());
+                    TextList.put(this_turn, text_name);
+                    Log.d("TextList", TextList.toString());
                 }
 
                 @Override
@@ -191,8 +184,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         }
 
         LogOutBtn.setOnClickListener(this);
-
-
     }
 
     public void toGallery_Click(View v) {
@@ -200,6 +191,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         i.putExtra("MyImages", Imagelist);
         i.putExtra("MyAudio", AudioList);
         i.putExtra("MyText", TextList);
+
         startActivity(i);
     }
 
@@ -220,7 +212,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     }*/
 
     public void addCard_Click(View v) {
-        Intent i = new Intent(ProfileActivity.this, AddPhoto.class);
+        Intent i = new Intent(ProfileActivity.this, addAlbum.class);
         startActivity(i);
     }
 

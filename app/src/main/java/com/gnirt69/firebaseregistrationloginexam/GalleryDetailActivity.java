@@ -56,15 +56,12 @@ public class GalleryDetailActivity extends AppCompatActivity {
         setTitle(data.get(pos).getName());
 
 
-
-
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(), data);
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setPageTransformer(true, new DepthPageTransformer());
-
         mViewPager.setAdapter(mSectionsPagerAdapter);
         mViewPager.setCurrentItem(pos);
 
@@ -113,16 +110,15 @@ public class GalleryDetailActivity extends AppCompatActivity {
             }
         });
 
-        mViewPager.setOnClickListener(new View.OnClickListener(){
+        /*mViewPager.setOnClickListener(new View.OnClickListener(){
 
-            @Override
+           @Override
             public void onClick(View view) {
-                Log.d("DET FUNKAR", "HEJSALN!");
-               // playSound(data.get(pos).getAudio());
+                playSound(data.get(pos).getAudio());
 
             }
 
-        });
+        });*/
 
 
     }

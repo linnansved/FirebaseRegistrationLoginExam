@@ -28,9 +28,11 @@
         <activity android:name=".UserInfo" />
         <activity android:name=".AddPhoto" />
         <activity android:name=".GalleryMain" />
-        <activity android:name=".GalleryDetailActivity"
-            android:label="@string/title_activity_detail"/>
-        <activity android:name=".ChildProfile"/>
+        <activity
+            android:name=".GalleryDetailActivity"
+            android:label="@string/title_activity_detail" />
+        <activity android:name=".ChildProfile" />
+        <activity android:name=".addAlbum"></activity>
     </application>
 
 </manifest>
