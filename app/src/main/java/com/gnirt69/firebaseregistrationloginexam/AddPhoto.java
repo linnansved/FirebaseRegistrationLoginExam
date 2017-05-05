@@ -5,7 +5,6 @@ package com.gnirt69.firebaseregistrationloginexam;
         import android.media.MediaPlayer;
         import android.media.MediaRecorder;
         import android.net.Uri;
-        import android.provider.ContactsContract;
         import android.provider.MediaStore;
         import android.support.annotation.NonNull;
         import android.support.v7.app.AppCompatActivity;
@@ -18,13 +17,8 @@ package com.gnirt69.firebaseregistrationloginexam;
         import android.widget.Toast;
         import com.google.android.gms.tasks.OnFailureListener;
         import com.google.android.gms.tasks.OnSuccessListener;
-        import com.google.firebase.auth.FirebaseAuth;
-        import com.google.firebase.database.ChildEventListener;
-        import com.google.firebase.database.DataSnapshot;
-        import com.google.firebase.database.DatabaseError;
         import com.google.firebase.database.DatabaseReference;
         import com.google.firebase.database.FirebaseDatabase;
-        import com.google.firebase.database.ValueEventListener;
         import com.google.firebase.storage.FirebaseStorage;
         import com.google.firebase.storage.UploadTask;
         import com.google.firebase.storage.StorageReference;
@@ -58,15 +52,12 @@ public class AddPhoto extends AppCompatActivity {
     private DatabaseReference imageRef;
     private DatabaseReference audioRef;
     private DatabaseReference deckRef;
-    private DatabaseReference userRef;
     private DatabaseReference stringRef;
     public ArrayList<Uri> imageUrlList = new ArrayList<>();
     public ArrayList<Uri> audioUrlList = new ArrayList<>();
     public String cardID;
     public ArrayList<String> arrayCardID = new ArrayList<String>();
-    public ArrayList<String> arrayDeckID = new ArrayList<String>();
     public int i = 0;
-    public int j = 0;
     public String deckID;
 
 
@@ -83,7 +74,9 @@ public class AddPhoto extends AppCompatActivity {
         storageReference = FirebaseStorage.getInstance().getReference();
         mDatabase = FirebaseDatabase.getInstance().getReference();
         //mDisplayDatabase = FirebaseDatabase.getInstance().getReference().child("Decks").child(deckID);
-        deckID = UUID.randomUUID().toString();
+        Intent intent = getIntent();
+        deckID = intent.getExtras().getString("deckID");
+        Log.v(LOG_TAG, "hejhej");
 
     }
     public void startRecording(View view) {
@@ -173,9 +166,6 @@ public class AddPhoto extends AppCompatActivity {
             uploadStringToDatabase(view);
             arrayCardID.add(i, cardID);
             i++;
-
-
-
         } else {
             Toast.makeText(getApplicationContext(), "du måste lägga till bild och ljud", Toast.LENGTH_LONG).show();
         }
@@ -183,11 +173,6 @@ public class AddPhoto extends AppCompatActivity {
 
 
     public void onClickDone(View view) {
-
-        createDecksToUser();
-        arrayDeckID.add(j, deckID);
-        j++;
-
         createCardIdInDecksToDB();
     }
 
@@ -201,18 +186,6 @@ public class AddPhoto extends AppCompatActivity {
         }
     }
 
-    public void createDecksToUser(){
-        String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        Log.v(LOG_TAG, "SE HIT" + userID); //hit funkar det
-        Map<String, String> decks = new HashMap<>(); //Hit funkar det också, men inte innanför for-loopen
-        // Här vill vi Lägga till if-sats som gör att bara ett deck-id med samma id kan lagras under user
-        for(int m = 0; m < arrayDeckID.size(); m++){
-            Log.v(LOG_TAG, "SE HIT1 " + userID);
-            userRef = mDatabase.child("Users").child(userID).child("Decks");
-            decks.put("DeckID"+" " + m, arrayDeckID.get(m));
-            userRef.setValue(decks);
-        }
-    }
 
 
     private void uploadImage() {
@@ -293,27 +266,7 @@ public class AddPhoto extends AppCompatActivity {
 
     }
 
-    public void tryDeckDatabase(View view) {
-        EditText editText2 = (EditText) findViewById(R.id.albumName);
-        String message2 = editText2.getText().toString();
-        Log.v(LOG_TAG, message2);
-        deckRef = mDatabase.child("Decks").child(deckID);
-        Map<String, String> string2 = new HashMap<>();
-        string2.put("albumName", message2);
-        deckRef.setValue(string2);
-    }
 
-    /*
-    private void addDeckIdToUserDB(){
-        String stringUser = getIntent().getExtras().getString("UserID");
-        System.out.print(stringUser);
-        Map<String, String> decks = new HashMap<>();
-        for(int k = 0; k < arrayDeckID.size(); k++){
-            userRef = mDatabase.child("Users").child(stringUser);
-            decks.put("deckID"+" "+k, arrayDeckID.get(k));
-            userRef.setValue(decks);
-        }
-    }*/
 
 
     }

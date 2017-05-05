@@ -6,4 +6,25 @@
     android:layout_height="match_parent"
     tools:context="com.gnirt69.firebaseregistrationloginexam.addAlbum">
 
+    <Button
+        android:id="@+id/createAlbumBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="53dp"
+        android:text="Create Album"
+        android:onClick="onClickCreateAlbum"
+        tools:layout_editor_absoluteX="107dp" />
+
+
+    <EditText
+        android:id="@+id/albumName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Albumname"
+        android:inputType="textPersonName"
+        tools:layout_editor_absoluteX="85dp"
+        tools:layout_editor_absoluteY="105dp" />
+
+
 </android.support.constraint.ConstraintLayout>

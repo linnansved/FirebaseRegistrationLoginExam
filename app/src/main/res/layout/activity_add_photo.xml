@@ -96,26 +96,5 @@
         android:onClick="onClickDone"
         android:text="Done" />
 
-    <EditText
-        android:id="@+id/albumName"
-        android:layout_width="200dp"
-        android:layout_height="40dp"
-        android:layout_below="@id/UploadButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="5dp"
-        android:background="@drawable/whiteback"
-        android:hint="Enter albumname"
-        android:textAlignment="center"
-        android:typeface="monospace" />
-
-    <Button
-        android:id="@+id/albumBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/albumName"
-        android:layout_alignBaseline="@id/albumName"
-        android:onClick="tryDeckDatabase"
-        android:text="UploadAlb" />
-
 
 </RelativeLayout>
