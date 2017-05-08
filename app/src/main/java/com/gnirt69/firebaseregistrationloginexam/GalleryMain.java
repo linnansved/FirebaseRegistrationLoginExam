@@ -1,7 +1,6 @@
 package com.gnirt69.firebaseregistrationloginexam;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -24,13 +23,12 @@ import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 
 public class GalleryMain extends AppCompatActivity {
     GalleryAdapter mAdapter;
     RecyclerView mRecyclerView;
-    public String image_name;
+    public String imageName;
+    public String audioName;
     private DatabaseReference mDatabase;
 
 
@@ -38,7 +36,8 @@ public class GalleryMain extends AppCompatActivity {
     ArrayList<String> cardKey = new ArrayList<>();
     private StorageReference storageReference;
 
-    private DatabaseReference imageName;
+    private DatabaseReference imageDatabaseNameRef;
+    private DatabaseReference audioDatabaseNameRef;
 
 
     @Override
@@ -55,7 +54,7 @@ public class GalleryMain extends AppCompatActivity {
         HashMap<String, String> TextList = (HashMap<String, String>) getIntent().getSerializableExtra("MyText");
 
 
-        for (HashMap.Entry<String, String> entry: Imagelist.entrySet()){
+        for (HashMap.Entry<String, String> entry : Imagelist.entrySet()) {
             GalleryImageModel imageModel = new GalleryImageModel();
             String key = entry.getKey();
             cardKey.add(key);
@@ -86,10 +85,12 @@ public class GalleryMain extends AppCompatActivity {
                         Intent intent = new Intent(GalleryMain.this, GalleryDetailActivity.class);
                         intent.putParcelableArrayListExtra("data", data);
                         intent.putExtra("pos", position);
+
                         String cardID = cardKey.get(position);
-                        removeStorageImage(cardID);
+                        getNameRemoveImgStorage(cardID);
+                        getNameRemoveAudStorage(cardID);
                         ////removeDB(cardID);
-                        Log.d("cardKey", cardID);
+
                         startActivity(intent);
 
                     }
@@ -97,18 +98,9 @@ public class GalleryMain extends AppCompatActivity {
 
     }
 
-    private void removeStorageImage(String cardID){
+    private void removeStorageImage(String imageName) {
 
-        /*imageName = mDatabase.child(cardID).child("Images").child("Name");
-
-        imageName.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                image_name = dataSnapshot.getValue(String.class);
-                Log.d("name", image_name);*/
-
-                image_name = "image_2017.04.25.13.12.45.jpeg";
-                StorageReference imageRef = storageReference.child("images/" + image_name);
+                StorageReference imageRef = storageReference.child("images/" + imageName);
                 imageRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
@@ -121,15 +113,24 @@ public class GalleryMain extends AppCompatActivity {
 
                     }
                 });
-            }
-            /*
+        }
+
+    private void removeStorageAudio(String audioName) {
+
+        StorageReference audioRef = storageReference.child("audio/" + audioName);
+        audioRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
-            public void onCancelled(DatabaseError databaseError) {
-                //handle databaseError
+            public void onSuccess(Void aVoid) {
+                Log.d("yes", "!");
             }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d("no", "!");
 
-
-    //});
+            }
+        });
+    }
 
     /*
     private void removeDB(String cardID){
@@ -137,4 +138,34 @@ public class GalleryMain extends AppCompatActivity {
         mDatabase.child("Cards").child(cardID).removeValue();
     }*/
 
+    private void getNameRemoveImgStorage(String cardID){
+        imageDatabaseNameRef = mDatabase.child("Cards").child(cardID).child("Images").child("Name");
+        imageDatabaseNameRef.addListenerForSingleValueEvent(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                imageName = dataSnapshot.getValue(String.class);
+                removeStorageImage(imageName);
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                //handle databaseError
+            }
+        });
+    }
+    private void getNameRemoveAudStorage(String cardID){
+        audioDatabaseNameRef = mDatabase.child("Cards").child(cardID).child("Audio").child("Name");
+        audioDatabaseNameRef.addListenerForSingleValueEvent(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                audioName = dataSnapshot.getValue(String.class);
+                removeStorageAudio(audioName);
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                //handle databaseError
+            }
+        });
+    }
 }

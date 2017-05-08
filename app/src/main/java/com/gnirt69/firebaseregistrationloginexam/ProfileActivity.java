@@ -136,7 +136,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                 public void onDataChange(DataSnapshot dataSnapshot2) {
                     url_name = dataSnapshot2.getValue(String.class);
                     Imagelist.put(this_turn, url_name);
-                    Log.d("ImageList", Imagelist.toString());
                 }
 
                 @Override
@@ -154,7 +153,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                 public void onDataChange(DataSnapshot dataSnapshot3) {
                     audio_name = dataSnapshot3.getValue(String.class);
                     AudioList.put(this_turn, audio_name);
-                    Log.d("AudioList", AudioList.toString());
                 }
 
                 @Override
@@ -171,7 +169,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                 public void onDataChange(DataSnapshot dataSnapshot3) {
                     text_name = dataSnapshot3.getValue(String.class);
                     TextList.put(this_turn, text_name);
-                    Log.d("TextList", TextList.toString());
                 }
 
                 @Override
