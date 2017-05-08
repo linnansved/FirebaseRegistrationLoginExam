@@ -181,10 +181,10 @@ public class AddPhoto extends AppCompatActivity {
 
 
     private void createCardIdInDecksToDB() {
-        Map<String, String> cards = new HashMap<>();
+        Map<String, Boolean> cards = new HashMap<>();
         for (int k = 0; k < arrayCardID.size(); k++) {
             deckRef = mDatabase.child("Decks").child(deckID).child("Cards");
-            cards.put("CardID" + " " + k, arrayCardID.get(k));
+            cards.put(arrayCardID.get(k), true);
             deckRef.setValue(cards);
         }
     }
