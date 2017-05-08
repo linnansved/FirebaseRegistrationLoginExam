@@ -58,24 +58,19 @@ public class addAlbum extends AppCompatActivity {
         Map<String, String> string = new HashMap<>();
         string.put("albumName", message);
         deckRef.setValue(string);
+
+        //        Intent i = new Intent(addAlbum.this, AddPhoto.class);
+       // i.putExtra("deckID", deckID);
+     //   startActivity(i);
     }
 
     public void createDeckIdUnderUserToDb() {
         String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        Log.v(LOG_TAG, "SE HIT" + userID); //hit funkar det
-        Map<String, String> decks = new HashMap<>(); //Hit funkar det också, men inte innanför for-loopen
-        // Här vill vi Lägga till if-sats som gör att bara ett deck-id med samma id kan lagras under user
-        //if deckID
-        Log.v(LOG_TAG, "SE HIT1" + userID);
-        for(int m = 0; m < arrayDeckID.size(); m++){
-            Log.v(LOG_TAG, "SE HIT2 " + userID);
-            userRef = mDatabase.child("Users").child(userID).child("Decks");
-            Log.v(LOG_TAG, "SE HIT3" + userID);
-            decks.put("DeckID"+" " + m, arrayDeckID.get(m));
-            Log.v(LOG_TAG, "SE HIT4" + userID);
-            userRef.setValue(decks);
-            Log.v(LOG_TAG, "SE HIT5" + userID);
-        }
+        Log.v(LOG_TAG, "SE HIT" + userID);
+        userRef = mDatabase.child("Users").child(userID).child("Decks");
+        Map<String, Boolean> decks = new HashMap<>();
+        decks.put(deckID, true);
+        userRef.setValue(decks);
     }
-
 }
+
