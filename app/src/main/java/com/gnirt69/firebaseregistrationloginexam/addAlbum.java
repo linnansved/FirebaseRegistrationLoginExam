@@ -37,19 +37,28 @@ public class addAlbum extends AppCompatActivity {
 
     public void onClickCreateAlbum(View view) {
         createAlbumToDb(view);
-
         createDeckIdUnderUserToDb();
 
         arrayDeckID.add(j, deckID);
         j++;
 
+        //Skickar deckID till AddPhoto
         Intent i = new Intent(addAlbum.this, AddPhoto.class);
         i.putExtra("deckID", deckID);
         startActivity(i);
-
-
     }
 
+
+
+    public void createAlbumToDb(View view) {
+        EditText editText = (EditText) findViewById(R.id.albumName);
+        String message = editText.getText().toString();
+        Log.v(LOG_TAG, message);
+        deckRef = mDatabase.child("Decks").child(deckID);
+        Map<String, String> string = new HashMap<>();
+        string.put("albumName", message);
+        deckRef.setValue(string);
+    }
 
     public void createDeckIdUnderUserToDb() {
         String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -67,16 +76,6 @@ public class addAlbum extends AppCompatActivity {
             userRef.setValue(decks);
             Log.v(LOG_TAG, "SE HIT5" + userID);
         }
-    }
-
-    public void createAlbumToDb(View view) {
-        EditText editText = (EditText) findViewById(R.id.albumName);
-        String message = editText.getText().toString();
-        Log.v(LOG_TAG, message);
-        deckRef = mDatabase.child("Decks").child(deckID);
-        Map<String, String> string = new HashMap<>();
-        string.put("albumName", message);
-        deckRef.setValue(string);
     }
 
 }

@@ -75,6 +75,8 @@ public class AddPhoto extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference();
         //mDisplayDatabase = FirebaseDatabase.getInstance().getReference().child("Decks").child(deckID);
         Intent intent = getIntent();
+
+        //Tar emot deckID från addAlbum
         deckID = intent.getExtras().getString("deckID");
         Log.v(LOG_TAG, "hejhej");
 
