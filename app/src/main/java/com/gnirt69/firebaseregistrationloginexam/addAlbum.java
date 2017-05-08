@@ -26,6 +26,7 @@ public class addAlbum extends AppCompatActivity {
     public ArrayList<String> arrayDeckID = new ArrayList<String>();
     public String deckID, albumName;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,13 +68,13 @@ public class addAlbum extends AppCompatActivity {
 
     public void createDeckIdUnderUserToDb() {
         String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        Map<String, Boolean> decks = new HashMap<>();
         Log.v(LOG_TAG, "SE HIT" + userID);
         userRef = mDatabase.child("Users").child(userID).child("Decks");
-        Map<String, Boolean> decks = new HashMap<>();
         decks.put(deckID, true);
         userRef.setValue(decks);
 
     }
-
+    
 }
 

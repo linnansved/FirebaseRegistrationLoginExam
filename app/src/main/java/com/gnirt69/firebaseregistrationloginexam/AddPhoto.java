@@ -177,6 +177,8 @@ public class AddPhoto extends AppCompatActivity {
 
     public void onClickDone(View view) {
         createCardIdInDecksToDB();
+        Intent i = new Intent(AddPhoto.this, addAlbum.class);
+        startActivity(i);
     }
 
 
