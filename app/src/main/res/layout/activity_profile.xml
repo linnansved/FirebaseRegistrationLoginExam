@@ -7,7 +7,6 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:id="@+id/relative"
     tools:context="com.gnirt69.firebaseregistrationloginexam.ProfileActivity"
     android:background="@drawable/background">
 
@@ -72,31 +71,7 @@
         android:clickable="true"
         android:onClick="toGallery_Click"
         />
-    <de.hdodenhof.circleimageview.CircleImageView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/album2"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:src="@drawable/dog"
-        app:civ_border_width="6dp"
-        app:civ_border_color="#FFFFFF"
-        android:layout_below="@id/tvNickname"
-        android:layout_toRightOf="@id/album1"
-        android:layout_toEndOf="@id/album1"
-        android:layout_marginLeft="30dp"
-        />
-    <de.hdodenhof.circleimageview.CircleImageView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/album3"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:src="@drawable/carrot"
-        app:civ_border_width="6dp"
-        app:civ_border_color="#FFFFFF"
-        android:layout_below="@id/album1"
-        android:layout_marginLeft="35dp"
-        android:layout_marginTop="10dp"
-        />
+
     <de.hdodenhof.circleimageview.CircleImageView
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/album4"
@@ -105,11 +80,11 @@
         android:src="@drawable/plus"
         app:civ_border_width="6dp"
         app:civ_border_color="#FFFFFF"
-        android:layout_below="@id/album2"
-        android:layout_toRightOf="@id/album3"
-        android:layout_toEndOf="@id/album3"
+        android:layout_below="@id/tvNickname"
+        android:layout_toRightOf="@id/album1"
+        android:layout_toEndOf="@id/album1"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="10dp"
+
         android:clickable="true"
         android:onClick="addCard_Click"
 

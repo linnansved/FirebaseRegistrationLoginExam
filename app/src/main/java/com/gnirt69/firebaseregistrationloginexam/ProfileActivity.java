@@ -213,11 +213,9 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     public void addCard_Click(View v) {
         Intent i = new Intent(ProfileActivity.this, addAlbum.class);
-        RelativeLayout mainLayout = (RelativeLayout)findViewById(R.id.relative);
         //Log.d("Här är DeckID", ID);
-        Button btn = new Button(this);
-        btn.setText("hej");
-        mainLayout.addView(btn);
+      //  Button btn = new Button(this);
+       // btn.setText("hej");
         startActivity(i);
     }
 
@@ -262,9 +260,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         i.putExtra("Nickname", nickname);
         startActivity(i);
     }
-
-    public static void createAlbumView(String buttonName, String ID){
-        Log.d("Här är DeckID", ID);
-    }
+    
 
 }

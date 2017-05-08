@@ -39,11 +39,8 @@ public class addAlbum extends AppCompatActivity {
     public void onClickCreateAlbum(View view) {
         createAlbumToDb(view);
         createDeckIdUnderUserToDb();
-        ProfileActivity.createAlbumView(albumName, deckID);
-
         arrayDeckID.add(j, deckID);
         j++;
-
         //Skickar deckID till AddPhoto
         Intent i = new Intent(addAlbum.this, AddPhoto.class);
         i.putExtra("deckID", deckID);
