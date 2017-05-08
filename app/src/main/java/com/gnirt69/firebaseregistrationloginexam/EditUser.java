@@ -241,14 +241,5 @@ public class EditUser extends AppCompatActivity {
         }
     }
 
-   /* public void updateNick(String Nickname){
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-        nickname = getIntent().getExtras().getString("Nickname");
-        nick=mDatabase.child("Users").child(userID).child("nickname");
-        Log.d("Här var vi är", nick.toString());
-        nick.setValue(Nickname);
-        Log.d("Nya nicknamet", Nickname);
-    }*/
-
 
 }

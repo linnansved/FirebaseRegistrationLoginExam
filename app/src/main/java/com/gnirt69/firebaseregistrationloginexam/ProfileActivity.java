@@ -1,5 +1,6 @@
 package com.gnirt69.firebaseregistrationloginexam;
 
+import android.content.Context;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,6 +9,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Button;
 import android.content.Intent;
@@ -61,7 +64,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     public HashMap<String, String> AudioList = new HashMap<>();
     public HashMap<String, String> TextList = new HashMap<>();
 
-
+    private static Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -210,6 +213,11 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     public void addCard_Click(View v) {
         Intent i = new Intent(ProfileActivity.this, addAlbum.class);
+        RelativeLayout mainLayout = (RelativeLayout)findViewById(R.id.relative);
+        //Log.d("Här är DeckID", ID);
+        Button btn = new Button(this);
+        btn.setText("hej");
+        mainLayout.addView(btn);
         startActivity(i);
     }
 
@@ -254,10 +262,9 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         i.putExtra("Nickname", nickname);
         startActivity(i);
     }
-//MARKUS AVSNITT
-    public void dynamicLink_Click(View v) {
-        //MARKUS KOD
-    }
 
+    public static void createAlbumView(String buttonName, String ID){
+        Log.d("Här är DeckID", ID);
+    }
 
 }

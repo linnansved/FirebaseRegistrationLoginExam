@@ -24,7 +24,7 @@ public class addAlbum extends AppCompatActivity {
     public int j = 0;
     private DatabaseReference userRef;
     public ArrayList<String> arrayDeckID = new ArrayList<String>();
-    public String deckID;
+    public String deckID, albumName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,11 +33,13 @@ public class addAlbum extends AppCompatActivity {
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
         deckID = UUID.randomUUID().toString();
+
     }
 
     public void onClickCreateAlbum(View view) {
         createAlbumToDb(view);
         createDeckIdUnderUserToDb();
+        ProfileActivity.createAlbumView(albumName, deckID);
 
         arrayDeckID.add(j, deckID);
         j++;
@@ -54,10 +56,12 @@ public class addAlbum extends AppCompatActivity {
         EditText editText = (EditText) findViewById(R.id.albumName);
         String message = editText.getText().toString();
         Log.v(LOG_TAG, message);
+        albumName = message.toString();
         deckRef = mDatabase.child("Decks").child(deckID);
         Map<String, String> string = new HashMap<>();
         string.put("albumName", message);
         deckRef.setValue(string);
+
 
         //        Intent i = new Intent(addAlbum.this, AddPhoto.class);
        // i.putExtra("deckID", deckID);
@@ -71,6 +75,8 @@ public class addAlbum extends AppCompatActivity {
         Map<String, Boolean> decks = new HashMap<>();
         decks.put(deckID, true);
         userRef.setValue(decks);
+
     }
+
 }
 
