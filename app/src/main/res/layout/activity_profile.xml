@@ -10,6 +10,7 @@
     tools:context="com.gnirt69.firebaseregistrationloginexam.ProfileActivity"
     android:background="@drawable/background">
 
+
     <de.hdodenhof.circleimageview.CircleImageView
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/profile_image"
@@ -20,6 +21,7 @@
         app:civ_border_color="#FFFFFF"
         android:layout_above="@+id/linear"
         android:layout_centerHorizontal="true" />
+
 
     <ImageView
         android:id="@+id/unlock"
@@ -56,6 +58,18 @@
         android:id="@+id/tvNickname"
         android:layout_below="@+id/profile_image"
         android:layout_centerHorizontal="true" />
+
+    <GridView
+        android:id="@+id/photo_browser_grid_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:horizontalSpacing="5dp"
+        android:verticalSpacing="5dp"
+        android:numColumns="auto_fit"
+        android:columnWidth="100dp">
+    </GridView>
 
 
     <de.hdodenhof.circleimageview.CircleImageView

@@ -71,8 +71,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-
-
         firebaseAuth = FirebaseAuth.getInstance();
 
         unLocked = (ImageView) findViewById(R.id.unlock);
