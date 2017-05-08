@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,6 +17,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 public class EditUser extends AppCompatActivity {
@@ -25,6 +31,10 @@ public class EditUser extends AppCompatActivity {
     private EditText oldEmail, newEmail, password, newPassword, newNickname;
     private FirebaseAuth.AuthStateListener authListener;
     private FirebaseAuth auth;
+    private DatabaseReference mDatabase;
+    private DatabaseReference nick;
+    public String userID;
+    public String nickname, newNick;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +44,10 @@ public class EditUser extends AppCompatActivity {
         //get firebase auth instance
         auth = FirebaseAuth.getInstance();
 
+
         //get current user
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        userID = user.getUid();
 
         authListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -164,27 +176,33 @@ public class EditUser extends AppCompatActivity {
                 changePassword.setVisibility(View.GONE);
                 newNickname.setVisibility(View.VISIBLE);
                 changeNickname.setVisibility(View.VISIBLE);
+
             }
         });
 
 
 
-     /*   changeNickname.setOnClickListener(new View.OnClickListener() {
+       changeNickname.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 if (user != null && !newNickname.getText().toString().trim().equals("")) {
                     if (newNickname.getText().toString().trim().length() < 0) {
                         newNickname.setError("Enter Nickname");
 
                     } else {
-                        user.updatePassword(newNickname.getText().toString().trim())
-                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        newNick = newNickname.getText().toString();
+                        mDatabase = FirebaseDatabase.getInstance().getReference();
+                        nickname = getIntent().getExtras().getString("Nickname");
+                        nick=mDatabase.child("Users").child(userID).child("nickname");
+                        nick.setValue(newNick)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if (task.isSuccessful()) {
                                             Toast.makeText(EditUser.this, "Nickname is updated!", Toast.LENGTH_SHORT).show();
-                                            signOut();
+                                            Intent i = new Intent(EditUser.this, ProfileActivity.class);
+                                            i.putExtra("Nickname", newNick);
+                                            startActivity(i);
 
                                         } else {
                                             Toast.makeText(EditUser.this, "Failed to update nickname!", Toast.LENGTH_SHORT).show();
@@ -197,7 +215,7 @@ public class EditUser extends AppCompatActivity {
                     newPassword.setError("Enter password");
                 }
             }
-        });*/
+        });
 
     }
 
@@ -222,6 +240,15 @@ public class EditUser extends AppCompatActivity {
             auth.removeAuthStateListener(authListener);
         }
     }
+
+   /* public void updateNick(String Nickname){
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        nickname = getIntent().getExtras().getString("Nickname");
+        nick=mDatabase.child("Users").child(userID).child("nickname");
+        Log.d("Här var vi är", nick.toString());
+        nick.setValue(Nickname);
+        Log.d("Nya nicknamet", Nickname);
+    }*/
 
 
 }

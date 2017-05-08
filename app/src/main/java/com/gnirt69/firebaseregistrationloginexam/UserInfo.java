@@ -22,6 +22,7 @@ public class UserInfo extends AppCompatActivity {
     private TextView tvNick, tvEmail;
     private FirebaseAuth firebaseAuth;
     private DatabaseReference mDatabase;
+    public String nickname1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +34,12 @@ public class UserInfo extends AppCompatActivity {
 
         tvEmail = (TextView) findViewById(R.id.currentEmail);
         //tvEmail.setText("Your current email:"+ getIntent().getExtras().getString("Email"));
-        tvEmail.setText("Your email is:"+ getIntent().getExtras().getString("Email"));
+        tvEmail.setText(getIntent().getExtras().getString("Email"));
 
         tvNick = (TextView) findViewById(R.id.currentNickname);
-        tvNick.setText("Your nickname is:"+ getIntent().getExtras().getString("Nickname"));
+        tvNick.setText(getIntent().getExtras().getString("Nickname"));
+
+        nickname1 = getIntent().getExtras().getString("Nickname");
 
         if(firebaseAuth.getCurrentUser() == null){
             finish();
@@ -46,6 +49,7 @@ public class UserInfo extends AppCompatActivity {
 
     public void editUser_Click(View v) {
         Intent i = new Intent(UserInfo.this, EditUser.class);
+        i.putExtra("Nickname", nickname1);
         startActivity(i);
     }
 }
