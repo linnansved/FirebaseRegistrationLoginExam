@@ -45,7 +45,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     private DatabaseReference databaseReference2;
     private DatabaseReference databaseReference3;
 
-    public ArrayList<String> SendDeckID = new ArrayList<>();
     public ArrayList<String> DeckList = new ArrayList<>();
 
     public ArrayList<ImageView> AlbumList = new ArrayList<>();
@@ -169,11 +168,11 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 getDeck_string = dataSnapshot.getKey().toString();
                 DeckList.add(getDeck_string);
+                Log.d("deck", String.valueOf(DeckList));
 
                 for (int i = 0; i < DeckList.size(); i++) {
                     imageView = AlbumList.get(i);
                     imageView.setId(i);
-                    Log.d("nu sätter vi ID", imageView.toString());
                     imageView.setVisibility(View.VISIBLE);
 
                 }
@@ -268,13 +267,10 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     public void toGallery_Click(View v) {
-        Log.d("har ar knappen", String.valueOf(v.getId()));
         int id = v.getId();
         DeckId = DeckList.get(id);
-        Log.d("här är DeckID för knapp", DeckId);
-
         Intent i = new Intent(ProfileActivity.this, GalleryMain.class);
-        i.putExtra("DeckID", SendDeckID);
+        i.putExtra("DeckId", DeckId);
 
         i.putExtra("MyImages", Imagelist);
         i.putExtra("MyAudio", AudioList);

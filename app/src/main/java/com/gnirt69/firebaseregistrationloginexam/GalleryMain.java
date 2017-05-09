@@ -13,6 +13,7 @@ import android.view.View;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,10 +32,11 @@ public class GalleryMain extends AppCompatActivity {
     public String audioName;
     private DatabaseReference mDatabase;
 
-
     ArrayList<GalleryImageModel> data = new ArrayList<>();
     ArrayList<String> cardKey = new ArrayList<>();
     private StorageReference storageReference;
+
+    public ArrayList<String> DeckList = new ArrayList<>();
 
     private DatabaseReference imageDatabaseNameRef;
     private DatabaseReference audioDatabaseNameRef;
@@ -44,11 +46,49 @@ public class GalleryMain extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gallery_main);
-
         mDatabase = FirebaseDatabase.getInstance().getReference();
-
         storageReference = FirebaseStorage.getInstance().getReference();
-        ArrayList<String> SendDeckID = (ArrayList<String>) getIntent().getSerializableExtra("DeckID");
+
+        String deckID = getIntent().getExtras().getString("DeckId");
+
+        final ArrayList<String> arrayLoadList = new ArrayList<>();
+        DatabaseReference ref = mDatabase.child("Decks").child(deckID).child("Cards");
+        ref.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                arrayLoadList.add(dataSnapshot.getKey().toString());
+                Log.d("card", String.valueOf(arrayLoadList));
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+
+
+
+
+
+
+
 
         HashMap<String, String> Imagelist = (HashMap<String, String>) getIntent().getSerializableExtra("MyImages");
         HashMap<String, String> AudioList = (HashMap<String, String>) getIntent().getSerializableExtra("MyAudio");
