@@ -25,7 +25,7 @@
             android:textColor="#FFFFFF"
             android:textStyle="bold"
             android:onClick="onClickRecord"/>
-
+    
     <Button
         android:layout_width="90dp"
         android:layout_height="90dp"
@@ -85,6 +85,12 @@
         android:text="UPLOAD"
         android:textAppearance="?android:attr/textAppearanceLarge"
         />
-
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@id/tapetaplogo"
+        android:layout_centerInParent="true"
+        android:background="@drawable/red_but"
+        android:id="@+id/RecordNotice"/>
 
 </RelativeLayout>

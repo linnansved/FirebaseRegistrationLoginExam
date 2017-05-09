@@ -40,6 +40,7 @@ public class addAlbum extends AppCompatActivity {
     public void onClickCreateAlbum(View view) {
         createAlbumToDb(view);
         createDeckIdUnderUserToDb();
+        //makeAlbumVisibleInProfileActivity();
         arrayDeckID.add(j, deckID);
         j++;
         //Skickar deckID till AddPhoto
@@ -47,8 +48,7 @@ public class addAlbum extends AppCompatActivity {
         i.putExtra("deckID", deckID);
         startActivity(i);
     }
-
-
+    
 
     public void createAlbumToDb(View view) {
         EditText editText = (EditText) findViewById(R.id.albumName);

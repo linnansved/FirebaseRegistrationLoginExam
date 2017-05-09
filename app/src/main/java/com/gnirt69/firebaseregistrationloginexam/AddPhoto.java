@@ -2,6 +2,7 @@ package com.gnirt69.firebaseregistrationloginexam;
 
         import android.content.Intent;
         import android.graphics.Bitmap;
+        import android.media.Image;
         import android.media.MediaPlayer;
         import android.media.MediaRecorder;
         import android.net.Uri;
@@ -61,6 +62,8 @@ public class AddPhoto extends AppCompatActivity {
     public ArrayList<String> arrayCardID = new ArrayList<String>();
     public int i = 0;
     public String deckID;
+    private ImageView recordRedButton;
+    private Button recordButton;
 
 
 
@@ -76,10 +79,15 @@ public class AddPhoto extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference();
         //mDisplayDatabase = FirebaseDatabase.getInstance().getReference().child("Decks").child(deckID);
         Intent intent = getIntent();
-
         //Tar emot deckID från addAlbum
         deckID = intent.getExtras().getString("deckID");
         Log.v(LOG_TAG, "hejhej");
+
+        recordRedButton = (ImageView) findViewById(R.id.RecordNotice);
+        recordRedButton.setVisibility(View.GONE);
+
+        recordButton = (Button) findViewById(R.id.RecordButton);
+        recordButton.setVisibility(View.VISIBLE);
 
     }
     public void startRecording(View view) {
@@ -88,6 +96,9 @@ public class AddPhoto extends AppCompatActivity {
         mRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
         mRecorder.setOutputFile(mAudioFilePath + "/" + mAudioName);
         mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+        recordRedButton.setVisibility(View.VISIBLE);
+        //recordButton.setVisibility(View.GONE);
+
         try {
             mRecorder.prepare();
         } catch (IOException e) {
@@ -99,6 +110,8 @@ public class AddPhoto extends AppCompatActivity {
         mRecorder.stop();
         mRecorder.release();
         mRecorder = null;
+        recordRedButton.setVisibility(View.GONE);
+        //recordButton.setVisibility(View.VISIBLE);
     }
     public void onClickRecord(View view) {
         if (booleanIsRecordAudioStarted) {
