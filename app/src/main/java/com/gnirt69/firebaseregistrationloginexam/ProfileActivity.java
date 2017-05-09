@@ -41,41 +41,23 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     private FirebaseAuth firebaseAuth;
 
-    private DatabaseReference databaseReference1;
-    private DatabaseReference databaseReference2;
-    private DatabaseReference databaseReference3;
-
     public ArrayList<String> DeckList = new ArrayList<>();
-
     public ArrayList<ImageView> AlbumList = new ArrayList<>();
 
     private Button LogOutBtn, editUserBtn, enterBtn;
 
-    private ImageView unLocked, locked, addAlbum;
-
+    private ImageView unLocked, locked, imageView, addAlbum;
     private ImageView alb1, alb2, alb3, alb4, alb5, alb6, alb7, alb8;
 
     private TextView tvEmail,tvNick, textSqParent;
     private EditText answerParent;
 
     private String answer, DeckId;
-
     public String nickname;
-    public String url_name;
-    public String audio_name;
-    public String text_name;
     public String getDeck_string;
-
-    public ImageView imageView;
 
     private DatabaseReference mDatabase;
     private DatabaseReference hej, getDeck;
-
-    public HashMap<String, String> Imagelist = new HashMap<>();
-    public HashMap<String, String> AudioList = new HashMap<>();
-    public HashMap<String, String> TextList = new HashMap<>();
-
-    private static Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,8 +102,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             startActivity(new Intent(this, LoginActivity.class));
         }
 
-        //FirebaseUser user = firebaseAuth.getCurrentUser();
-
         unLocked.setVisibility(View.VISIBLE);
         locked.setVisibility(View.GONE);
         //LogOutBtn.setVisibility(View.VISIBLE);
@@ -155,10 +135,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                 tvNick.setText(nickname);
                 tvNick.setVisibility(View.VISIBLE);
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
             }
         });
 
@@ -177,91 +155,19 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
                 }
             }
-
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
             }
-
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
-
             }
-
             @Override
             public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
             }
-
-
         });
-
-
-        // Get image URL from database
-        ArrayList<String> cardID = new ArrayList<>();
-
-        //Här ska vi hämta in och addera CardID - här lägger vi in manuellt
-        cardID.add("10575602-d5b0-487e-9050-05fbb429d911"); //Sailormoon
-        cardID.add("2f9ca101-ae77-4bb1-bc79-1a6deffe4f38"); //gadda
-        cardID.add("e0c1af48-ee82-4dde-b548-ed17246f1112"); // hund
-
-
-        for (int i = 0; i < cardID.size(); i++) {
-            final String this_turn = cardID.get(i);
-            databaseReference1 = FirebaseDatabase.getInstance().getReference().child("Cards").child(this_turn).child("Images").child("URL");
-            databaseReference1.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot2) {
-                    url_name = dataSnapshot2.getValue(String.class);
-                    Imagelist.put(this_turn, url_name);
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                    //handle databaseError
-                }
-
-            });
-
-
-            //Get audio URL from database
-            databaseReference2 = FirebaseDatabase.getInstance().getReference().child("Cards").child(this_turn).child("Audio").child("URL");
-            databaseReference2.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot3) {
-                    audio_name = dataSnapshot3.getValue(String.class);
-                    AudioList.put(this_turn, audio_name);
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                    //handle databaseError
-                }
-
-            });
-
-            //Get text from database
-            databaseReference3 = FirebaseDatabase.getInstance().getReference().child("Cards").child(this_turn).child("picName");
-            databaseReference3.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot3) {
-                    text_name = dataSnapshot3.getValue(String.class);
-                    TextList.put(this_turn, text_name);
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                    //handle databaseError
-                }
-
-            });
-
-        }
 
         LogOutBtn.setOnClickListener(this);
     }
@@ -271,11 +177,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         DeckId = DeckList.get(id);
         Intent i = new Intent(ProfileActivity.this, GalleryMain.class);
         i.putExtra("DeckId", DeckId);
-
-        i.putExtra("MyImages", Imagelist);
-        i.putExtra("MyAudio", AudioList);
-        i.putExtra("MyText", TextList);
-
         startActivity(i);
     }
 
@@ -297,9 +198,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     public void addCard_Click(View v) {
         Intent i = new Intent(ProfileActivity.this, addAlbum.class);
-        //Log.d("Här är DeckID", ID);
-      //  Button btn = new Button(this);
-       // btn.setText("hej");
         startActivity(i);
     }
 

@@ -30,17 +30,23 @@ public class GalleryMain extends AppCompatActivity {
     RecyclerView mRecyclerView;
     public String imageName;
     public String audioName;
-    private DatabaseReference mDatabase;
+    public String url_name;
+    public String audio_name;
+    public String text_name;
+    public String this_turn;
 
-    ArrayList<GalleryImageModel> data = new ArrayList<>();
-    ArrayList<String> cardKey = new ArrayList<>();
+    public ArrayList<String> CardID = new ArrayList<>();
+    public ArrayList<GalleryImageModel> data = new ArrayList<>();
+    public ArrayList<String> cardKey = new ArrayList<>();
     private StorageReference storageReference;
-
-    public ArrayList<String> DeckList = new ArrayList<>();
 
     private DatabaseReference imageDatabaseNameRef;
     private DatabaseReference audioDatabaseNameRef;
+    private DatabaseReference mDatabase;
 
+    public HashMap<String, String> Imagelist = new HashMap<>();
+    public HashMap<String, String> AudioList = new HashMap<>();
+    public HashMap<String, String> TextList = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,15 +55,29 @@ public class GalleryMain extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference();
         storageReference = FirebaseStorage.getInstance().getReference();
 
+        //Get DeckID
         String deckID = getIntent().getExtras().getString("DeckId");
 
-        final ArrayList<String> arrayLoadList = new ArrayList<>();
+        //Get CardID and add it to ArrayList CardID
         DatabaseReference ref = mDatabase.child("Decks").child(deckID).child("Cards");
+        Log.d("ref", String.valueOf(ref));
         ref.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                arrayLoadList.add(dataSnapshot.getKey().toString());
-                Log.d("card", String.valueOf(arrayLoadList));
+                CardID.add(dataSnapshot.getKey().toString());
+                getData(CardID);
+                Log.d("image", String.valueOf(Imagelist));
+
+                for (HashMap.Entry<String, String> entry : Imagelist.entrySet()) {
+                    Log.d("hej", "hejsan");
+                    GalleryImageModel imageModel = new GalleryImageModel();
+                    String key = entry.getKey();
+                    cardKey.add(key);
+                    imageModel.setUrl(entry.getValue());
+                    imageModel.setName(TextList.get(key));
+                    imageModel.setAudio(AudioList.get(key));
+                    data.add(imageModel);
+                }
             }
 
             @Override
@@ -81,39 +101,11 @@ public class GalleryMain extends AppCompatActivity {
             }
         });
 
-
-
-
-
-
-
-
-
-
-        HashMap<String, String> Imagelist = (HashMap<String, String>) getIntent().getSerializableExtra("MyImages");
-        HashMap<String, String> AudioList = (HashMap<String, String>) getIntent().getSerializableExtra("MyAudio");
-        HashMap<String, String> TextList = (HashMap<String, String>) getIntent().getSerializableExtra("MyText");
-
-
-        for (HashMap.Entry<String, String> entry : Imagelist.entrySet()) {
-            GalleryImageModel imageModel = new GalleryImageModel();
-            String key = entry.getKey();
-            cardKey.add(key);
-            imageModel.setUrl(entry.getValue());
-            imageModel.setName(TextList.get(key));
-            imageModel.setAudio(AudioList.get(key));
-            data.add(imageModel);
-
-        }
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         mRecyclerView = (RecyclerView) findViewById(R.id.list);
         mRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         mRecyclerView.setHasFixedSize(true);
-
-
         mAdapter = new GalleryAdapter(GalleryMain.this, data);
         mRecyclerView.setAdapter(mAdapter);
 
@@ -138,6 +130,75 @@ public class GalleryMain extends AppCompatActivity {
                 }));
 
     }
+
+    public HashMap getData(ArrayList CardID){
+        for (int i = 0; i < CardID.size(); i++) {
+            this_turn = (String) CardID.get(i);
+            DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference().child("Cards").child(this_turn).child("Images").child("URL");
+            reference1.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot2) {
+                    url_name = dataSnapshot2.getValue(String.class);
+                    Imagelist.put(this_turn, url_name);
+                    Log.d("ImageList", String.valueOf(Imagelist));
+                }
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    //handle databaseError
+                }
+            });
+
+
+            //Get audio URL from database
+            DatabaseReference reference2 = FirebaseDatabase.getInstance().getReference().child("Cards").child(this_turn).child("Audio").child("URL");
+            reference2.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot3) {
+                    audio_name = dataSnapshot3.getValue(String.class);
+                    AudioList.put(this_turn, audio_name);
+                    Log.d("AudioList", String.valueOf(AudioList));
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    //handle databaseError
+                }
+
+            });
+
+            //Get text from database
+            DatabaseReference reference3 = FirebaseDatabase.getInstance().getReference().child("Cards").child(this_turn).child("picName");
+            reference3.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot3) {
+                    text_name = dataSnapshot3.getValue(String.class);
+                    TextList.put(this_turn, text_name);
+                    Log.d("TextList", String.valueOf(TextList));
+                }
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    //handle databaseError
+                }
+
+            });
+
+        }
+        return Imagelist;
+    }
+
+    /*
+    public void displayData(){
+        for (HashMap.Entry<String, String> entry : Imagelist.entrySet()) {
+            Log.d("hej", "hejsan");
+            GalleryImageModel imageModel = new GalleryImageModel();
+            String key = entry.getKey();
+            cardKey.add(key);
+            imageModel.setUrl(entry.getValue());
+            imageModel.setName(TextList.get(key));
+            imageModel.setAudio(AudioList.get(key));
+            data.add(imageModel);
+        }
+    }*/
 
     private void removeStorageImage(String imageName) {
 
