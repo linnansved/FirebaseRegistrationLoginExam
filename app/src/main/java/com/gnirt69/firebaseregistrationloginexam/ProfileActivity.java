@@ -65,7 +65,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     public String audio_name;
     public String text_name;
     public String getDeck_string;
-    public String album_name;
 
     public ImageView imageView;
 
@@ -164,23 +163,16 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         });
 
         getDeck = mDatabase.child("Users").child(userID).child("Decks");
-        Log.d("userID", userID);
         getDeck.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 getDeck_string = dataSnapshot.getKey().toString();
                 DeckList.add(getDeck_string);
-                Log.d("här är den lille!", getDeck_string);
-                Log.d("här är listan!", DeckList.toString());
-
-                if (getDeck_string!=null){
-                    alb1.setVisibility(View.VISIBLE);
-
-                }
 
                 for (int i = 0; i < DeckList.size(); i++) {
                     imageView = AlbumList.get(i);
                     imageView.setVisibility(View.VISIBLE);
+
                 }
             }
 
@@ -273,7 +265,10 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     public void toGallery_Click(View v) {
+        Log.d("har ar knappen", String.valueOf(v.getId()));
+
         Intent i = new Intent(ProfileActivity.this, GalleryMain.class);
+
         i.putExtra("MyImages", Imagelist);
         i.putExtra("MyAudio", AudioList);
         i.putExtra("MyText", TextList);
