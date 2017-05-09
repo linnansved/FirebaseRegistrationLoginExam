@@ -60,10 +60,6 @@ public class addAlbum extends AppCompatActivity {
         string.put("albumName", message);
         deckRef.setValue(string);
 
-
-        //        Intent i = new Intent(addAlbum.this, AddPhoto.class);
-       // i.putExtra("deckID", deckID);
-     //   startActivity(i);
     }
 
     public void createDeckIdUnderUserToDb() {

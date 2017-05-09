@@ -17,6 +17,7 @@ package com.gnirt69.firebaseregistrationloginexam;
         import android.widget.Toast;
         import com.google.android.gms.tasks.OnFailureListener;
         import com.google.android.gms.tasks.OnSuccessListener;
+        import com.google.firebase.auth.FirebaseAuth;
         import com.google.firebase.database.DatabaseReference;
         import com.google.firebase.database.FirebaseDatabase;
         import com.google.firebase.storage.FirebaseStorage;
@@ -169,17 +170,14 @@ public class AddPhoto extends AppCompatActivity {
             uploadStringToDatabase(view);
             arrayCardID.add(i, cardID);
             i++;
+            createCardIdInDecksToDB();
+            Intent i = new Intent(AddPhoto.this, addAlbum.class);
+            startActivity(i);
         } else {
             Toast.makeText(getApplicationContext(), "du måste lägga till bild och ljud", Toast.LENGTH_LONG).show();
         }
     }
 
-
-    public void onClickDone(View view) {
-        createCardIdInDecksToDB();
-        Intent i = new Intent(AddPhoto.this, addAlbum.class);
-        startActivity(i);
-    }
 
 
     private void createCardIdInDecksToDB() {
