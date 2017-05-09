@@ -48,6 +48,7 @@ public class GalleryMain extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         storageReference = FirebaseStorage.getInstance().getReference();
+        ArrayList<String> SendDeckID = (ArrayList<String>) getIntent().getSerializableExtra("DeckID");
 
         HashMap<String, String> Imagelist = (HashMap<String, String>) getIntent().getSerializableExtra("MyImages");
         HashMap<String, String> AudioList = (HashMap<String, String>) getIntent().getSerializableExtra("MyAudio");

@@ -45,7 +45,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     private DatabaseReference databaseReference2;
     private DatabaseReference databaseReference3;
 
-
+    public ArrayList<String> SendDeckID = new ArrayList<>();
     public ArrayList<String> DeckList = new ArrayList<>();
 
     public ArrayList<ImageView> AlbumList = new ArrayList<>();
@@ -274,6 +274,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         Log.d("här är DeckID för knapp", DeckId);
 
         Intent i = new Intent(ProfileActivity.this, GalleryMain.class);
+        i.putExtra("DeckID", SendDeckID);
 
         i.putExtra("MyImages", Imagelist);
         i.putExtra("MyAudio", AudioList);

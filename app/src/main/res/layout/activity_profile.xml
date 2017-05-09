@@ -28,8 +28,6 @@
         android:layout_above="@+id/linear"
         android:layout_centerHorizontal="true" />
 
-
-
     <ImageView
         android:id="@+id/unlock"
         android:layout_width="50dp"
@@ -136,10 +134,10 @@
         android:src="@drawable/setting"
         app:civ_border_width="6dp"
         app:civ_border_color="#FFFFFF"
-        android:layout_below="@id/AddAlbum2"
+        android:layout_below="@id/album1"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="40dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="150dp"
         android:clickable="true"
         android:onClick="toGallery_Click"
         />
@@ -152,10 +150,10 @@
         android:src="@drawable/setting"
         app:civ_border_width="6dp"
         app:civ_border_color="#FFFFFF"
-        android:layout_below="@id/AddAlbum2"
+        android:layout_below="@id/addAlbumButton"
         android:layout_alignParentRight="true"
         android:layout_marginRight="40dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="150dp"
         android:clickable="true"
         android:onClick="toGallery_Click"/>
 
@@ -167,10 +165,10 @@
         android:src="@drawable/setting"
         app:civ_border_width="6dp"
         app:civ_border_color="#FFFFFF"
-        android:layout_below="@id/AddAlbum3"
+        android:layout_below="@id/album1"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="40dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="280dp"
         android:clickable="true"
         android:onClick="toGallery_Click"
         />
@@ -183,10 +181,10 @@
         android:src="@drawable/setting"
         app:civ_border_width="6dp"
         app:civ_border_color="#FFFFFF"
-        android:layout_below="@id/AddAlbum4"
+        android:layout_below="@id/addAlbumButton"
         android:layout_alignParentRight="true"
         android:layout_marginRight="40dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="280dp"
         android:clickable="true"
         android:onClick="toGallery_Click"/>
 
@@ -198,10 +196,10 @@
         android:src="@drawable/setting"
         app:civ_border_width="6dp"
         app:civ_border_color="#FFFFFF"
-        android:layout_below="@id/AddAlbum5"
+        android:layout_below="@id/album1"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="40dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="410dp"
         android:clickable="true"
         android:onClick="toGallery_Click"
         />
@@ -214,10 +212,10 @@
         android:src="@drawable/setting"
         app:civ_border_width="6dp"
         app:civ_border_color="#FFFFFF"
-        android:layout_below="@id/AddAlbum6"
+        android:layout_below="@id/addAlbumButton"
         android:layout_alignParentRight="true"
         android:layout_marginRight="40dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="410dp"
         android:clickable="true"
         android:onClick="toGallery_Click"/>
 
