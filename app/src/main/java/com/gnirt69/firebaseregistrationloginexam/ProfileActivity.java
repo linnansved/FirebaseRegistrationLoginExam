@@ -311,7 +311,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
        //LogOutBtn.setVisibility(View.GONE);
        addAlbum.setVisibility(View.GONE);
        editUserBtn.setVisibility(View.GONE);
-     //  tvEmail.setVisibility(View.GONE);
+       //tvEmail.setVisibility(View.GONE);
        tvNick.setText(nickname);
        tvNick.setVisibility(View.VISIBLE);
 
