@@ -70,10 +70,10 @@ public class addAlbum extends AppCompatActivity {
         String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         Map<String, Boolean> decks = new HashMap<>();
         Log.v(LOG_TAG, "SE HIT" + userID);
-        userRef = mDatabase.child("Users").child(userID).child("Decks");
+        userRef = mDatabase.child("Users").child(userID).child("Decks").child(deckID);
         decks.put(deckID, true);
         userRef.setValue(decks);
-
+        
     }
     
 }
