@@ -44,7 +44,10 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     private DatabaseReference databaseReference1;
     private DatabaseReference databaseReference2;
     private DatabaseReference databaseReference3;
+
     public ArrayList<String> DeckList = new ArrayList<>();
+
+    public ArrayList<ImageView> AlbumList = new ArrayList<>();
 
     private Button LogOutBtn, editUserBtn, enterBtn;
 
@@ -62,6 +65,9 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     public String audio_name;
     public String text_name;
     public String getDeck_string;
+    public String album_name;
+
+    public ImageView imageView;
 
     private DatabaseReference mDatabase;
     private DatabaseReference hej, getDeck;
@@ -81,7 +87,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
         unLocked = (ImageView) findViewById(R.id.unlock);
         locked = (ImageView) findViewById(R.id.lock);
-        addAlbum = (ImageView) findViewById(R.id.album2);
+        addAlbum = (ImageView) findViewById(R.id.addAlbumButton);
         editUserBtn = (Button) findViewById(R.id.UserClick);
         enterBtn = (Button) findViewById(R.id.enterBtn);
         textSqParent = (TextView)findViewById(R.id.textSqParent);
@@ -99,7 +105,15 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         alb7 = (ImageView) findViewById(R.id.AddAlbum7);
         alb8 = (ImageView) findViewById(R.id.AddAlbum8);
 
-
+        AlbumList.add(alb1);
+        AlbumList.add(alb2);
+        AlbumList.add(alb3);
+        AlbumList.add(alb4);
+        AlbumList.add(alb5);
+        AlbumList.add(alb6);
+        AlbumList.add(alb7);
+        AlbumList.add(alb8);
+        
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
         if(firebaseAuth.getCurrentUser() == null){
@@ -120,7 +134,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
 
         //Gör alla album osyndliga tillsvidare
-
         alb1.setVisibility(View.GONE);
         alb2.setVisibility(View.GONE);
         alb3.setVisibility(View.GONE);
@@ -149,7 +162,9 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
             }
         });
+
         getDeck = mDatabase.child("Users").child(userID).child("Decks");
+        Log.d("userID", userID);
         getDeck.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -161,6 +176,11 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                 if (getDeck_string!=null){
                     alb1.setVisibility(View.VISIBLE);
 
+                }
+
+                for (int i = 0; i < DeckList.size(); i++) {
+                    imageView = AlbumList.get(i);
+                    imageView.setVisibility(View.VISIBLE);
                 }
             }
 
