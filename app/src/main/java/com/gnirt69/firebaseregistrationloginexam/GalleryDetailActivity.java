@@ -51,6 +51,7 @@ public class GalleryDetailActivity extends AppCompatActivity {
 
 
         data = getIntent().getParcelableArrayListExtra("data");
+        Log.d("Datan kommer fram", data.toString());
         pos = getIntent().getIntExtra("pos", 0);
 
         setTitle(data.get(pos).getName());

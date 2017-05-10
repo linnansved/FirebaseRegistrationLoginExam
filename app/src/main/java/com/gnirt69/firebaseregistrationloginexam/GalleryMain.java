@@ -121,7 +121,7 @@ public class GalleryMain extends AppCompatActivity {
 
                             Intent i = new Intent(GalleryMain.this, GalleryDetailActivity.class);
                             i.putParcelableArrayListExtra("data", data);
-
+                            startActivity(i);
                             Log.d("data2", String.valueOf(i));
                         }
                         @Override
