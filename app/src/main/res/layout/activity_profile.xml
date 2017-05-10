@@ -125,7 +125,7 @@
         android:layout_marginRight="40dp"
         android:layout_marginTop="15dp"
         android:clickable="true"
-        android:onClick="addCard_Click"/>
+        android:onClick="toGallery_Click"/>
 
     <de.hdodenhof.circleimageview.CircleImageView
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -156,7 +156,7 @@
         android:layout_marginRight="40dp"
         android:layout_marginTop="15dp"
         android:clickable="true"
-        android:onClick="addCard_Click"/>
+        android:onClick="toGallery_Click"/>
 
     <de.hdodenhof.circleimageview.CircleImageView
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -187,7 +187,7 @@
         android:layout_marginRight="40dp"
         android:layout_marginTop="15dp"
         android:clickable="true"
-        android:onClick="addCard_Click"/>
+        android:onClick="toGallery_Click"/>
 
     <de.hdodenhof.circleimageview.CircleImageView
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -218,14 +218,14 @@
         android:layout_marginRight="40dp"
         android:layout_marginTop="15dp"
         android:clickable="true"
-        android:onClick="addCard_Click"/>
+        android:onClick="toGallery_Click"/>
 
     <Button
         android:id="@+id/UserClick"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_alignBaseline="@id/profile_image"
-        android:layout_toRightOf="@id/profile_image"
+        android:layout_alignEnd="@id/profile_image"
         android:background="@drawable/setting_gear"
         android:textColor="#FFFFFF"
         android:onClick="seeUser_Click"/>
@@ -236,7 +236,8 @@
         android:id="@+id/textSqParent"
         android:textAlignment="center"
         android:typeface="monospace"
-        android:layout_centerInParent="true"
+        android:layout_below="@id/profile_image"
+        android:layout_centerHorizontal="true"
         android:textColor="#0080ff"
         android:gravity="clip_vertical"
         android:background="@drawable/text_back"
@@ -244,7 +245,18 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Type the word 'parent' to enter admin page"
         />
-
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:text="Submit"
+        android:id="@+id/enterBtn"
+        android:background="@drawable/green_but"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:onClick="testParent"
+        android:layout_alignTop="@id/textSqParent"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="140dp"/>
 
         <EditText
             android:layout_width="150dp"
@@ -253,20 +265,11 @@
             android:hint="Type answer"
             android:textAlignment="center"
             android:typeface="monospace"
-            android:layout_centerInParent="true"
+            android:layout_alignTop="@id/textSqParent"
             android:inputType="text"
-            />
-        <Button
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:text="Submit"
-            android:id="@+id/enterBtn"
-            android:background="@drawable/green_but"
-            android:textColor="#FFFFFF"
-            android:textStyle="bold"
-            android:onClick="testParent"
             android:layout_centerHorizontal="true"
-            android:layout_below="@+id/answerParent" />
+            android:layout_marginTop="90dp"
+            />
 
 
 </RelativeLayout>

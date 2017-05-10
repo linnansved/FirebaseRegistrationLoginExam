@@ -215,9 +215,9 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     }
     public void toParent_Click(View v) {
-        enterBtn.setVisibility(View.VISIBLE);
         textSqParent.setVisibility(View.VISIBLE);
         answerParent.setVisibility(View.VISIBLE);
+        enterBtn.setVisibility(View.VISIBLE);
     }
 
     public void testParent(View v) {
@@ -232,9 +232,9 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             addAlbum.setVisibility(View.VISIBLE);
             editUserBtn.setVisibility(View.VISIBLE);
             // tvEmail.setVisibility(View.GONE);
-            enterBtn.setVisibility(View.GONE);
             textSqParent.setVisibility(View.GONE);
             answerParent.setVisibility(View.GONE);
+            enterBtn.setVisibility(View.GONE);
             tvNick.setText(nickname);
             tvNick.setVisibility(View.VISIBLE);
         }

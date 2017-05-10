@@ -33,7 +33,8 @@ public class GalleryMain extends AppCompatActivity {
     public String url_name;
     public String audio_name;
     public String text_name;
-    public String this_turn;
+    public String this_turn, deckID;
+    public Toolbar toolbar1;
 
     public ArrayList<String> CardID = new ArrayList<>();
     public ArrayList<GalleryImageModel> data = new ArrayList<>();
@@ -55,8 +56,11 @@ public class GalleryMain extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference();
         storageReference = FirebaseStorage.getInstance().getReference();
 
+        toolbar1 = (Toolbar) findViewById(R.id.detail_toolbar);
+        setSupportActionBar(toolbar1);
+
         //Get DeckID
-        String deckID = getIntent().getExtras().getString("DeckId");
+        deckID = getIntent().getExtras().getString("DeckId");
 
         //Get CardID and add it to ArrayList CardID
         DatabaseReference ref = mDatabase.child("Decks").child(deckID).child("Cards");
@@ -75,6 +79,7 @@ public class GalleryMain extends AppCompatActivity {
                             Imagelist.put(this_turn, url_name);
                             Log.d("ImageList", String.valueOf(Imagelist));
                         }
+
                         @Override
                         public void onCancelled(DatabaseError databaseError) {
                             //handle databaseError
@@ -119,11 +124,9 @@ public class GalleryMain extends AppCompatActivity {
                                 Log.d("data", String.valueOf(data));
                             }
 
-                            Intent i = new Intent(GalleryMain.this, GalleryDetailActivity.class);
-                            i.putParcelableArrayListExtra("data", data);
-                            startActivity(i);
-                            Log.d("data2", String.valueOf(i));
+                            createGallery();
                         }
+
                         @Override
                         public void onCancelled(DatabaseError databaseError) {
                             //handle databaseError
@@ -153,8 +156,12 @@ public class GalleryMain extends AppCompatActivity {
 
             }
         });
+    }
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        public void createGallery() {
+
+            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         mRecyclerView = (RecyclerView) findViewById(R.id.list);
         mRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
@@ -181,7 +188,9 @@ public class GalleryMain extends AppCompatActivity {
                     }
                 }));
 
-    }
+        }
+
+
 
     /*public void getData(ArrayList CardID){
         for (int i = 0; i < CardID.size(); i++) {
@@ -332,5 +341,11 @@ public class GalleryMain extends AppCompatActivity {
                 //handle databaseError
             }
         });
+    }
+
+
+    public void goToAddPhoto(){
+        Intent intent = new Intent(GalleryMain.this, AddPhoto.class);
+        intent.putExtra("deckID", deckID);
     }
 }

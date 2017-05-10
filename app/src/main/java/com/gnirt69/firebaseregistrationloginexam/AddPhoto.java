@@ -56,6 +56,7 @@ public class AddPhoto extends AppCompatActivity {
     private DatabaseReference audioRef;
     private DatabaseReference deckRef;
     private DatabaseReference stringRef;
+    public FirebaseAuth firebaseAuth;
     public ArrayList<Uri> imageUrlList = new ArrayList<>();
     public ArrayList<Uri> audioUrlList = new ArrayList<>();
     public String cardID;
@@ -184,7 +185,8 @@ public class AddPhoto extends AppCompatActivity {
             arrayCardID.add(i, cardID);
             i++;
             createCardIdInDecksToDB();
-            Intent i = new Intent(AddPhoto.this, addAlbum.class);
+            Intent i = new Intent(AddPhoto.this, ProfileActivity.class);
+            i.putExtra("Email", firebaseAuth.getCurrentUser().getEmail());
             startActivity(i);
         } else {
             Toast.makeText(getApplicationContext(), "du måste lägga till bild och ljud", Toast.LENGTH_LONG).show();
