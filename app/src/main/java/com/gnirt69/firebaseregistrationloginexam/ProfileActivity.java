@@ -46,7 +46,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     private Button LogOutBtn, editUserBtn, enterBtn;
 
-    private ImageView unLocked, locked, imageView, addAlbum;
+    private ImageView unLocked, locked, imageView, addAlbum, instructions;
     private ImageView alb1, alb2, alb3, alb4, alb5, alb6, alb7, alb8;
 
     private TextView tvEmail,tvNick, textSqParent;
@@ -67,6 +67,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         firebaseAuth = FirebaseAuth.getInstance();
 
         unLocked = (ImageView) findViewById(R.id.unlock);
+        instructions = (ImageView) findViewById(R.id.album1);
         locked = (ImageView) findViewById(R.id.lock);
         addAlbum = (ImageView) findViewById(R.id.album2);
         editUserBtn = (Button) findViewById(R.id.UserClick);
@@ -103,6 +104,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         }
 
         unLocked.setVisibility(View.VISIBLE);
+        instructions.setVisibility(View.VISIBLE);
         locked.setVisibility(View.GONE);
         //LogOutBtn.setVisibility(View.VISIBLE);
         addAlbum.setVisibility(View.VISIBLE);
@@ -205,7 +207,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         Log.d("går till kids", "toChild_Click: ");
         unLocked.setVisibility(View.GONE);
         locked.setVisibility(View.VISIBLE);
-        //LogOutBtn.setVisibility(View.GONE);
+        instructions.setVisibility(View.GONE);
+        LogOutBtn.setVisibility(View.GONE);
         addAlbum.setVisibility(View.GONE);
         editUserBtn.setVisibility(View.GONE);
         //tvEmail.setVisibility(View.GONE);
@@ -218,6 +221,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         textSqParent.setVisibility(View.VISIBLE);
         answerParent.setVisibility(View.VISIBLE);
         enterBtn.setVisibility(View.VISIBLE);
+        LogOutBtn.setVisibility(View.VISIBLE);
+        instructions.setVisibility(View.VISIBLE);
     }
 
     public void testParent(View v) {
