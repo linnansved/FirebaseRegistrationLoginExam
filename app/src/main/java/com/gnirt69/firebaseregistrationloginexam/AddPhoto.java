@@ -64,7 +64,9 @@ public class AddPhoto extends AppCompatActivity {
     public String deckID;
     private ImageView recordRedButton;
     private Button recordButton;
-    public String userID;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +82,6 @@ public class AddPhoto extends AppCompatActivity {
         //Tar emot deckID från addAlbum
         deckID = intent.getExtras().getString("deckID");
         Log.v(LOG_TAG, "hejhej");
-        userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         recordRedButton = (ImageView) findViewById(R.id.RecordNotice);
         recordRedButton.setVisibility(View.GONE);
@@ -205,7 +206,7 @@ public class AddPhoto extends AppCompatActivity {
 
     private void uploadImage() {
         imageName = "image_"+generateRandom().toString()+".jpeg";
-        StorageReference riversRef = storageReference.child(userID).child("images/").child(imageName);
+        StorageReference riversRef = storageReference.child("images/").child(imageName);
         riversRef.putFile(imageFilePath)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
@@ -233,7 +234,7 @@ public class AddPhoto extends AppCompatActivity {
 
     private void uploadAudio(){
         Uri uri = Uri.fromFile(new File(mAudioFilePath + "/" + mAudioName));
-        StorageReference riversRef1 = storageReference.child(userID).child("audio/").child(mAudioName);
+        StorageReference riversRef1 = storageReference.child("audio/").child(mAudioName);
         riversRef1.putFile(uri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
