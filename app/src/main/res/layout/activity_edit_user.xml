@@ -185,8 +185,6 @@
             android:textStyle="bold"
             android:layout_marginTop="16dp"
             android:text=" CHANGE NICKNAME "/>
-
-
     </LinearLayout>
 
     <ImageView
