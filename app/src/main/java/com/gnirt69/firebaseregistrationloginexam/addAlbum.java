@@ -42,7 +42,7 @@ public class addAlbum extends AppCompatActivity {
     }
 //FIXA SÅ LOOPEN FUNKAR
     public void onClickCreateAlbum(View view) {
-        if(len.equals("8")) {
+        if(length==8) {
             Toast.makeText(addAlbum.this, "You must delete an album in order to add a new one", Toast.LENGTH_LONG).show();
             Intent i = new Intent(addAlbum.this, ProfileActivity.class);
             i.putExtra("deckID", deckID);
@@ -51,14 +51,18 @@ public class addAlbum extends AppCompatActivity {
         }
         else{
             createAlbumToDb(view);
+            Log.d("funkarattladdatillDB","hej");
             createDeckIdUnderUserToDb();
+            Log.d("funkarattladdatillDB2","hej");
             //makeAlbumVisibleInProfileActivity();
             arrayDeckID.add(j, deckID);
+            Log.d("läggertilliarray","hej");
             j++;
             //Skickar deckID till AddPhoto
-            Intent i = new Intent(addAlbum.this, ProfileActivity.class);
-            i.putExtra("deckID", deckID);
-            startActivity(i);
+            Intent intent = new Intent(addAlbum.this, ProfileActivity.class);
+            intent.putExtra("deckID", deckID);
+            startActivity(intent);
+            Log.d("skickatillprofile","hej");
         }
 
     }

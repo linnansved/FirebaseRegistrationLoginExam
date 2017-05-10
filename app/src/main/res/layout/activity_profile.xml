@@ -71,7 +71,7 @@
         android:id="@+id/album1"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:src="@drawable/cloudblue"
+        android:src="@drawable/info"
         app:civ_border_width="6dp"
         app:civ_border_color="#FFFFFF"
         android:layout_below="@id/tvNickname"

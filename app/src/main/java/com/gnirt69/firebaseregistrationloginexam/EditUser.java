@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -35,11 +36,16 @@ public class EditUser extends AppCompatActivity {
     private DatabaseReference nick;
     public String userID;
     public String nickname, newNick;
+    public boolean visible;
+    public ImageView bubble;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_user);
+        visible = false;
+        bubble = (ImageView) findViewById(R.id.prat);
+        bubble.setVisibility(View.GONE);
 
         //get firebase auth instance
         auth = FirebaseAuth.getInstance();
@@ -241,5 +247,14 @@ public class EditUser extends AppCompatActivity {
         }
     }
 
-
+    public void hideShowBubble(View v) {
+        if (visible){
+            bubble.setVisibility(View.GONE);
+            visible = false;
+        }
+        else{
+            bubble.setVisibility(View.VISIBLE);
+            visible = true;
+        }
+    }
 }

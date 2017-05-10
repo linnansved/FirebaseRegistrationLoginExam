@@ -43,6 +43,7 @@ public class UserInfo extends AppCompatActivity {
         tvNick.setText(getIntent().getExtras().getString("Nickname"));
 
         nickname1 = getIntent().getExtras().getString("Nickname");
+
         bubble.setVisibility(View.GONE);
         visible = false;
 
