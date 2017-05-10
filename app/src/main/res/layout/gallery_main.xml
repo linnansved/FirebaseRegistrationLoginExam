@@ -31,4 +31,15 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/detail_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@android:color/transparent"
+        app:elevation="0dp"
+        app:popupTheme="@style/AppTheme.PopupOverlay"
+        android:clickable="true"
+        android:onClick="goToAddPhoto"/>
+
+
 </android.support.design.widget.CoordinatorLayout>
