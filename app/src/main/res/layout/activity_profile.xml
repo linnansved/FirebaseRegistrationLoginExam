@@ -231,34 +231,43 @@
         android:onClick="seeUser_Click"/>
 
     <TextView
-        android:layout_width="200dp"
+        android:layout_width="250dp"
         android:layout_height="200dp"
         android:id="@+id/textSqParent"
         android:textAlignment="center"
+        android:typeface="monospace"
         android:layout_centerInParent="true"
-        android:background="@drawable/whiteback"
+        android:textColor="#0080ff"
+        android:gravity="clip_vertical"
+        android:background="@drawable/text_back"
+        android:elegantTextHeight="true"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Type parent to enter admin page"/>
+        android:text="Type the word 'parent' to enter admin page"
+        />
 
 
         <EditText
-            android:layout_width="100dp"
+            android:layout_width="150dp"
             android:layout_height="50dp"
             android:id="@+id/answerParent"
+            android:hint="Type answer"
+            android:textAlignment="center"
+            android:typeface="monospace"
             android:layout_centerInParent="true"
             android:inputType="text"
             />
-    <Button
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:text="ENTER"
-        android:id="@+id/enterBtn"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/answerParent"
-        android:background="@drawable/green_but"
-        android:textColor="#FFFFFF"
-        android:textStyle="bold"
-        android:onClick="testParent"/>
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:text="Submit"
+            android:id="@+id/enterBtn"
+            android:background="@drawable/green_but"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:onClick="testParent"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/answerParent" />
+
 
 </RelativeLayout>
 </ScrollView>

@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,13 +24,15 @@ public class UserInfo extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private DatabaseReference mDatabase;
     public String nickname1;
+    public ImageView bubble;
+    public boolean visible;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_info);
         mDatabase = FirebaseDatabase.getInstance().getReference();
-
+        bubble = (ImageView) findViewById(R.id.prat);
         firebaseAuth = FirebaseAuth.getInstance();
 
         tvEmail = (TextView) findViewById(R.id.currentEmail);
@@ -40,6 +43,8 @@ public class UserInfo extends AppCompatActivity {
         tvNick.setText(getIntent().getExtras().getString("Nickname"));
 
         nickname1 = getIntent().getExtras().getString("Nickname");
+        bubble.setVisibility(View.GONE);
+        visible = false;
 
         if(firebaseAuth.getCurrentUser() == null){
             finish();
@@ -51,6 +56,16 @@ public class UserInfo extends AppCompatActivity {
         Intent i = new Intent(UserInfo.this, EditUser.class);
         i.putExtra("Nickname", nickname1);
         startActivity(i);
+    }
+    public void hideShowBubble(View v) {
+        if (visible){
+            bubble.setVisibility(View.GONE);
+            visible = false;
+        }
+        else{
+        bubble.setVisibility(View.VISIBLE);
+            visible = true;
+        }
     }
 }
 

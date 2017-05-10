@@ -308,6 +308,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     public void testParent(View v) {
         answer = answerParent.getText().toString();
 
+        answerParent.setText("");
+
         if(answer.equals("parent")){
             unLocked.setVisibility(View.VISIBLE);
             locked.setVisibility(View.GONE);
