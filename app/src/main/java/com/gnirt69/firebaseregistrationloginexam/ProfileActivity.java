@@ -251,6 +251,12 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         startActivity(i);
     }
 
+    public void toInstructions(View v){
+        Intent i = new Intent(ProfileActivity.this, Instructions.class);
+        startActivity(i);
+        Log.d("Här går det eh", "toInstructions: ");
+    }
+
 
 }
 
