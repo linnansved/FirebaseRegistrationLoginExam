@@ -17,15 +17,15 @@
     <TextView
         android:id="@+id/info"
         android:layout_width="250dp"
-        android:layout_height="100dp"
+        android:layout_height="200dp"
         android:background="@android:color/transparent"
         android:ems="10"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="100dp"
-        android:text="Here you can add a new album!"
+        android:text="Add a new album and start filling it with fun photos!"
         android:textAlignment="center"
-        android:textColor="#0080ff"
+        android:textColor="#FFFFFF"
         android:textStyle="bold"
         android:typeface="monospace"
         />
@@ -50,7 +50,7 @@
         android:inputType="textPersonName"
         android:textAlignment="center"
         android:typeface="monospace"
-        android:textColor="#FFFFFF"
+        android:textColor="#0080ff"
         android:layout_alignBottom="@+id/createAlbumBtn"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="70dp" />
