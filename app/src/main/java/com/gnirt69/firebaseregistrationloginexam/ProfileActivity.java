@@ -59,6 +59,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     private DatabaseReference mDatabase;
     private DatabaseReference hej, getDeck;
 
+    public int length;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -199,11 +201,14 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     public void addCard_Click(View v) {
         Intent i = new Intent(ProfileActivity.this, addAlbum.class);
+        length =DeckList.size();
+        String len = Integer.toString(length);
+        Log.d("langden ar faktsikt", len);
+        i.putExtra("Length", (int)length);
         startActivity(i);
     }
 
     public void toChild_Click(View v) {
-
         Log.d("går till kids", "toChild_Click: ");
         unLocked.setVisibility(View.GONE);
         locked.setVisibility(View.VISIBLE);
@@ -221,8 +226,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         textSqParent.setVisibility(View.VISIBLE);
         answerParent.setVisibility(View.VISIBLE);
         enterBtn.setVisibility(View.VISIBLE);
-        LogOutBtn.setVisibility(View.VISIBLE);
-        instructions.setVisibility(View.VISIBLE);
     }
 
     public void testParent(View v) {
@@ -242,6 +245,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             enterBtn.setVisibility(View.GONE);
             tvNick.setText(nickname);
             tvNick.setVisibility(View.VISIBLE);
+            LogOutBtn.setVisibility(View.VISIBLE);
+            instructions.setVisibility(View.VISIBLE);
         }
         else {
 
