@@ -32,8 +32,7 @@
             android:name=".GalleryDetailActivity"
             android:label="@string/title_activity_detail" />
         <activity android:name=".ChildProfile" />
-        <activity android:name=".addAlbum" />
-        <activity android:name=".Instructions"></activity>
+        <activity android:name=".addAlbum"></activity>
     </application>
 
 </manifest>

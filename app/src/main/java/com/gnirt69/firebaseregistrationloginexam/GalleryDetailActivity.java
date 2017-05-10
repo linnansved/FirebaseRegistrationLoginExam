@@ -48,11 +48,9 @@ public class GalleryDetailActivity extends AppCompatActivity {
 
         toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setTitle("Add new photos to album");
 
 
         data = getIntent().getParcelableArrayListExtra("data");
-        Log.d("Datan kommer fram", data.toString());
         pos = getIntent().getIntExtra("pos", 0);
 
         setTitle(data.get(pos).getName());
