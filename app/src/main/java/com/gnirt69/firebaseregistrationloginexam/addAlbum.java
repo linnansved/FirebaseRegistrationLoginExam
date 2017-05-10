@@ -40,7 +40,7 @@ public class addAlbum extends AppCompatActivity {
         len=Integer.toString(length);
         Log.d("Här är längden", len);
     }
-
+//FIXA SÅ LOOPEN FUNKAR
     public void onClickCreateAlbum(View view) {
         if(len.equals("8")) {
             Toast.makeText(addAlbum.this, "You must delete an album in order to add a new one", Toast.LENGTH_LONG).show();
