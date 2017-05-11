@@ -183,12 +183,13 @@ public class GalleryMain extends AppCompatActivity {
 
         int id = item.getItemId();
 
-        Log.v("log", "hejhej1");
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_add) {
-            Log.v("log", "hejhej2");
             goToAddPhoto();
-            Log.v("log", "hejhej3");
+        }
+
+        if (id == R.id.action_delete){
+            goToDelete();
         }
 
 
@@ -392,6 +393,10 @@ public class GalleryMain extends AppCompatActivity {
         Intent intent = new Intent(GalleryMain.this, AddPhoto.class);
         intent.putExtra("deckID", deckID);
         startActivity(intent);
+    }
+
+    public void goToDelete(){
+        //ANTON OCH ALEXANDER HÄR FÅR NI LÄGGA ERAN KOD!!
     }
 
 }
