@@ -81,6 +81,18 @@
         android:onClick="toInstructions"
         />
 
+    <TextView
+        android:layout_width="90dp"
+        android:layout_height="wrap_content"
+        android:text="INFO"
+        android:textColor="#0080ff"
+        android:id="@+id/infoText"
+        android:layout_below="@+id/album1"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="60dp"
+        android:textAlignment="center"/>
+
+
     <de.hdodenhof.circleimageview.CircleImageView
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/album2"
@@ -94,7 +106,16 @@
         android:layout_marginRight="40dp"
         android:clickable="true"
         android:onClick="addCard_Click"/>
-
+    <TextView
+        android:layout_width="90dp"
+        android:layout_height="wrap_content"
+        android:text="+ ALBUM"
+        android:textColor="#0080ff"
+        android:id="@+id/plusText"
+        android:layout_below="@+id/album1"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="60dp"
+        android:textAlignment="center"/>
 
     <de.hdodenhof.circleimageview.CircleImageView
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -107,10 +128,21 @@
         android:layout_below="@id/album1"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="40dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="20dp"
         android:clickable="true"
         android:onClick="toGallery_Click"
         />
+    <TextView
+        android:layout_width="90dp"
+        android:layout_height="wrap_content"
+        android:text="ALBUM 1"
+        android:textColor="#0080ff"
+        android:id="@+id/alb1Text"
+        android:layout_below="@+id/album1"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="142dp"
+        android:textAlignment="center"/>
 
     <de.hdodenhof.circleimageview.CircleImageView
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -123,9 +155,21 @@
         android:layout_below="@id/album1"
         android:layout_alignParentRight="true"
         android:layout_marginRight="40dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="20dp"
         android:clickable="true"
         android:onClick="toGallery_Click"/>
+
+    <TextView
+        android:layout_width="90dp"
+        android:layout_height="wrap_content"
+        android:text="ALBUM 2"
+        android:textColor="#0080ff"
+        android:id="@+id/alb2Text"
+        android:layout_marginTop="142dp"
+        android:layout_below="@+id/album1"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="60dp"
+        android:textAlignment="center"/>
 
     <de.hdodenhof.circleimageview.CircleImageView
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -138,10 +182,22 @@
         android:layout_below="@id/album1"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="40dp"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="160dp"
         android:clickable="true"
         android:onClick="toGallery_Click"
         />
+    <TextView
+        android:layout_width="90dp"
+        android:layout_height="wrap_content"
+        android:text="ALBUM 3"
+        android:textColor="#0080ff"
+        android:id="@+id/alb3Text"
+        android:layout_below="@+id/album1"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="280dp"
+        android:textAlignment="center"/>
+
 
     <de.hdodenhof.circleimageview.CircleImageView
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -154,9 +210,21 @@
         android:layout_below="@id/album1"
         android:layout_alignParentRight="true"
         android:layout_marginRight="40dp"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="160dp"
         android:clickable="true"
         android:onClick="toGallery_Click"/>
+
+    <TextView
+        android:layout_width="90dp"
+        android:layout_height="wrap_content"
+        android:text="ALBUM 4"
+        android:textColor="#0080ff"
+        android:id="@+id/alb4Text"
+        android:layout_marginTop="280dp"
+        android:layout_below="@+id/album1"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="60dp"
+        android:textAlignment="center"/>
 
     <de.hdodenhof.circleimageview.CircleImageView
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -169,10 +237,22 @@
         android:layout_below="@id/album1"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="40dp"
-        android:layout_marginTop="295dp"
+        android:layout_marginTop="300dp"
         android:clickable="true"
         android:onClick="toGallery_Click"
         />
+
+    <TextView
+        android:layout_width="90dp"
+        android:layout_height="wrap_content"
+        android:text="ALBUM 5"
+        android:textColor="#0080ff"
+        android:id="@+id/alb5Text"
+        android:layout_below="@+id/album1"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="422dp"
+        android:textAlignment="center"/>
 
     <de.hdodenhof.circleimageview.CircleImageView
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -185,9 +265,21 @@
         android:layout_below="@id/album1"
         android:layout_alignParentRight="true"
         android:layout_marginRight="40dp"
-        android:layout_marginTop="295dp"
+        android:layout_marginTop="300dp"
         android:clickable="true"
         android:onClick="toGallery_Click"/>
+
+    <TextView
+        android:layout_width="90dp"
+        android:layout_height="wrap_content"
+        android:text="ALBUM 6"
+        android:textColor="#0080ff"
+        android:id="@+id/alb6Text"
+        android:layout_marginTop="422dp"
+        android:layout_below="@+id/album1"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="60dp"
+        android:textAlignment="center"/>
 
     <de.hdodenhof.circleimageview.CircleImageView
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -204,6 +296,17 @@
         android:clickable="true"
         android:onClick="toGallery_Click"
         />
+    <TextView
+        android:layout_width="90dp"
+        android:layout_height="wrap_content"
+        android:text="ALBUM 7"
+        android:textColor="#0080ff"
+        android:id="@+id/alb7Text"
+        android:layout_below="@+id/album1"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="565dp"
+        android:textAlignment="center"/>
 
     <de.hdodenhof.circleimageview.CircleImageView
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -219,6 +322,18 @@
         android:layout_marginTop="440dp"
         android:clickable="true"
         android:onClick="toGallery_Click"/>
+    <TextView
+        android:layout_width="90dp"
+        android:layout_height="wrap_content"
+        android:text="ALBUM 8"
+        android:textColor="#0080ff"
+        android:id="@+id/alb8Text"
+        android:layout_marginTop="565dp"
+        android:layout_below="@+id/album1"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="60dp"
+        android:textAlignment="center"/>
+
 
     <Button
         android:id="@+id/UserClick"
