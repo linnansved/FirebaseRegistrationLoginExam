@@ -182,7 +182,8 @@ public class GalleryMain extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_add) {
+
             return true;
         }
 
@@ -211,9 +212,9 @@ public class GalleryMain extends AppCompatActivity {
                         intent.putExtra("pos", position);
                         intent.putParcelableArrayListExtra("data", data);
 
-                        String cardID = cardKey.get(position);
-                        getNameRemoveImgStorage(cardID);
-                        getNameRemoveAudStorage(cardID);
+                        //String cardID = cardKey.get(position);
+                        //getNameRemoveImgStorage(cardID);
+                        //getNameRemoveAudStorage(cardID);
                         ////removeDB(cardID);
 
                         startActivity(intent);
