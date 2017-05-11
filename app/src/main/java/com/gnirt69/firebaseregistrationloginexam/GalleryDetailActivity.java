@@ -61,14 +61,15 @@ public class GalleryDetailActivity extends AppCompatActivity {
         mViewPager.setPageTransformer(true, new DepthPageTransformer());
         mViewPager.setAdapter(mSectionsPagerAdapter);
         mViewPager.setCurrentItem(pos);
+        playSound(data.get(pos).getAudio());
 
-        mViewPager.setOnClickListener(new View.OnClickListener(){
+
+       /* mViewPager.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 playSound(data.get(pos).getAudio());
-                Log.d("spelar","ljud");
             }
-        });
+        });*/
 
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -81,14 +82,11 @@ public class GalleryDetailActivity extends AppCompatActivity {
 
                 //noinspection ConstantConditions
                 setTitle(data.get(position).getName());
-                //playSound(data.get(position).getAudio());
-
-
+                playSound(data.get(position).getAudio());
             }
 
             @Override
             public void onPageScrollStateChanged(int state) {
-
             }
 
         });
@@ -117,15 +115,11 @@ public class GalleryDetailActivity extends AppCompatActivity {
 
     public void playSound(String audioUrl){
         mAudioName = audioUrl;
-        Log.d("AudioLaddas", mAudioName);
         mPlayer = new MediaPlayer();
         try {
             mPlayer.setDataSource(mAudioName);
-            Log.d("play1", String.valueOf(mPlayer));
             mPlayer.prepare();
-            Log.d("play2", String.valueOf(mPlayer));
             mPlayer.start();
-            Log.d("play3", String.valueOf(mPlayer));
         } catch (IOException e) {
             Log.e("Går", "inte");
         }

@@ -84,7 +84,7 @@
     <TextView
         android:layout_width="90dp"
         android:layout_height="wrap_content"
-        android:text="INFO"
+        android:text="Information"
         android:textColor="#0080ff"
         android:id="@+id/infoText"
         android:layout_below="@+id/album1"
@@ -109,7 +109,7 @@
     <TextView
         android:layout_width="90dp"
         android:layout_height="wrap_content"
-        android:text="+ ALBUM"
+        android:text="Add Album"
         android:textColor="#0080ff"
         android:id="@+id/plusText"
         android:layout_below="@+id/album1"
