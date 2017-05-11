@@ -30,13 +30,13 @@
         android:layout_width="90dp"
         android:layout_height="90dp"
         android:id="@+id/chooseImage"
-        android:layout_below="@id/tapetaplogo"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="30dp"
         android:background="@mipmap/camera"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
-        android:onClick="onClickImage"/>
+        android:onClick="onClickImage"
+        android:layout_alignBaseline="@+id/RecordButton"
+        android:layout_alignBottom="@+id/RecordButton"
+        android:layout_toStartOf="@+id/RecordButton" />
 
         <Button
             android:id="@+id/PlayButton"

@@ -177,6 +177,7 @@ public class GalleryMain extends AppCompatActivity {
 
                         Intent intent = new Intent(GalleryMain.this, GalleryDetailActivity.class);
                         intent.putExtra("pos", position);
+                        intent.putParcelableArrayListExtra("data", data);
 
                         String cardID = cardKey.get(position);
                         getNameRemoveImgStorage(cardID);
