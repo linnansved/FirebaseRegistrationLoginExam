@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -30,6 +31,8 @@ public class LoginActivity extends AppCompatActivity {
     public ArrayList<String> arrayDeckID = new ArrayList<>();
     public ArrayList<String> arrayUserID = new ArrayList<>();
     private static final String LOG_TAG = "LoginActivity";
+    public ImageView bubble;
+    public boolean visible;
 
 
     @Override
@@ -39,6 +42,9 @@ public class LoginActivity extends AppCompatActivity {
         txtEmailLogin = (EditText) findViewById(R.id.txtEmailLogin);
         txtPwd = (EditText) findViewById(R.id.txtPasswordLogin);
         firebaseAuth = FirebaseAuth.getInstance();
+        bubble = (ImageView) findViewById(R.id.prat);
+        bubble.setVisibility(View.VISIBLE);
+        visible = true;
     }
 
     public void btnUserLogin_Click(View v) {
@@ -73,6 +79,17 @@ public class LoginActivity extends AppCompatActivity {
     public void btnForgotPwd_Click(View v) {
         Intent i = new Intent(LoginActivity.this, ForgotPassword.class);
         startActivity(i);
+    }
+
+    public void hideShowBubble(View v) {
+        if (visible){
+            bubble.setVisibility(View.GONE);
+            visible = false;
+        }
+        else{
+            bubble.setVisibility(View.VISIBLE);
+            visible = true;
+        }
     }
 
 }

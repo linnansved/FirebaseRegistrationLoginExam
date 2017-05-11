@@ -32,7 +32,7 @@ public class UserInfo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_info);
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        bubble = (ImageView) findViewById(R.id.prat);
+
         firebaseAuth = FirebaseAuth.getInstance();
 
         tvEmail = (TextView) findViewById(R.id.currentEmail);
@@ -44,6 +44,7 @@ public class UserInfo extends AppCompatActivity {
 
         nickname1 = getIntent().getExtras().getString("Nickname");
 
+        bubble = (ImageView) findViewById(R.id.prat);
         bubble.setVisibility(View.GONE);
         visible = false;
 

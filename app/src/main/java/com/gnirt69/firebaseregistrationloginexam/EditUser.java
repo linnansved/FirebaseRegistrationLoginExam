@@ -60,7 +60,8 @@ public class EditUser extends AppCompatActivity {
     public Uri downloadPicUrl;
     private ImageView picView;
     private static final String LOG_TAG = "EditUser";
-
+    public ImageView bubble;
+    public boolean visible;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +74,9 @@ public class EditUser extends AppCompatActivity {
         //get firebase auth instance
         auth = FirebaseAuth.getInstance();
 
-
+        bubble = (ImageView) findViewById(R.id.prat);
+        bubble.setVisibility(View.GONE);
+        visible = false;
         //get current user
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         userID = user.getUid();
@@ -350,6 +353,17 @@ public class EditUser extends AppCompatActivity {
         super.onStop();
         if (authListener != null) {
             auth.removeAuthStateListener(authListener);
+        }
+    }
+
+    public void hideShowBubble(View v) {
+        if (visible){
+            bubble.setVisibility(View.GONE);
+            visible = false;
+        }
+        else{
+            bubble.setVisibility(View.VISIBLE);
+            visible = true;
         }
     }
 

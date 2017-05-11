@@ -214,11 +214,11 @@
 
     </LinearLayout>
     <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_alignParentRight="true"
         android:layout_marginRight="70dp"
-        android:src="@drawable/pratbubbla1"
+        android:src="@drawable/edituser_info"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="25dp"
         android:id="@+id/prat" />
