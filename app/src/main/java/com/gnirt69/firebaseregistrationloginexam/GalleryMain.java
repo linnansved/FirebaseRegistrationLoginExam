@@ -71,8 +71,11 @@ public class GalleryMain extends AppCompatActivity {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 CardID.add(dataSnapshot.getKey().toString());
+                Log.d("card", String.valueOf(CardID.size()));
+
 
                 for (int i = 0; i < CardID.size(); i++) {
+                    Log.d("card", String.valueOf(CardID));
                     this_turn = (String) CardID.get(i);
                     DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference().child("Cards").child(this_turn).child("Images").child("URL");
                     reference1.addListenerForSingleValueEvent(new ValueEventListener() {

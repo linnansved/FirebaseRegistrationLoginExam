@@ -162,6 +162,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 getDeck_string = dataSnapshot.getKey().toString();
                 DeckList.add(getDeck_string);
+                Log.d("DeckList:"+DeckList,"visar");
 
                 for (int i = 0; i < DeckList.size(); i++) {
                     imageView = AlbumList.get(i);
