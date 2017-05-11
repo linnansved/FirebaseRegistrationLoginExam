@@ -19,6 +19,7 @@ package com.gnirt69.firebaseregistrationloginexam;
         import com.google.android.gms.tasks.OnFailureListener;
         import com.google.android.gms.tasks.OnSuccessListener;
         import com.google.firebase.auth.FirebaseAuth;
+        import com.google.firebase.auth.FirebaseUser;
         import com.google.firebase.database.DatabaseReference;
         import com.google.firebase.database.FirebaseDatabase;
         import com.google.firebase.storage.FirebaseStorage;
@@ -66,6 +67,8 @@ public class AddPhoto extends AppCompatActivity {
     private ImageView recordRedButton;
     private Button recordButton;
 
+    public String userID;
+
 
 
 
@@ -89,6 +92,11 @@ public class AddPhoto extends AppCompatActivity {
 
         recordButton = (Button) findViewById(R.id.RecordButton);
         recordButton.setVisibility(View.VISIBLE);
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser user =  firebaseAuth.getCurrentUser();
+        userID = user.toString();
+
 
     }
     public void startRecording(View view) {
@@ -208,8 +216,8 @@ public class AddPhoto extends AppCompatActivity {
 
     private void uploadImage() {
         imageName = "image_"+generateRandom().toString()+".jpeg";
-        StorageReference riversRef = storageReference.child("images/").child(imageName);
-        riversRef.putFile(imageFilePath)
+        StorageReference storageImageRef = storageReference.child(userID).child("images/").child(imageName);
+        storageImageRef.putFile(imageFilePath)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -236,8 +244,8 @@ public class AddPhoto extends AppCompatActivity {
 
     private void uploadAudio(){
         Uri uri = Uri.fromFile(new File(mAudioFilePath + "/" + mAudioName));
-        StorageReference riversRef1 = storageReference.child("audio/").child(mAudioName);
-        riversRef1.putFile(uri)
+        StorageReference storageAudioRef = storageReference.child(userID).child("audio/").child(mAudioName);
+        storageAudioRef.putFile(uri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
