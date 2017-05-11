@@ -35,6 +35,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 
 public class EditUser extends AppCompatActivity {
 
@@ -58,7 +60,7 @@ public class EditUser extends AppCompatActivity {
     private String picName;
     private StorageReference storageReference;
     public Uri downloadPicUrl;
-    private ImageView picView;
+    private CircleImageView picView;
     private static final String LOG_TAG = "EditUser";
     public ImageView bubble;
     public boolean visible;
@@ -70,6 +72,8 @@ public class EditUser extends AppCompatActivity {
 
         storageReference = FirebaseStorage.getInstance().getReference();
         mDatabase = FirebaseDatabase.getInstance().getReference();
+
+        picView = (CircleImageView) findViewById(R.id.profile_image);
 
         //get firebase auth instance
         auth = FirebaseAuth.getInstance();
@@ -101,7 +105,7 @@ public class EditUser extends AppCompatActivity {
         changePassword = (Button) findViewById(R.id.changePass);
         changeNickname= (Button) findViewById(R.id.changeNick);
         addProfilePic = (Button) findViewById(R.id.addProfilePic);
-        picView = (ImageView) findViewById(R.id.picView);
+        //picView = (ImageView) findViewById(R.id.picView);
 
         oldEmail = (EditText) findViewById(R.id.old_email);
         newEmail = (EditText) findViewById(R.id.new_email);

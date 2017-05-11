@@ -53,6 +53,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     private DatabaseReference profilePicReference;
 
     public ArrayList<String> DeckList = new ArrayList<>();
+    public ArrayList<String> AlbumNames = new ArrayList<>();
+    public ArrayList<String> Arrays = new ArrayList<>();
     public ArrayList<ImageView> AlbumList = new ArrayList<>();
 
     private Button LogOutBtn, editUserBtn, enterBtn;
@@ -63,15 +65,15 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     private TextView tvEmail,tvNick, textSqParent;
     private EditText answerParent;
 
-    private String answer, DeckId;
-    public String nickname, picName;
+    public String nickname, picName, setName;
     public String getDeck_string;
-
-
+    public ArrayList<TextView> AlbumName = new ArrayList<>();
+    private TextView alb1T, alb2T, alb3T, alb4T, alb5T, alb6T, alb7T, alb8T, AlbNameView;
+    private String answer, DeckId, DeckId1, albNamn1;
+    private DatabaseReference hej, getDeck, albNamn;
     private DatabaseReference mDatabase;
-    private DatabaseReference hej, getDeck;
-
     public int length;
+    public int counter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,6 +112,26 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         AlbumList.add(alb7);
         AlbumList.add(alb8);
 
+        //Tar in alla albumtexter
+
+        alb1T = (TextView) findViewById(R.id.alb1Text);
+        alb2T = (TextView) findViewById(R.id.alb2Text);
+        alb3T = (TextView) findViewById(R.id.alb3Text);
+        alb4T = (TextView) findViewById(R.id.alb4Text);
+        alb5T = (TextView) findViewById(R.id.alb5Text);
+        alb6T = (TextView) findViewById(R.id.alb6Text);
+        alb7T = (TextView) findViewById(R.id.alb7Text);
+        alb8T = (TextView) findViewById(R.id.alb8Text);
+
+        AlbumName.add(alb1T);
+        AlbumName.add(alb2T);
+        AlbumName.add(alb3T);
+        AlbumName.add(alb4T);
+        AlbumName.add(alb5T);
+        AlbumName.add(alb6T);
+        AlbumName.add(alb7T);
+        AlbumName.add(alb8T);
+
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
         if(firebaseAuth.getCurrentUser() == null){
@@ -128,7 +150,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         answerParent.setVisibility(View.GONE);
 
 
-        //Gör alla album osyndliga tillsvidare
+        //Gör alla album & albumnamn osynliga tills vidare
         alb1.setVisibility(View.GONE);
         alb2.setVisibility(View.GONE);
         alb3.setVisibility(View.GONE);
@@ -138,6 +160,14 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         alb7.setVisibility(View.GONE);
         alb8.setVisibility(View.GONE);
 
+        alb1T.setVisibility(View.GONE);
+        alb2T.setVisibility(View.GONE);
+        alb3T.setVisibility(View.GONE);
+        alb4T.setVisibility(View.GONE);
+        alb5T.setVisibility(View.GONE);
+        alb6T.setVisibility(View.GONE);
+        alb7T.setVisibility(View.GONE);
+        alb8T.setVisibility(View.GONE);
 
         LogOutBtn = (Button) findViewById(R.id.LogOutBtn);
         String userID = user.getUid();
@@ -163,10 +193,43 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                 getDeck_string = dataSnapshot.getKey().toString();
                 DeckList.add(getDeck_string);
 
-                for (int i = 0; i < DeckList.size(); i++) {
+                for ( int i = 0; i < DeckList.size(); i++) {
                     imageView = AlbumList.get(i);
+                    AlbNameView = AlbumName.get(i);
                     imageView.setId(i);
+                    counter = i;
                     imageView.setVisibility(View.VISIBLE);
+                    DeckId1 = DeckList.get(i);
+                    albNamn = mDatabase.child("Decks").child(DeckId1).child("albumName");
+                    Log.d("Här kommer albumnamnet", String.valueOf(albNamn));
+                    albNamn.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            albNamn1 = dataSnapshot.getValue(String.class);
+                            if (AlbumNames.contains(albNamn1)) {
+                                Log.d("finns redan", String.valueOf(AlbumNames));
+                            }
+                            else {
+                                AlbumNames.add(albNamn1);
+                                AlbNameView.setText(albNamn1);
+                                AlbNameView.setVisibility(View.VISIBLE);
+                                //Log.d("listan albumnamn", String.valueOf(AlbumNames));
+                            }
+                            Log.d("Här är sista listan", String.valueOf(AlbumNames));
+                            //Log.d("Namnet", AlbumNames.get(1));
+                                //setName = AlbumNames.get(counter);
+
+
+                        }
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+                        }
+
+                    });
+
+                    //AlbNameView.setText("hej");
+
+                    Log.d("Här är sista", String.valueOf(AlbumNames));
 
                 }
             }
