@@ -1,5 +1,6 @@
 package com.gnirt69.firebaseregistrationloginexam;
 
+import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -64,6 +65,7 @@ public class GalleryMain extends AppCompatActivity {
 
         //Get DeckID
         deckID = getIntent().getExtras().getString("DeckId");
+        Log.v("deckID", deckID);
 
         //Get CardID and add it to ArrayList CardID
         DatabaseReference ref = mDatabase.child("Decks").child(deckID).child("Cards");
@@ -177,14 +179,26 @@ public class GalleryMain extends AppCompatActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
+
+
         int id = item.getItemId();
 
+        Log.v("log", "hejhej1");
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if (id == R.id.action_add) {
+            Log.v("log", "hejhej2");
+            goToAddPhoto();
+            Log.v("log", "hejhej3");
         }
 
+
+        /*switch (id) {
+            case R.id.action_add:
+                onItemClickGoToAddPhoto();
+        }*/
+
         return super.onOptionsItemSelected(item);
+
     }
 
 
@@ -374,9 +388,10 @@ public class GalleryMain extends AppCompatActivity {
         });
     }
 
-
     public void goToAddPhoto(){
         Intent intent = new Intent(GalleryMain.this, AddPhoto.class);
         intent.putExtra("deckID", deckID);
+        startActivity(intent);
     }
+
 }
