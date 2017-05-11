@@ -95,7 +95,7 @@ public class AddPhoto extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user =  firebaseAuth.getCurrentUser();
-        userID = user.toString();
+        userID = user.getUid();
 
 
     }
