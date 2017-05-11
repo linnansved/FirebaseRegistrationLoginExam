@@ -106,8 +106,14 @@ public class GalleryMain extends AppCompatActivity {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot2) {
                     url_name = dataSnapshot2.getValue(String.class);
-                    Imagelist.put(this_turn, url_name);
-                    Log.d("ImageList", String.valueOf(Imagelist));
+
+                    if (Imagelist.values().contains(url_name)){
+                    }
+
+                    else{
+                        Imagelist.put(this_turn, url_name);
+                        Log.d("ImageList", String.valueOf(Imagelist));
+                    }
                 }
 
                 @Override
@@ -122,8 +128,13 @@ public class GalleryMain extends AppCompatActivity {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot3) {
                     audio_name = dataSnapshot3.getValue(String.class);
-                    AudioList.put(this_turn, audio_name);
-                    Log.d("AudioList", String.valueOf(AudioList));
+
+                    if (AudioList.values().contains(audio_name)){
+                    }
+                    else{
+                        AudioList.put(this_turn, audio_name);
+                        Log.d("AudioList", String.valueOf(AudioList));
+                    }
                 }
 
                 @Override
@@ -139,22 +150,15 @@ public class GalleryMain extends AppCompatActivity {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot3) {
                     text_name = dataSnapshot3.getValue(String.class);
-                    TextList.put(this_turn, text_name);
-                    Log.d("TextList", String.valueOf(TextList));
 
-                    for (HashMap.Entry<String, String> entry : Imagelist.entrySet()) {
-                        Log.d("imagelist", String.valueOf(Imagelist));
-                        GalleryImageModel imageModel = new GalleryImageModel();
-                        String key = entry.getKey();
-                        cardKey.add(key);
-                        imageModel.setUrl(entry.getValue());
-                        imageModel.setName(TextList.get(key));
-                        imageModel.setAudio(AudioList.get(key));
-                        data.add(imageModel);
-                        Log.d("data", String.valueOf(data));
+                    if (TextList.values().contains(text_name)){
                     }
-
-                    createGallery();
+                    else{
+                        TextList.put(this_turn, text_name);
+                        Log.d("TextList", String.valueOf(TextList));
+                        syncData();
+                        createGallery();
+                    }
                 }
 
                 @Override
@@ -166,6 +170,21 @@ public class GalleryMain extends AppCompatActivity {
         }
 
     }
+
+    public void syncData(){
+        for (HashMap.Entry<String, String> entry : Imagelist.entrySet()) {
+            Log.d("imagelist", String.valueOf(Imagelist));
+            GalleryImageModel imageModel = new GalleryImageModel();
+            String key = entry.getKey();
+            cardKey.add(key);
+            imageModel.setUrl(entry.getValue());
+            imageModel.setName(TextList.get(key));
+            imageModel.setAudio(AudioList.get(key));
+            data.add(imageModel);
+            Log.d("data", String.valueOf(data));
+        }
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -299,5 +318,6 @@ public class GalleryMain extends AppCompatActivity {
     public void goToAddPhoto(){
         Intent intent = new Intent(GalleryMain.this, AddPhoto.class);
         intent.putExtra("deckID", deckID);
+        startActivity(intent);
     }
 }

@@ -192,14 +192,14 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             @Override
             public void onDataChange(DataSnapshot dataSnapshot4) {
                 picName = dataSnapshot4.getValue(String.class);
-                Log.v("picname", "picname"+picName);
+                Log.v("picname", picName);
 
-
-
-                /*try {
+                /*
+                try {
                     CircleImageView i = (CircleImageView)findViewById(R.id.profile_image);
+                    Log.v("picName2", String.valueOf(i));
                     Bitmap bitmap = BitmapFactory.decodeStream((InputStream)new URL(picName).getContent());
-                    Log.v("picName", "picnamehej "+picName);
+                    Log.v("picName3", String.valueOf(bitmap));
                     i.setImageBitmap(bitmap);
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
@@ -214,10 +214,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                 //handle databaseError
             }
         });
-
-
-
-
     }
 
     public void toGallery_Click(View v) {
