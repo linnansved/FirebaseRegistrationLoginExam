@@ -8,33 +8,30 @@
     tools:context=".EditUser"
     android:background="@drawable/background">
 
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/profile_image"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:civ_border_width="6dp"
+        app:civ_border_color="#FFFFFF"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true" />
+
     <ImageView
         android:id="@+id/tapetaplogo"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:src="@drawable/tapetaplogo"
         android:layout_centerHorizontal="true" />
 
-    <Button
-        android:id="@+id/addProfilePic"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:background="@drawable/camera"
-        android:onClick="onClickProfileImage"/>
 
-    <Button
-        android:id="@+id/uploadPic"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_below="@id/addProfilePic"
-        android:background="@drawable/upload"
-        android:onClick="onClickUploadProfilePic"/>
 
     <ImageView
         android:layout_width="180dp"
         android:layout_height="180dp"
         android:id="@+id/picView"
-        android:layout_below="@id/uploadPic"
         android:layout_centerHorizontal="true"
         tools:layout_editor_absoluteY="8dp"
         tools:layout_editor_absoluteX="8dp"
@@ -175,6 +172,20 @@
             android:layout_marginTop="16dp"
             android:text="    SAVE CHANGES   "/>
 
+        <Button
+            android:id="@+id/uploadPic"
+            android:layout_gravity="center_horizontal"
+            style="?android:textAppearanceSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/green_but"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"
+            android:onClick="onClickUploadProfilePic"
+            android:text="    SAVE CHANGES   "/>
+
+
 
         <Button
             android:id="@+id/change_email_button"
@@ -210,6 +221,19 @@
             android:textStyle="bold"
             android:layout_marginTop="16dp"
             android:text=" CHANGE NICKNAME "/>
+
+        <Button
+            android:id="@+id/addProfilePic"
+            android:layout_gravity="center_horizontal"
+            style="?android:textAppearanceSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/blue_big_but"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"
+            android:onClick="onClickProfileImage"
+            android:text="    CHANGE PROFILE PICTURE   "/>
 
 
     </LinearLayout>
