@@ -1,12 +1,15 @@
 package com.gnirt69.firebaseregistrationloginexam;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.ArrayMap;
 import android.util.Log;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.ImageView;
@@ -30,9 +33,15 @@ import android.util.Log;
 
 import org.w3c.dom.Text;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 import static android.R.attr.data;
 import static android.R.attr.tag;
@@ -58,6 +67,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     public String nickname, picName;
     public String getDeck_string;
 
+
     private DatabaseReference mDatabase;
     private DatabaseReference hej, getDeck;
 
@@ -79,7 +89,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         textSqParent = (TextView)findViewById(R.id.textSqParent);
         answerParent = (EditText) findViewById(R.id.answerParent);
         tvNick = (TextView) findViewById(R.id.tvNickname);
-
+        CircleImageView i = (CircleImageView)findViewById(R.id.profile_image);
 
         //Tar in alla möjliga album
         alb1 = (ImageView) findViewById(R.id.AddAlbum1);
@@ -183,12 +193,30 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             public void onDataChange(DataSnapshot dataSnapshot4) {
                 picName = dataSnapshot4.getValue(String.class);
                 Log.v("picname", "picname"+picName);
+
+
+
+                /*try {
+                    CircleImageView i = (CircleImageView)findViewById(R.id.profile_image);
+                    Bitmap bitmap = BitmapFactory.decodeStream((InputStream)new URL(picName).getContent());
+                    Log.v("picName", "picnamehej "+picName);
+                    i.setImageBitmap(bitmap);
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }*/
+
+
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 //handle databaseError
             }
         });
+
+
+
 
     }
 
