@@ -1,28 +1,39 @@
 package com.gnirt69.firebaseregistrationloginexam;
 
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 
 public class EditUser extends AppCompatActivity {
@@ -36,16 +47,28 @@ public class EditUser extends AppCompatActivity {
     private DatabaseReference nick;
     public String userID;
     public String nickname, newNick;
-    public boolean visible;
-    public ImageView bubble;
+    private static final int PICK_IMAGE_REQUES = 234;
+    public Button addProfilePic;
+    private Uri imageFilePath;
+    public ArrayList<String> arrayPicID = new ArrayList<String>();
+    public ArrayList<Uri> picUrlList = new ArrayList<>();
+    public int i = 0;
+    public String picID;
+    private DatabaseReference picRef;
+    private String picName;
+    private StorageReference storageReference;
+    public Uri downloadPicUrl;
+    private ImageView picView;
+    private static final String LOG_TAG = "EditUser";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_user);
-        visible = false;
-        bubble = (ImageView) findViewById(R.id.prat);
-        bubble.setVisibility(View.GONE);
+
+        storageReference = FirebaseStorage.getInstance().getReference();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         //get firebase auth instance
         auth = FirebaseAuth.getInstance();
@@ -74,6 +97,8 @@ public class EditUser extends AppCompatActivity {
         changeEmail = (Button) findViewById(R.id.changeEmail);
         changePassword = (Button) findViewById(R.id.changePass);
         changeNickname= (Button) findViewById(R.id.changeNick);
+        addProfilePic = (Button) findViewById(R.id.addProfilePic);
+        picView = (ImageView) findViewById(R.id.picView);
 
         oldEmail = (EditText) findViewById(R.id.old_email);
         newEmail = (EditText) findViewById(R.id.new_email);
@@ -188,7 +213,7 @@ public class EditUser extends AppCompatActivity {
 
 
 
-       changeNickname.setOnClickListener(new View.OnClickListener() {
+        changeNickname.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (user != null && !newNickname.getText().toString().trim().equals("")) {
@@ -201,7 +226,7 @@ public class EditUser extends AppCompatActivity {
                         nickname = getIntent().getExtras().getString("Nickname");
                         nick=mDatabase.child("Users").child(userID).child("nickname");
                         nick.setValue(newNick)
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if (task.isSuccessful()) {
@@ -239,6 +264,87 @@ public class EditUser extends AppCompatActivity {
         auth.addAuthStateListener(authListener);
     }
 
+    public void addProfilePhoto(){
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(intent, PICK_IMAGE_REQUES);
+        intent.setType("images/jpg");
+        /*intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select an Image"), PICK_IMAGE_REQUES);*/
+
+    }
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PICK_IMAGE_REQUES && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            imageFilePath = data.getData();
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageFilePath);
+                picView.setImageBitmap(bitmap);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    public void onClickProfileImage(View view) {
+        if (view == addProfilePic) {
+            addProfilePhoto();
+        } else {
+            Toast.makeText(getApplicationContext(), "hej", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private String generateRandom() {
+        String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+        return timeStamp;
+    }
+
+    public void onClickUploadProfilePic(View view) {
+        if (imageFilePath !=null) {
+            picID = UUID.randomUUID().toString();
+            uploadProfilePic();
+        } else {
+            Toast.makeText(getApplicationContext(), "du måste lägga till bild och ljud", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void uploadProfilePic() {
+        picName = "pic_"+generateRandom().toString()+".jpeg";
+        StorageReference riversRef = storageReference.child(userID).child("profilepic/").child(picName);
+        riversRef.putFile(imageFilePath)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        int x = 0;
+                        Toast.makeText(getApplicationContext(), "File Uploaded", Toast.LENGTH_LONG).show();
+                        downloadPicUrl = taskSnapshot.getDownloadUrl();
+                        picUrlList.add(x, downloadPicUrl);
+                        uploadPicToDatabase();
+                        x++;
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                        Toast.makeText(getApplicationContext(), exception.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                })
+        ;
+    }
+
+    private void uploadPicToDatabase() {
+        mDatabase.child("Users").child(userID).child("pic").child("picID").setValue(picID);
+        mDatabase.child("Users").child(userID).child("pic").child("URL").setValue(downloadPicUrl.toString());
+
+        /*Intent i = new Intent(EditUser.this, EditUser.class);
+        i.putExtra("picID", picID);
+        startActivity(i);*/
+    }
+
+
+    public ArrayList getUri(){
+        return picUrlList;
+    }
+
+
     @Override
     public void onStop() {
         super.onStop();
@@ -247,14 +353,6 @@ public class EditUser extends AppCompatActivity {
         }
     }
 
-    public void hideShowBubble(View v) {
-        if (visible){
-            bubble.setVisibility(View.GONE);
-            visible = false;
-        }
-        else{
-            bubble.setVisibility(View.VISIBLE);
-            visible = true;
-        }
-    }
+
 }
+
