@@ -108,8 +108,8 @@
 
 
     <ImageView
-        android:layout_width="160dp"
-        android:layout_height="160dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_alignParentRight="true"
         android:layout_marginRight="70dp"
         android:src="@drawable/pratbubbla1"
@@ -137,7 +137,9 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:src="@drawable/bird"
-        android:id="@+id/greenbird" />
+        android:id="@+id/greenbird"
+        android:clickable="true"
+        android:onClick="hideShowBubble"/>
 
 
 

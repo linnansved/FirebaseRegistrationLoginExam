@@ -78,7 +78,7 @@
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="40dp"
         android:clickable="true"
-        android:onClick="toGallery_Click"
+        android:onClick="toInstructions"
         />
 
     <de.hdodenhof.circleimageview.CircleImageView
@@ -101,7 +101,7 @@
         android:id="@+id/AddAlbum1"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:src="@drawable/setting"
+        android:src="@drawable/home"
         app:civ_border_width="6dp"
         app:civ_border_color="#FFFFFF"
         android:layout_below="@id/album1"
@@ -117,7 +117,7 @@
         android:id="@+id/AddAlbum2"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:src="@drawable/setting"
+        android:src="@drawable/red_bird"
         app:civ_border_width="6dp"
         app:civ_border_color="#FFFFFF"
         android:layout_below="@id/album1"
@@ -125,20 +125,20 @@
         android:layout_marginRight="40dp"
         android:layout_marginTop="15dp"
         android:clickable="true"
-        android:onClick="addCard_Click"/>
+        android:onClick="toGallery_Click"/>
 
     <de.hdodenhof.circleimageview.CircleImageView
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/AddAlbum3"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:src="@drawable/setting"
+        android:src="@drawable/bird"
         app:civ_border_width="6dp"
         app:civ_border_color="#FFFFFF"
-        android:layout_below="@id/AddAlbum2"
+        android:layout_below="@id/album1"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="40dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="150dp"
         android:clickable="true"
         android:onClick="toGallery_Click"
         />
@@ -148,28 +148,28 @@
         android:id="@+id/AddAlbum4"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:src="@drawable/setting"
+        android:src="@drawable/dog"
         app:civ_border_width="6dp"
         app:civ_border_color="#FFFFFF"
-        android:layout_below="@id/AddAlbum2"
+        android:layout_below="@id/album1"
         android:layout_alignParentRight="true"
         android:layout_marginRight="40dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="150dp"
         android:clickable="true"
-        android:onClick="addCard_Click"/>
+        android:onClick="toGallery_Click"/>
 
     <de.hdodenhof.circleimageview.CircleImageView
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/AddAlbum5"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:src="@drawable/setting"
+        android:src="@drawable/leaf"
         app:civ_border_width="6dp"
         app:civ_border_color="#FFFFFF"
-        android:layout_below="@id/AddAlbum3"
+        android:layout_below="@id/album1"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="40dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="295dp"
         android:clickable="true"
         android:onClick="toGallery_Click"
         />
@@ -179,28 +179,28 @@
         android:id="@+id/AddAlbum6"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:src="@drawable/setting"
+        android:src="@drawable/carrot"
         app:civ_border_width="6dp"
         app:civ_border_color="#FFFFFF"
-        android:layout_below="@id/AddAlbum4"
+        android:layout_below="@id/album1"
         android:layout_alignParentRight="true"
         android:layout_marginRight="40dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="295dp"
         android:clickable="true"
-        android:onClick="addCard_Click"/>
+        android:onClick="toGallery_Click"/>
 
     <de.hdodenhof.circleimageview.CircleImageView
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/AddAlbum7"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:src="@drawable/setting"
+        android:src="@drawable/lock"
         app:civ_border_width="6dp"
         app:civ_border_color="#FFFFFF"
-        android:layout_below="@id/AddAlbum5"
+        android:layout_below="@id/album1"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="40dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="440dp"
         android:clickable="true"
         android:onClick="toGallery_Click"
         />
@@ -213,52 +213,64 @@
         android:src="@drawable/setting"
         app:civ_border_width="6dp"
         app:civ_border_color="#FFFFFF"
-        android:layout_below="@id/AddAlbum6"
+        android:layout_below="@id/album1"
         android:layout_alignParentRight="true"
         android:layout_marginRight="40dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="440dp"
         android:clickable="true"
-        android:onClick="addCard_Click"/>
+        android:onClick="toGallery_Click"/>
 
     <Button
         android:id="@+id/UserClick"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_alignBaseline="@id/profile_image"
-        android:layout_toRightOf="@id/profile_image"
+        android:layout_alignEnd="@id/profile_image"
         android:background="@drawable/setting_gear"
         android:textColor="#FFFFFF"
         android:onClick="seeUser_Click"/>
 
     <TextView
-        android:layout_width="200dp"
+        android:layout_width="250dp"
         android:layout_height="200dp"
         android:id="@+id/textSqParent"
         android:textAlignment="center"
-        android:layout_centerInParent="true"
-        android:background="@drawable/whiteback"
+        android:typeface="monospace"
+        android:layout_below="@id/profile_image"
+        android:layout_centerHorizontal="true"
+        android:textColor="#0080ff"
+        android:gravity="clip_vertical"
+        android:background="@drawable/text_back"
+        android:elegantTextHeight="true"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Type parent to enter admin page"/>
-
-
-        <EditText
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:id="@+id/answerParent"
-            android:layout_centerInParent="true"
-            android:inputType="text"
-            />
+        android:text="Type the word 'parent' to enter admin page"
+        />
     <Button
         android:layout_width="100dp"
         android:layout_height="50dp"
-        android:text="ENTER"
+        android:text="Submit"
         android:id="@+id/enterBtn"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/answerParent"
         android:background="@drawable/green_but"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
-        android:onClick="testParent"/>
+        android:onClick="testParent"
+        android:layout_alignTop="@id/textSqParent"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="140dp"/>
+
+        <EditText
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:id="@+id/answerParent"
+            android:hint="Type answer"
+            android:textAlignment="center"
+            android:typeface="monospace"
+            android:layout_alignTop="@id/textSqParent"
+            android:inputType="text"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="90dp"
+            />
+
 
 </RelativeLayout>
 </ScrollView>
