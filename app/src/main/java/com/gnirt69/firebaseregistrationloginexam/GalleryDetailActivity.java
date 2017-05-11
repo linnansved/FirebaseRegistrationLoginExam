@@ -48,15 +48,10 @@ public class GalleryDetailActivity extends AppCompatActivity {
 
         toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setTitle("Add new photos to album");
-
 
         data = getIntent().getParcelableArrayListExtra("data");
-        Log.d("Datan kommer fram", data.toString());
         pos = getIntent().getIntExtra("pos", 0);
-
         setTitle(data.get(pos).getName());
-
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -67,6 +62,13 @@ public class GalleryDetailActivity extends AppCompatActivity {
         mViewPager.setAdapter(mSectionsPagerAdapter);
         mViewPager.setCurrentItem(pos);
 
+        mViewPager.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                playSound(data.get(pos).getAudio());
+                Log.d("spelar","ljud");
+            }
+        });
 
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -79,7 +81,7 @@ public class GalleryDetailActivity extends AppCompatActivity {
 
                 //noinspection ConstantConditions
                 setTitle(data.get(position).getName());
-                playSound(data.get(position).getAudio());
+                //playSound(data.get(position).getAudio());
 
 
             }
@@ -111,18 +113,6 @@ public class GalleryDetailActivity extends AppCompatActivity {
                 return false;
             }
         });
-
-        /*mViewPager.setOnClickListener(new View.OnClickListener(){
-
-           @Override
-            public void onClick(View view) {
-                playSound(data.get(pos).getAudio());
-
-            }
-
-        });*/
-
-
     }
 
     public void playSound(String audioUrl){
@@ -131,12 +121,14 @@ public class GalleryDetailActivity extends AppCompatActivity {
         mPlayer = new MediaPlayer();
         try {
             mPlayer.setDataSource(mAudioName);
+            Log.d("play1", String.valueOf(mPlayer));
             mPlayer.prepare();
+            Log.d("play2", String.valueOf(mPlayer));
             mPlayer.start();
+            Log.d("play3", String.valueOf(mPlayer));
         } catch (IOException e) {
-            Log.e("GÅR EJ ATT SPELA LJUD", "prepare() failed");
+            Log.e("Går", "inte");
         }
-
     }
 
     @Override
