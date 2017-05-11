@@ -41,6 +41,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     private FirebaseAuth firebaseAuth;
 
+    private DatabaseReference profilePicReference;
+
     public ArrayList<String> DeckList = new ArrayList<>();
     public ArrayList<ImageView> AlbumList = new ArrayList<>();
 
@@ -53,7 +55,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     private EditText answerParent;
 
     private String answer, DeckId;
-    public String nickname;
+    public String nickname, picName;
     public String getDeck_string;
 
     private DatabaseReference mDatabase;
@@ -173,6 +175,21 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         });
 
         LogOutBtn.setOnClickListener(this);
+
+        //Get profilepic URL from database
+        profilePicReference = FirebaseDatabase.getInstance().getReference().child("Users").child(userID).child("pic").child("URL");
+        profilePicReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot4) {
+                picName = dataSnapshot4.getValue(String.class);
+                Log.v("picname", "picname"+picName);
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                //handle databaseError
+            }
+        });
+
     }
 
     public void toGallery_Click(View v) {
