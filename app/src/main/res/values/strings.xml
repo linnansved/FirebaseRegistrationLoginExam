@@ -5,6 +5,8 @@
     <string name="title_activity_main2">Main2Activity</string>
     <string name="action_delete">Delete Photo</string>
     <string name="action_add">Add Photo</string>
+    <string name="action_deletealbum">Delete Album</string>
+    <string name="action_share">Share Album</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="title_activity_detail">DetailActivity</string>
 </resources>
