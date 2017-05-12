@@ -59,7 +59,8 @@ public class addAlbum extends AppCompatActivity {
             Log.d("läggertilliarray","hej");
             j++;
             //Skickar deckID till AddPhoto
-            Intent intent = new Intent(addAlbum.this, AddPhoto.class);
+          //  Intent intent = new Intent(addAlbum.this, AddPhoto.class);
+            Intent intent = new Intent(addAlbum.this, ProfileActivity.class);
             intent.putExtra("deckID", deckID);
             startActivity(intent);
             Log.d("skickatillprofile","hej");

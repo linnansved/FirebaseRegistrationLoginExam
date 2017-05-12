@@ -195,9 +195,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
                 for ( int i = 0; i < DeckList.size(); i++) {
                     imageView = AlbumList.get(i);
-                    AlbNameView = AlbumName.get(i);
                     imageView.setId(i);
-                    counter = i;
+                    counter = 0;
                     imageView.setVisibility(View.VISIBLE);
                     DeckId1 = DeckList.get(i);
                     albNamn = mDatabase.child("Decks").child(DeckId1).child("albumName");
@@ -207,17 +206,15 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             albNamn1 = dataSnapshot.getValue(String.class);
                             if (AlbumNames.contains(albNamn1)) {
-                                Log.d("finns redan", String.valueOf(AlbumNames));
+                               // Log.d("finns redan", String.valueOf(AlbumNames));
                             }
                             else {
                                 AlbumNames.add(albNamn1);
+                                AlbNameView=AlbumName.get(counter);
                                 AlbNameView.setText(albNamn1);
                                 AlbNameView.setVisibility(View.VISIBLE);
-                                //Log.d("listan albumnamn", String.valueOf(AlbumNames));
+                                counter++;
                             }
-                            Log.d("Här är sista listan", String.valueOf(AlbumNames));
-                            //Log.d("Namnet", AlbumNames.get(1));
-                                //setName = AlbumNames.get(counter);
 
 
                         }
@@ -278,6 +275,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             }
         });
     }
+
 
     public void toGallery_Click(View v) {
         int id = v.getId();
