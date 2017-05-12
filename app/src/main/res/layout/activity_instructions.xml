@@ -16,29 +16,88 @@
         android:ems="10"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="50dp"
         android:text="INSTRUCTIONS"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
         android:typeface="monospace"
         />
-    <TextView
-        android:id="@+id/info"
-        android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:background="@android:color/transparent"
-        android:ems="10"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-        android:layout_centerHorizontal="true"
+
+    <ImageView
+        android:id="@+id/leaf1"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/leaf"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="10dp"
         android:layout_below="@id/head"
-        android:layout_marginTop="20dp"
-        android:text="Click on the + in order to add a new album,you can add up to 8 albums in total. Enter the album to add a picture, sound and text. When it is time for your child to use the app - lock the app and enter ChildMode meaning that no changes can be made..."
-        android:textAlignment="center"
-        android:textColor="#FFFFFF"
-        android:textStyle="bold"
+        android:layout_marginLeft="40dp"/>
+
+    <TextView
+        android:id="@+id/info1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/leaf1"
+        android:layout_below="@id/head"
+        android:layout_marginTop="10dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:ems="10"
+        android:layout_marginLeft="10dp"
         android:typeface="monospace"
+        android:textColor="#FFFFFF"
+        android:text="Click on the + in order to add a new album,you can add up to 8 albums in total"
         />
+
+    <ImageView
+        android:id="@+id/leaf2"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/leaf"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/info1"
+        android:layout_marginLeft="40dp"/>
+
+    <TextView
+        android:id="@+id/info2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/leaf1"
+        android:layout_below="@id/info1"
+        android:layout_marginTop="10dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:ems="10"
+        android:layout_marginLeft="10dp"
+        android:typeface="monospace"
+        android:textColor="#FFFFFF"
+        android:text="You can navigate between parent and child mode by clicking on the lock, in child mode you can only view pictures, not edit any infromation."
+        />
+
+    <ImageView
+        android:id="@+id/leaf3"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/leaf"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/info2"
+        android:layout_marginLeft="40dp"/>
+
+    <TextView
+        android:id="@+id/info3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/leaf1"
+        android:layout_below="@id/info2"
+        android:layout_marginTop="10dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:ems="10"
+        android:layout_marginLeft="10dp"
+        android:typeface="monospace"
+        android:textColor="#FFFFFF"
+        android:text="Albums can bedeleted and shared with other users, these functions will appear as you enter one of the albums when in parent mode."        />
+
     <ImageView
         android:layout_width="50dp"
         android:layout_height="50dp"
