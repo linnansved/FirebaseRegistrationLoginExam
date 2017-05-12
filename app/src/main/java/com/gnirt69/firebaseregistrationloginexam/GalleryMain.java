@@ -203,7 +203,12 @@ public class GalleryMain extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_add) {
 
-            return true;
+            goToAddPhoto();
+        }
+
+        if (id == R.id.action_delete) {
+
+            deletePhotos();
         }
 
         return super.onOptionsItemSelected(item);
@@ -319,5 +324,9 @@ public class GalleryMain extends AppCompatActivity {
         Intent intent = new Intent(GalleryMain.this, AddPhoto.class);
         intent.putExtra("deckID", deckID);
         startActivity(intent);
+    }
+
+    public void deletePhotos() {
+        //här kan ni lägga in det ni vill grabbbsssss
     }
 }
