@@ -217,6 +217,16 @@ public class GalleryMain extends AppCompatActivity {
             deletePhotos();
         }
 
+        if (id == R.id.action_delete) {
+
+            deleteAlbum();
+        }
+
+        if (id == R.id.action_delete) {
+
+            shareAlbum();
+        }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -246,7 +256,7 @@ public class GalleryMain extends AppCompatActivity {
                         }else {
                             DialogInterface.OnClickListener dialogCklickListener = new DialogInterface.OnClickListener(){
                                 @Override
-                                public void onClick(DialogInterface dialog, int which, int position){
+                                public void onClick(DialogInterface dialog, int which){
                                     switch (which){
                                         case DialogInterface.BUTTON_POSITIVE:
                                             //mRecyclerView.setImageResource(android.R.color.transparent);
@@ -367,5 +377,13 @@ public class GalleryMain extends AppCompatActivity {
         mRecyclerView.setAlpha(0.5f);
         delete = true;
 
+    }
+
+    public void deleteAlbum() {
+        // här lägger vi koden för att radera album
+    }
+
+    public void shareAlbum() {
+        // här lägger vi koden för att dela ett album
     }
 }
