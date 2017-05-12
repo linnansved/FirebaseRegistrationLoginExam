@@ -1,8 +1,10 @@
 package com.gnirt69.firebaseregistrationloginexam;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +13,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -28,6 +31,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GalleryMain extends AppCompatActivity {
+
     GalleryAdapter mAdapter;
     RecyclerView mRecyclerView;
     public String imageName;
@@ -46,6 +50,8 @@ public class GalleryMain extends AppCompatActivity {
     private DatabaseReference imageDatabaseNameRef;
     private DatabaseReference audioDatabaseNameRef;
     private DatabaseReference mDatabase;
+
+    public Boolean delete = false;
 
     public HashMap<String, String> Imagelist = new HashMap<>();
     public HashMap<String, String> AudioList = new HashMap<>();
@@ -231,17 +237,45 @@ public class GalleryMain extends AppCompatActivity {
 
                     @Override
                     public void onItemClick(View view, int position) {
+                        if (delete == false){
+                            Intent intent = new Intent(GalleryMain.this, GalleryDetailActivity.class);
+                            intent.putExtra("pos", position);
+                            intent.putParcelableArrayListExtra("data", data);
+                            startActivity(intent);
 
-                        Intent intent = new Intent(GalleryMain.this, GalleryDetailActivity.class);
-                        intent.putExtra("pos", position);
-                        intent.putParcelableArrayListExtra("data", data);
+                        }else {
+                            DialogInterface.OnClickListener dialogCklickListener = new DialogInterface.OnClickListener(){
+                                @Override
+                                public void onClick(DialogInterface dialog, int which){
+                                    switch (which){
+                                        case DialogInterface.BUTTON_POSITIVE:
+                                            //mRecyclerView.setImageResource(android.R.color.transparent);
+                                            Log.d("PicDel","Gick bra");
+                                            //String cardID = cardKey.get(position);
+                                            //getNameRemoveImgStorage(cardID);
+                                            //getNameRemoveAudStorage(cardID);
+                                            //removeDB(cardID);
+                                            mRecyclerView.(android.R.color.transparent);
+                                            mRecyclerView.setAlpha(1);
+                                            delete = false;
+                                            break;
 
-                        //String cardID = cardKey.get(position);
-                        //getNameRemoveImgStorage(cardID);
-                        //getNameRemoveAudStorage(cardID);
-                        ////removeDB(cardID);
+                                        case DialogInterface.BUTTON_NEGATIVE:
+                                            Toast.makeText(getApplicationContext(), "Ok", Toast.LENGTH_LONG).show();
+                                            mRecyclerView.setAlpha(1);
+                                            delete = false;
+                                    }
+                                }
+                            };
+                            AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+                            builder.setMessage("Är du säker att du vill ta bort bilden?").setPositiveButton("Ja", dialogCklickListener)
+                                    .setNegativeButton("Nej", dialogCklickListener).show();
 
-                        startActivity(intent);
+                        }
+
+
+
+
 
                     }
                 }));
@@ -327,6 +361,8 @@ public class GalleryMain extends AppCompatActivity {
     }
 
     public void deletePhotos() {
-        //här kan ni lägga in det ni vill grabbbsssss
+        mRecyclerView.setAlpha(0.5f);
+        delete = true;
+
     }
 }
