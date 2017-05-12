@@ -62,7 +62,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     private ImageView unLocked, locked, imageView, addAlbum, instructions;
     private ImageView alb1, alb2, alb3, alb4, alb5, alb6, alb7, alb8;
 
-    private TextView tvEmail,tvNick, textSqParent;
+    private TextView tvEmail,tvNick, textSqParent, infoText, plusText;
     private EditText answerParent;
 
     public String nickname, picName, setName;
@@ -91,6 +91,9 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         textSqParent = (TextView)findViewById(R.id.textSqParent);
         answerParent = (EditText) findViewById(R.id.answerParent);
         tvNick = (TextView) findViewById(R.id.tvNickname);
+        infoText = (TextView) findViewById(R.id.infoText);
+        plusText = (TextView) findViewById(R.id.plusText);
+
         CircleImageView i = (CircleImageView)findViewById(R.id.profile_image);
 
         //Tar in alla möjliga album
@@ -321,6 +324,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         //tvEmail.setVisibility(View.GONE);
         tvNick.setText(nickname);
         tvNick.setVisibility(View.VISIBLE);
+        infoText.setVisibility(View.GONE);
+        plusText.setVisibility(View.GONE);
 
 
     }
@@ -328,6 +333,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         textSqParent.setVisibility(View.VISIBLE);
         answerParent.setVisibility(View.VISIBLE);
         enterBtn.setVisibility(View.VISIBLE);
+        infoText.setVisibility(View.VISIBLE);
+        plusText.setVisibility(View.VISIBLE);
     }
 
     public void testParent(View v) {
