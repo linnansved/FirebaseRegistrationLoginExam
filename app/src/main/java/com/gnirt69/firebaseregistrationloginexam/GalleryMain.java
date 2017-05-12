@@ -246,16 +246,20 @@ public class GalleryMain extends AppCompatActivity {
                         }else {
                             DialogInterface.OnClickListener dialogCklickListener = new DialogInterface.OnClickListener(){
                                 @Override
-                                public void onClick(DialogInterface dialog, int which){
+                                public void onClick(DialogInterface dialog, int which, int position){
                                     switch (which){
                                         case DialogInterface.BUTTON_POSITIVE:
                                             //mRecyclerView.setImageResource(android.R.color.transparent);
                                             Log.d("PicDel","Gick bra");
+
                                             //String cardID = cardKey.get(position);
                                             //getNameRemoveImgStorage(cardID);
                                             //getNameRemoveAudStorage(cardID);
                                             //removeDB(cardID);
-                                            mRecyclerView.(android.R.color.transparent);
+
+                                            //mRecyclerView.get(position);
+
+                                            //setImageResource(android.R.color.transparent);
                                             mRecyclerView.setAlpha(1);
                                             delete = false;
                                             break;
@@ -316,11 +320,10 @@ public class GalleryMain extends AppCompatActivity {
         });
     }
 
-    /*
     private void removeDB(String cardID){
         mDatabase.child("Decks").child(deckID).child(cardID).removeValue();
         mDatabase.child("Cards").child(cardID).removeValue();
-    }*/
+    }
 
     private void getNameRemoveImgStorage(String cardID){
         imageDatabaseNameRef = mDatabase.child("Cards").child(cardID).child("Images").child("Name");
