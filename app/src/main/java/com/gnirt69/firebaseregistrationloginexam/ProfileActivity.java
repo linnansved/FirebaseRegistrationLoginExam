@@ -295,20 +295,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                     }
                 });
 
-/*
-                try {
-                    CircleImageView i = (CircleImageView)findViewById(R.id.profile_image);
-                    Log.v("picName2", String.valueOf(i));
-                    Bitmap bitmap = BitmapFactory.decodeStream((InputStream)new URL(picName).getContent());
-                    Log.v("picName3", String.valueOf(bitmap));
-                    i.setImageBitmap(bitmap);
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }*/
-
-
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -406,6 +392,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         Intent i = new Intent(ProfileActivity.this, UserInfo.class);
         i.putExtra("Email", firebaseAuth.getCurrentUser().getEmail());
         i.putExtra("Nickname", nickname);
+        i.putExtra("localFile", localFile);
         startActivity(i);
     }
 

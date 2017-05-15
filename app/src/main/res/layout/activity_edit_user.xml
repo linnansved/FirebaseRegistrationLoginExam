@@ -20,6 +20,7 @@
         android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true" />
 
+
     <ImageView
         android:id="@+id/tapetaplogo"
         android:layout_width="150dp"
@@ -146,7 +147,7 @@
             android:textColor="#FFFFFF"
             android:textStyle="bold"
             android:layout_marginTop="16dp"
-            android:text="    SAVE CHANGES   "/>
+            android:text="    SAVE EMAIL   "/>
 
         <Button
             android:id="@+id/changePass"
@@ -158,7 +159,7 @@
             android:textColor="#FFFFFF"
             android:textStyle="bold"
             android:layout_marginTop="16dp"
-            android:text="    SAVE CHANGES   "/>
+            android:text="    SAVE PASSWORD   "/>
 
         <Button
             android:id="@+id/changeNick"
@@ -170,7 +171,7 @@
             android:textColor="#FFFFFF"
             android:textStyle="bold"
             android:layout_marginTop="16dp"
-            android:text="    SAVE CHANGES   "/>
+            android:text="    SAVE NICKNAME   "/>
 
         <Button
             android:id="@+id/uploadPic"
@@ -181,9 +182,9 @@
             android:background="@drawable/green_but"
             android:textColor="#FFFFFF"
             android:textStyle="bold"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="30dp"
             android:onClick="onClickUploadProfilePic"
-            android:text="    SAVE CHANGES   "/>
+            android:text="    SAVE PROFILE PIC   "/>
 
 
 

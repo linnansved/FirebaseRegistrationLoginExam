@@ -1,6 +1,7 @@
 package com.gnirt69.firebaseregistrationloginexam;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
@@ -27,6 +28,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -63,6 +65,7 @@ public class EditUser extends AppCompatActivity {
     private static final String LOG_TAG = "EditUser";
     public ImageView bubble;
     public boolean visible;
+    public File localFile = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +76,13 @@ public class EditUser extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         picView = (CircleImageView) findViewById(R.id.profile_image);
+        localFile = (File) getIntent().getExtras().get("localFile");
+
+        picView= (CircleImageView) findViewById(R.id.profile_image);
+        BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+        Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath(),bmOptions);
+        picView.setImageBitmap(bitmap);
+
 
         //get firebase auth instance
         auth = FirebaseAuth.getInstance();
@@ -129,7 +139,7 @@ public class EditUser extends AppCompatActivity {
         btnChangeEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                oldEmail.setVisibility(View.GONE);
+                oldEmail.setVisibility(View.VISIBLE);
                 newEmail.setVisibility(View.VISIBLE);
                 password.setVisibility(View.GONE);
                 newPassword.setVisibility(View.GONE);
@@ -137,6 +147,11 @@ public class EditUser extends AppCompatActivity {
                 changePassword.setVisibility(View.GONE);
                 newNickname.setVisibility(View.GONE);
                 changeNickname.setVisibility(View.GONE);
+                uploadPic.setVisibility(View.GONE);
+                btnChangeNick.setVisibility(View.VISIBLE);
+                btnChangeEmail.setVisibility(View.GONE);
+                btnChangePassword.setVisibility(View.VISIBLE);
+                addProfilePic.setVisibility(View.VISIBLE);
                 uploadPic.setVisibility(View.GONE);
             }
         });
@@ -169,12 +184,17 @@ public class EditUser extends AppCompatActivity {
             public void onClick(View v) {
                 oldEmail.setVisibility(View.GONE);
                 newEmail.setVisibility(View.GONE);
-                password.setVisibility(View.GONE);
+                password.setVisibility(View.VISIBLE);
                 newPassword.setVisibility(View.VISIBLE);
                 changeEmail.setVisibility(View.GONE);
                 changePassword.setVisibility(View.VISIBLE);
                 newNickname.setVisibility(View.GONE);
                 changeNickname.setVisibility(View.GONE);
+                uploadPic.setVisibility(View.GONE);
+                btnChangeNick.setVisibility(View.VISIBLE);
+                btnChangeEmail.setVisibility(View.VISIBLE);
+                btnChangePassword.setVisibility(View.GONE);
+                addProfilePic.setVisibility(View.VISIBLE);
                 uploadPic.setVisibility(View.GONE);
             }
         });
@@ -220,6 +240,11 @@ public class EditUser extends AppCompatActivity {
                 changePassword.setVisibility(View.GONE);
                 newNickname.setVisibility(View.VISIBLE);
                 changeNickname.setVisibility(View.VISIBLE);
+                uploadPic.setVisibility(View.GONE);
+                btnChangeNick.setVisibility(View.GONE);
+                btnChangeEmail.setVisibility(View.VISIBLE);
+                btnChangePassword.setVisibility(View.VISIBLE);
+                addProfilePic.setVisibility(View.VISIBLE);
                 uploadPic.setVisibility(View.GONE);
 
             }
@@ -297,6 +322,20 @@ public class EditUser extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+
+        oldEmail.setVisibility(View.GONE);
+        newEmail.setVisibility(View.GONE);
+        password.setVisibility(View.GONE);
+        newPassword.setVisibility(View.GONE);
+        newNickname.setVisibility(View.GONE);
+        changeEmail.setVisibility(View.GONE);
+        changePassword.setVisibility(View.GONE);
+        changeNickname.setVisibility(View.GONE);
+        btnChangeNick.setVisibility(View.VISIBLE);
+        btnChangeEmail.setVisibility(View.VISIBLE);
+        btnChangePassword.setVisibility(View.VISIBLE);
+        addProfilePic.setVisibility(View.GONE);
+        uploadPic.setVisibility(View.VISIBLE);
     }
     public void onClickProfileImage(View view) {
         if (view == addProfilePic) {
@@ -318,6 +357,7 @@ public class EditUser extends AppCompatActivity {
         } else {
             Toast.makeText(getApplicationContext(), "du måste lägga till bild och ljud", Toast.LENGTH_LONG).show();
         }
+
     }
 
     private void uploadProfilePic() {
@@ -380,4 +420,5 @@ public class EditUser extends AppCompatActivity {
 
 
 }
+
 
