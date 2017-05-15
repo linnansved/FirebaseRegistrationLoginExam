@@ -46,6 +46,8 @@ public class GalleryMain extends AppCompatActivity {
     public Toolbar toolbar1;
     public TextView title;
 
+    private String removeCard;
+
 
     public FirebaseAuth firebaseAuth;
     public String userID, albumNameValue;
@@ -53,11 +55,14 @@ public class GalleryMain extends AppCompatActivity {
     public ArrayList<String> CardID = new ArrayList<>();
     public ArrayList<GalleryImageModel> data = new ArrayList<>();
     public ArrayList<String> cardKey = new ArrayList<>();
+    public ArrayList<String> arrayCardsFromDecks = new ArrayList<>();
+
     private StorageReference storageReference;
 
     private DatabaseReference imageDatabaseNameRef;
     private DatabaseReference audioDatabaseNameRef;
     private DatabaseReference mDatabase;
+    public DatabaseReference DecksCardsRef;
 
     public Boolean delete = false;
 
@@ -235,19 +240,18 @@ public class GalleryMain extends AppCompatActivity {
             deletePhotos();
         }
 
-        if (id == R.id.action_delete) {
+        if (id == R.id.action_deletealbum) {
 
             deleteAlbum();
         }
 
-        if (id == R.id.action_delete) {
+        if (id == R.id.action_share) {
 
             shareAlbum();
         }
 
         return super.onOptionsItemSelected(item);
     }
-
 
         public void createGallery() {
 
@@ -286,10 +290,6 @@ public class GalleryMain extends AppCompatActivity {
                                             getNameRemoveAudStorage(cardID);
                                             removeDB(cardID);
 
-
-
-
-
                                             mRecyclerView.setAlpha(1);
                                             delete = false;
                                             finish();
@@ -304,14 +304,11 @@ public class GalleryMain extends AppCompatActivity {
                                 }
                             };
                             AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
-                            builder.setMessage("Är du säker att du vill ta bort bilden?").setPositiveButton("Ja", dialogCklickListener)
+                            builder.setMessage("Är du säker att du vill ta bort bilden? Ändringarna är permanenta")
+                                    .setPositiveButton("Ja", dialogCklickListener)
                                     .setNegativeButton("Nej", dialogCklickListener).show();
 
                         }
-
-
-
-
 
                     }
                 }));
@@ -403,11 +400,87 @@ public class GalleryMain extends AppCompatActivity {
 
     }
 
-    public void deleteAlbum() {
-        // här lägger vi koden för att radera album
+    public void deleteAlbum(View view) {
+        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener(){
+           @Override
+            public void onClick(DialogInterface dialog, int which){
+               switch (which){
+                   case DialogInterface.BUTTON_POSITIVE:
+                       Log.d("Delete album", "Hej") ;
+                       deleteDeckFromUser();
+                       deleteDeckFromDeck();
+
+                       Intent intent = new Intent(GalleryMain.this, ProfileActivity.class);
+                       startActivity(intent);
+
+                       Toast.makeText(getApplicationContext(), "Albumet är borttaget", Toast.LENGTH_LONG).show();
+
+
+                   case DialogInterface.BUTTON_NEGATIVE:
+
+               }
+           }
+
+        };
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+        builder.setMessage("Är du säker att du vill ta bort albumet? Ändringarna är permanenta")
+                .setPositiveButton("Ja", dialogClickListener)
+                .setNegativeButton("Nej", dialogClickListener).show();
+
     }
 
     public void shareAlbum() {
         // här lägger vi koden för att dela ett album
     }
+    private void deleteDeckFromUser(){
+        Log.d("DECKID: " + deckID, "hej")  ;
+        mDatabase.child("Users").child(userID).child("Decks").child(deckID).removeValue();
+
+    }
+    private void deleteDeckFromDeck(){
+
+        DecksCardsRef = mDatabase.child("Decks").child(deckID).child("Cards");
+        DecksCardsRef.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                arrayCardsFromDecks.add(dataSnapshot.getKey().toString());
+                Log.d("ArrayCardsDecks: " + arrayCardsFromDecks, "hej");
+                deleteCardsInDeck(arrayCardsFromDecks);
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.d("Nu blev det fel", "hej");
+
+            }
+        });
+        mDatabase.child("Decks").child(deckID).removeValue();
+
+    }
+
+    private void deleteCardsInDeck(ArrayList<String> arrayCardsFromDecks) {
+        Log.d("Skitskaft","hej");
+        for (int i = 0; i < arrayCardsFromDecks.size(); i++) {
+            removeCard = arrayCardsFromDecks.get(i);
+            Log.d("RemoveCard: " + removeCard, "hej");
+            mDatabase.child("Cards").child(removeCard).removeValue();
+        }
+    }
+
 }
