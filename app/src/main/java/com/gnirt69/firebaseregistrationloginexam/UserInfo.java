@@ -40,7 +40,15 @@ public class UserInfo extends AppCompatActivity {
         tvEmail.setText(getIntent().getExtras().getString("Email"));
 
         tvNick = (TextView) findViewById(R.id.currentNickname);
-        tvNick.setText(getIntent().getExtras().getString("Nickname"));
+        String nickname = (getIntent().getExtras().getString("Nickname"));
+
+        if (nickname ==null) {
+            tvNick.setText("No nickname added");
+        }
+        else{
+            tvNick.setText(nickname);
+
+        }
 
         nickname1 = getIntent().getExtras().getString("Nickname");
 
@@ -52,7 +60,11 @@ public class UserInfo extends AppCompatActivity {
             finish();
             startActivity(new Intent(this, LoginActivity.class));
         }
+
     }
+
+
+
 
     public void editUser_Click(View v) {
         Intent i = new Intent(UserInfo.this, EditUser.class);
