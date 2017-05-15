@@ -40,7 +40,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class EditUser extends AppCompatActivity {
 
-    private Button btnChangeEmail, btnChangePassword, btnChangeNick, changeEmail, changePassword, changeNickname;
+    private Button btnChangeEmail, btnChangePassword, btnChangeNick, changeEmail, changePassword, changeNickname, addProfilePic, uploadPic;
 
     private EditText oldEmail, newEmail, password, newPassword, newNickname;
     private FirebaseAuth.AuthStateListener authListener;
@@ -50,7 +50,6 @@ public class EditUser extends AppCompatActivity {
     public String userID;
     public String nickname, newNick;
     private static final int PICK_IMAGE_REQUES = 234;
-    public Button addProfilePic;
     private Uri imageFilePath;
     public ArrayList<String> arrayPicID = new ArrayList<String>();
     public ArrayList<Uri> picUrlList = new ArrayList<>();
@@ -105,6 +104,7 @@ public class EditUser extends AppCompatActivity {
         changePassword = (Button) findViewById(R.id.changePass);
         changeNickname= (Button) findViewById(R.id.changeNick);
         addProfilePic = (Button) findViewById(R.id.addProfilePic);
+        uploadPic = (Button) findViewById(R.id.uploadPic);
         //picView = (ImageView) findViewById(R.id.picView);
 
         oldEmail = (EditText) findViewById(R.id.old_email);
@@ -113,6 +113,7 @@ public class EditUser extends AppCompatActivity {
         newPassword = (EditText) findViewById(R.id.newPassword);
         newNickname = (EditText) findViewById(R.id.newNickname);
 
+        //KNAPPARNA FÖR ATT VÄLJA VAD MAN VILL ÄNDRA
         oldEmail.setVisibility(View.GONE);
         newEmail.setVisibility(View.GONE);
         password.setVisibility(View.GONE);
@@ -121,6 +122,9 @@ public class EditUser extends AppCompatActivity {
         changePassword.setVisibility(View.GONE);
         newNickname.setVisibility(View.GONE);
         changeNickname.setVisibility(View.GONE);
+        uploadPic.setVisibility(View.GONE);
+
+        //addProfilePic.setVisibility(View.GONE);
 
         btnChangeEmail.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,6 +137,7 @@ public class EditUser extends AppCompatActivity {
                 changePassword.setVisibility(View.GONE);
                 newNickname.setVisibility(View.GONE);
                 changeNickname.setVisibility(View.GONE);
+                uploadPic.setVisibility(View.GONE);
             }
         });
 
@@ -170,6 +175,7 @@ public class EditUser extends AppCompatActivity {
                 changePassword.setVisibility(View.VISIBLE);
                 newNickname.setVisibility(View.GONE);
                 changeNickname.setVisibility(View.GONE);
+                uploadPic.setVisibility(View.GONE);
             }
         });
 
@@ -214,6 +220,7 @@ public class EditUser extends AppCompatActivity {
                 changePassword.setVisibility(View.GONE);
                 newNickname.setVisibility(View.VISIBLE);
                 changeNickname.setVisibility(View.VISIBLE);
+                uploadPic.setVisibility(View.GONE);
 
             }
         });

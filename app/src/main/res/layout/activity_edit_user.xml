@@ -29,8 +29,8 @@
 
 
     <ImageView
-        android:layout_width="180dp"
-        android:layout_height="180dp"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
         android:id="@+id/picView"
         android:layout_centerHorizontal="true"
         tools:layout_editor_absoluteY="8dp"
