@@ -61,11 +61,11 @@ public class AddPhoto extends AppCompatActivity {
     public FirebaseAuth firebaseAuth;
 
     public String cardID;
-    public ArrayList<String> arrayCardID = new ArrayList<String>();
     public int i = 0;
     public String deckID;
-    private ImageView recordRedButton;
-    private Button recordButton;
+
+    private ImageView record;
+    //private Button recordButton;
 
     public String userID;
 
@@ -87,11 +87,11 @@ public class AddPhoto extends AppCompatActivity {
         deckID = intent.getExtras().getString("deckID");
         Log.v(LOG_TAG, "hejhej");
 
-        recordRedButton = (ImageView) findViewById(R.id.RecordNotice);
-        recordRedButton.setVisibility(View.GONE);
+        record = (ImageView) findViewById(R.id.recordView);
+        record.setVisibility(View.GONE);
 
-        recordButton = (Button) findViewById(R.id.RecordButton);
-        recordButton.setVisibility(View.VISIBLE);
+        //recordButton = (Button) findViewById(R.id.RecordButton);
+        //recordButton.setVisibility(View.VISIBLE);
 
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user =  firebaseAuth.getCurrentUser();
@@ -105,7 +105,7 @@ public class AddPhoto extends AppCompatActivity {
         mRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
         mRecorder.setOutputFile(mAudioFilePath + "/" + mAudioName);
         mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
-        recordRedButton.setVisibility(View.VISIBLE);
+        record.setVisibility(View.VISIBLE);
         //recordButton.setVisibility(View.GONE);
 
         try {
@@ -119,7 +119,7 @@ public class AddPhoto extends AppCompatActivity {
         mRecorder.stop();
         mRecorder.release();
         mRecorder = null;
-        recordRedButton.setVisibility(View.GONE);
+        record.setVisibility(View.GONE);
         //recordButton.setVisibility(View.VISIBLE);
     }
     public void onClickRecord(View view) {
