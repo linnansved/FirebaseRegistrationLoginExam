@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -43,6 +44,7 @@ public class GalleryMain extends AppCompatActivity {
     public String text_name;
     public String this_turn, deckID;
     public Toolbar toolbar1;
+    public TextView title;
 
 
     public FirebaseAuth firebaseAuth;
@@ -70,13 +72,14 @@ public class GalleryMain extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference();
         storageReference = FirebaseStorage.getInstance().getReference();
 
-
+        albumNameValue = getIntent().getExtras().getString("albumName");
 
         toolbar1 = (Toolbar) findViewById(R.id.toolbar);
+        title = (TextView) findViewById(R.id.toolbar_title);
+        toolbar1.setTitle(albumNameValue);
         setSupportActionBar(toolbar1);
-        albumNameValue = getIntent().getExtras().getString("albumName");
-        Log.d("hejkollahär", albumNameValue);
-        setTitle(albumNameValue);
+        title.setText(toolbar1.getTitle());
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         //Get DeckID
         deckID = getIntent().getExtras().getString("DeckId");
