@@ -279,12 +279,14 @@ public class GalleryMain extends AppCompatActivity {
                                             getNameRemoveAudStorage(cardID);
                                             removeDB(cardID);
 
-                                            CardID.remove(position);
-                                            mAdapter.notifyItemRemoved(position);
-                                            mAdapter.notifyItemRangeChanged(position,CardID.size());
+
+
+
 
                                             mRecyclerView.setAlpha(1);
                                             delete = false;
+                                            finish();
+                                            startActivity(getIntent());
                                             break;
 
                                         case DialogInterface.BUTTON_NEGATIVE:
