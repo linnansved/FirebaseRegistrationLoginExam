@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.ArrayMap;
@@ -20,6 +21,8 @@ import android.widget.Button;
 import android.content.Intent;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.*;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -27,12 +30,15 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import android.util.Log;
 
 import org.w3c.dom.Text;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -51,6 +57,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     private FirebaseAuth firebaseAuth;
 
     private DatabaseReference profilePicReference;
+    private StorageReference storageReference;
 
     public ArrayList<String> DeckList = new ArrayList<>();
     public ArrayList<String> AlbumNames = new ArrayList<>();
@@ -74,6 +81,9 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     private DatabaseReference mDatabase;
     public int length;
     public int counter;
+
+
+    public File localFile = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -173,7 +183,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         alb8T.setVisibility(View.GONE);
 
         LogOutBtn = (Button) findViewById(R.id.LogOutBtn);
-        String userID = user.getUid();
+        final String userID = user.getUid();
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
         hej = mDatabase.child("Users").child(userID).child("nickname");
@@ -249,6 +259,9 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
         LogOutBtn.setOnClickListener(this);
 
+
+
+
         //Get profilepic URL from database
         profilePicReference = FirebaseDatabase.getInstance().getReference().child("Users").child(userID).child("pic").child("URL");
         profilePicReference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -257,7 +270,32 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                 picName = dataSnapshot4.getValue(String.class);
                 Log.v("picname", picName);
 
-                /*
+
+
+                try {
+                    localFile = File.createTempFile("images", "jpg");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(picName);
+                storageReference.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+
+                        ImageView img= (ImageView) findViewById(R.id.profile_image);
+                        BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+                        Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath(),bmOptions);
+                        img.setImageBitmap(bitmap);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                        // Handle any errors
+                    }
+                });
+
+/*
                 try {
                     CircleImageView i = (CircleImageView)findViewById(R.id.profile_image);
                     Log.v("picName2", String.valueOf(i));
