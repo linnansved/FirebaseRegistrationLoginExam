@@ -52,14 +52,14 @@ public class AddPhoto extends AppCompatActivity {
     private StorageReference storageReference;
     public Uri downloadImageUrl;
     public Uri downloadAudioUrl;
+
     private DatabaseReference mDatabase;
     private DatabaseReference imageRef;
     private DatabaseReference audioRef;
     private DatabaseReference deckRef;
     private DatabaseReference stringRef;
     public FirebaseAuth firebaseAuth;
-    public ArrayList<Uri> imageUrlList = new ArrayList<>();
-    public ArrayList<Uri> audioUrlList = new ArrayList<>();
+
     public String cardID;
     public ArrayList<String> arrayCardID = new ArrayList<String>();
     public int i = 0;
@@ -189,9 +189,7 @@ public class AddPhoto extends AppCompatActivity {
             cardID = UUID.randomUUID().toString();
             uploadImage();
             uploadAudio();
-            uploadStringToDatabase(view);
-            arrayCardID.add(i, cardID);
-            i++;
+            uploadStringToDatabase();
             createCardIdInDecksToDB();
             Intent i = new Intent(AddPhoto.this, ProfileActivity.class);
             i.putExtra("Email", firebaseAuth.getCurrentUser().getEmail());
@@ -204,12 +202,10 @@ public class AddPhoto extends AppCompatActivity {
 
 
     private void createCardIdInDecksToDB() {
+        deckRef = mDatabase.child("Decks").child(deckID).child("Cards").child(cardID);
         Map<String, Boolean> cards = new HashMap<>();
-        for (int k = 0; k < arrayCardID.size(); k++) {
-            deckRef = mDatabase.child("Decks").child(deckID).child("Cards");
-            cards.put(arrayCardID.get(k), true);
-            deckRef.setValue(cards);
-        }
+        cards.put(cardID, true);
+        deckRef.setValue(cards);
     }
 
 
@@ -221,12 +217,9 @@ public class AddPhoto extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        int x = 0;
                         Toast.makeText(getApplicationContext(), "File Uploaded", Toast.LENGTH_LONG).show();
                         downloadImageUrl = taskSnapshot.getDownloadUrl();
-                        imageUrlList.add(x, downloadImageUrl);
                         uploadImageToDatabase();
-                        x++;
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -238,10 +231,6 @@ public class AddPhoto extends AppCompatActivity {
         ;
     }
 
-    public ArrayList getUri(){
-        return imageUrlList;
-    }
-
     private void uploadAudio(){
         Uri uri = Uri.fromFile(new File(mAudioFilePath + "/" + mAudioName));
         StorageReference storageAudioRef = storageReference.child(userID).child("audio/").child(mAudioName);
@@ -249,12 +238,9 @@ public class AddPhoto extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        int y=0;
                         Toast.makeText(getApplicationContext(), "File Uploaded", Toast.LENGTH_LONG).show();
                         downloadAudioUrl = taskSnapshot.getDownloadUrl();
-                        audioUrlList.add(y, downloadAudioUrl);
                         uploadAudioToDatabase();
-                        y++;
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -265,24 +251,23 @@ public class AddPhoto extends AppCompatActivity {
                 });
     }
     private void uploadImageToDatabase() {
-        imageRef = mDatabase.child("Cards").child(cardID);
+        imageRef = mDatabase.child("Cards").child(cardID).child("Images");
         Map<String, String> images = new HashMap<>();
         images.put("Name", imageName);
         images.put("URL", downloadImageUrl.toString());
-        imageRef = mDatabase.child("Cards").child(cardID).child("Images");
         imageRef.setValue(images);
     }
+
     private void uploadAudioToDatabase(){
-        audioRef = mDatabase.child("Cards").child(cardID);
+        audioRef = mDatabase.child("Cards").child(cardID).child("Audio");
         Map<String, String> audio = new HashMap<>();
         audio.put("Name", mAudioName);
         audio.put("URL", downloadAudioUrl.toString());
-        audioRef = mDatabase.child("Cards").child(cardID).child("Audio");
         audioRef.setValue(audio);
     }
 
 
-    private void uploadStringToDatabase(View view){
+    private void uploadStringToDatabase(){
         EditText editText = (EditText) findViewById(R.id.picName);
         String message = editText.getText().toString();
         Log.v(LOG_TAG, message);
@@ -296,4 +281,4 @@ public class AddPhoto extends AppCompatActivity {
 
 
 
-    }
+}
