@@ -7,7 +7,7 @@
     android:id="@+id/main_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="#CFD8DC"
     tools:context="com.gnirt69.firebaseregistrationloginexam.GalleryDetailActivity">
 
     <android.support.v4.view.ViewPager
@@ -20,9 +20,23 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/detail_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@android:color/transparent"
+        android:layout_height="130dp"
+        android:background="#99CCE5FF"
         app:elevation="0dp"
-        app:popupTheme="@style/AppTheme.PopupOverlay" />
+        android:layout_gravity="bottom"
+        android:textAllCaps="true"
+        app:popupTheme="@style/AppTheme.PopupOverlay" >
+
+        <TextView
+            android:id="@+id/image_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="50sp"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:textAllCaps="true"/>
+
+    </android.support.v7.widget.Toolbar>
 
 </android.support.design.widget.CoordinatorLayout>

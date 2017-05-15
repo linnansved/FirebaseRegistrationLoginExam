@@ -6,5 +6,5 @@
     android:layout_height="wrap_content"
     android:adjustViewBounds="true"
     android:scaleType="fitCenter"
-    android:background="@drawable/background"
+    android:background="#CFD8DC"
     tools:context="com.gnirt69.firebaseregistrationloginexam.GalleryDetailActivity$PlaceholderFragment"/>

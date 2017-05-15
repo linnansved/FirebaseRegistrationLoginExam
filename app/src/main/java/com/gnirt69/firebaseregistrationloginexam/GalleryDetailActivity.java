@@ -18,8 +18,9 @@ import android.view.View;
         import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
-        import com.bumptech.glide.Glide;
+import com.bumptech.glide.Glide;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -31,6 +32,8 @@ public class GalleryDetailActivity extends AppCompatActivity {
 
     public ArrayList<GalleryImageModel> data = new ArrayList<>();
     int pos;
+    public TextView title;
+    public String name;
 
     Toolbar toolbar;
     MediaPlayer mPlayer;
@@ -46,12 +49,18 @@ public class GalleryDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gallery_detail);
 
-        toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
-        setSupportActionBar(toolbar);
-
         data = getIntent().getParcelableArrayListExtra("data");
         pos = getIntent().getIntExtra("pos", 0);
-        setTitle(data.get(pos).getName());
+        name = data.get(pos).getName();
+
+        toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
+        title = (TextView) findViewById(R.id.image_title);
+        toolbar.setTitle(name);
+        setSupportActionBar(toolbar);
+        title.setText(toolbar.getTitle());
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        //setTitle(data.get(pos).getName());
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
