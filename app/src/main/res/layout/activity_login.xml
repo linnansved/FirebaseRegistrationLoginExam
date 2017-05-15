@@ -122,7 +122,7 @@
         android:layout_toLeftOf="@id/new_user"
         android:background="@drawable/blue_but_small"
         android:text="+"
-        android:textColor="#FFFFFF"
+        android:textColor="#0080ff"
         android:textStyle="bold"
         android:onClick="btnRegistration_Click" />
 
@@ -135,7 +135,7 @@
         android:layout_toLeftOf="@id/forgot_password"
         android:background="@drawable/blue_but_small"
         android:text="@string/question"
-        android:textColor="#FFFFFF"
+        android:textColor="#0080ff"
         android:textStyle="bold"
         android:onClick="btnForgotPwd_Click"/>
 

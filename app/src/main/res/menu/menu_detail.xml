@@ -1,7 +1,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.gnirt69.firebaseregistrationloginexam.GalleryMain">
+    tools:context="com.gnirt69.firebaseregistrationloginexam.GalleryMain"
+    app:popupTheme="@style/GalleryTheme">
+
+
     <item android:id="@+id/action_add"
         android:title="@string/action_add"
         android:orderInCategory="100"

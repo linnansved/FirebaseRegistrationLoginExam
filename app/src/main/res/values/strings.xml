@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TapeTap-FINAL</string>
+    <string name="app_name"></string>
     <string name="title_activity_profile">ProfileActivity</string>
     <string name="question">\?</string>
     <string name="title_activity_main2">Main2Activity</string>
