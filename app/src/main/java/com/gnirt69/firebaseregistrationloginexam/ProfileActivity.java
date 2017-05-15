@@ -69,8 +69,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     public String getDeck_string;
     public ArrayList<TextView> AlbumName = new ArrayList<>();
     private TextView alb1T, alb2T, alb3T, alb4T, alb5T, alb6T, alb7T, alb8T, AlbNameView;
-    private String answer, DeckId, DeckId1, albumNameValue;
-    private DatabaseReference hej, getDeck, albumNameDatabaseRef;
+    private String answer, DeckId, DeckId1, albNamn1;
+    private DatabaseReference hej, getDeck, albNamn;
     private DatabaseReference mDatabase;
     public int length;
     public int counter;
@@ -202,19 +202,19 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                     counter = 0;
                     imageView.setVisibility(View.VISIBLE);
                     DeckId1 = DeckList.get(i);
-                    albumNameDatabaseRef = mDatabase.child("Decks").child(DeckId1).child("albumName");
-                    Log.d("Här kommer albumets URL", String.valueOf(albumNameDatabaseRef));
-                    albumNameDatabaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    albNamn = mDatabase.child("Decks").child(DeckId1).child("albumName");
+                    Log.d("Här kommer albumnamnet", String.valueOf(albNamn));
+                    albNamn.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-                            albumNameValue = dataSnapshot.getValue(String.class);
-                            if (AlbumNames.contains(albumNameValue)) {
+                            albNamn1 = dataSnapshot.getValue(String.class);
+                            if (AlbumNames.contains(albNamn1)) {
                                // Log.d("finns redan", String.valueOf(AlbumNames));
                             }
                             else {
-                                AlbumNames.add(albumNameValue);
+                                AlbumNames.add(albNamn1);
                                 AlbNameView=AlbumName.get(counter);
-                                AlbNameView.setText(albumNameValue);
+                                AlbNameView.setText(albNamn1);
                                 AlbNameView.setVisibility(View.VISIBLE);
                                 counter++;
                             }
@@ -285,7 +285,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         DeckId = DeckList.get(id);
         Intent i = new Intent(ProfileActivity.this, GalleryMain.class);
         i.putExtra("DeckId", DeckId);
-        i.putExtra("albumName", AlbumNames.get(id));
         startActivity(i);
     }
 

@@ -46,7 +46,7 @@ public class GalleryMain extends AppCompatActivity {
 
 
     public FirebaseAuth firebaseAuth;
-    public String userID, albumNameValue;
+    public String userID;
 
     public ArrayList<String> CardID = new ArrayList<>();
     public ArrayList<GalleryImageModel> data = new ArrayList<>();
@@ -70,12 +70,9 @@ public class GalleryMain extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference();
         storageReference = FirebaseStorage.getInstance().getReference();
 
-        toolbar1 = (Toolbar) findViewById(R.id.toolbar);
+        toolbar1 = (Toolbar) findViewById(R.id.detail_toolbar);
         setSupportActionBar(toolbar1);
-
-        albumNameValue = getIntent().getExtras().getString("albumName");
-        Log.d("hejkollahär", albumNameValue);
-        setTitle(albumNameValue);
+        setTitle("hejsan");
 
         //Get DeckID
         deckID = getIntent().getExtras().getString("DeckId");
