@@ -18,6 +18,8 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -41,6 +43,10 @@ public class GalleryMain extends AppCompatActivity {
     public String text_name;
     public String this_turn, deckID;
     public Toolbar toolbar1;
+
+
+    public FirebaseAuth firebaseAuth;
+    public String userID;
 
     public ArrayList<String> CardID = new ArrayList<>();
     public ArrayList<GalleryImageModel> data = new ArrayList<>();
@@ -70,6 +76,10 @@ public class GalleryMain extends AppCompatActivity {
 
         //Get DeckID
         deckID = getIntent().getExtras().getString("DeckId");
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser user =  firebaseAuth.getCurrentUser();
+        userID = user.getUid();
 
         //Get CardID and add it to ArrayList CardID
         DatabaseReference ref = mDatabase.child("Decks").child(deckID).child("Cards");
@@ -182,6 +192,7 @@ public class GalleryMain extends AppCompatActivity {
             Log.d("imagelist", String.valueOf(Imagelist));
             GalleryImageModel imageModel = new GalleryImageModel();
             String key = entry.getKey();
+            Log.d("KEY: " + key, "ge mig");
             cardKey.add(key);
             imageModel.setUrl(entry.getValue());
             imageModel.setName(TextList.get(key));
@@ -246,7 +257,7 @@ public class GalleryMain extends AppCompatActivity {
                 new RecyclerItemClickListener.OnItemClickListener() {
 
                     @Override
-                    public void onItemClick(View view, int position) {
+                    public void onItemClick(View view, final int position) {
                         if (delete == false){
                             Intent intent = new Intent(GalleryMain.this, GalleryDetailActivity.class);
                             intent.putExtra("pos", position);
@@ -260,16 +271,18 @@ public class GalleryMain extends AppCompatActivity {
                                     switch (which){
                                         case DialogInterface.BUTTON_POSITIVE:
                                             //mRecyclerView.setImageResource(android.R.color.transparent);
-                                            Log.d("PicDel","Gick bra");
+                                            Log.d("pos:" + position ,"ge mig");
 
-                                            //String cardID = cardKey.get(position);
-                                            //getNameRemoveImgStorage(cardID);
-                                            //getNameRemoveAudStorage(cardID);
-                                            //removeDB(cardID);
+                                            String cardID = CardID.get(position);
+                                            Log.d("CARDID: " + cardID, "ge mig");
+                                            getNameRemoveImgStorage(cardID);
+                                            getNameRemoveAudStorage(cardID);
+                                            removeDB(cardID);
 
-                                            //mRecyclerView.get(position);
+                                            CardID.remove(position);
+                                            mAdapter.notifyItemRemoved(position);
+                                            mAdapter.notifyItemRangeChanged(position,CardID.size());
 
-                                            //setImageResource(android.R.color.transparent);
                                             mRecyclerView.setAlpha(1);
                                             delete = false;
                                             break;
@@ -298,7 +311,7 @@ public class GalleryMain extends AppCompatActivity {
 
     private void removeStorageImage(String imageName) {
 
-        StorageReference imageRef = storageReference.child("images/" + imageName);
+        StorageReference imageRef = storageReference.child(userID).child("images/" + imageName);
         imageRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
@@ -315,7 +328,7 @@ public class GalleryMain extends AppCompatActivity {
 
     private void removeStorageAudio(String audioName) {
 
-        StorageReference audioRef = storageReference.child("audio/" + audioName);
+        StorageReference audioRef = storageReference.child(userID).child("audio/" + audioName);
         audioRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
@@ -331,17 +344,18 @@ public class GalleryMain extends AppCompatActivity {
     }
 
     private void removeDB(String cardID){
-        mDatabase.child("Decks").child(deckID).child(cardID).removeValue();
+        mDatabase.child("Decks").child(deckID).child("Cards").child(cardID).removeValue();
         mDatabase.child("Cards").child(cardID).removeValue();
     }
 
     private void getNameRemoveImgStorage(String cardID){
         imageDatabaseNameRef = mDatabase.child("Cards").child(cardID).child("Images").child("Name");
-        imageDatabaseNameRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        imageDatabaseNameRef.addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 imageName = dataSnapshot.getValue(String.class);
+                Log.d("imageName: " + imageName, "ge mig");
                 removeStorageImage(imageName);
             }
             @Override
@@ -352,11 +366,12 @@ public class GalleryMain extends AppCompatActivity {
     }
     private void getNameRemoveAudStorage(String cardID){
         audioDatabaseNameRef = mDatabase.child("Cards").child(cardID).child("Audio").child("Name");
-        audioDatabaseNameRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        audioDatabaseNameRef.addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 audioName = dataSnapshot.getValue(String.class);
+                Log.d("audioName: " + audioName, "ge mig");
                 removeStorageAudio(audioName);
             }
             @Override
