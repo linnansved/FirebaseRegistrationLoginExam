@@ -219,6 +219,8 @@ public class GalleryMain extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_detail, menu);
+
+
         return true;
     }
 
@@ -229,7 +231,14 @@ public class GalleryMain extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
+
         //noinspection SimplifiableIfStatement
+
+        if (id == R.id.home_button){
+            goToProfileActivity();
+
+        }
+
         if (id == R.id.action_add) {
 
             goToAddPhoto();
@@ -394,11 +403,17 @@ public class GalleryMain extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void goToProfileActivity(){
+        Intent intent = new Intent(GalleryMain.this, ProfileActivity.class);
+        startActivity(intent);
+    }
+
     public void deletePhotos() {
         mRecyclerView.setAlpha(0.5f);
         delete = true;
 
     }
+
 
     public void deleteAlbum() {
         DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener(){

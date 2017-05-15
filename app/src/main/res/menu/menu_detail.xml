@@ -24,4 +24,11 @@
         android:title="@string/action_share"
         android:orderInCategory="100"
         app:showAsAction="never" />
+
+    <item android:id="@+id/home_button"
+        android:title="HOME"
+        android:icon="@drawable/home"
+        android:orderInCategory="100"
+        app:showAsAction="ifRoom"
+        />
 </menu>

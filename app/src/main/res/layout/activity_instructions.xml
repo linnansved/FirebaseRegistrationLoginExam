@@ -19,7 +19,7 @@
         android:layout_marginTop="50dp"
         android:text="INSTRUCTIONS"
         android:textAlignment="center"
-        android:textColor="#FFFFFF"
+        android:textColor="#01579B"
         android:textStyle="bold"
         android:typeface="monospace"
         />
@@ -45,7 +45,7 @@
         android:ems="10"
         android:layout_marginLeft="10dp"
         android:typeface="monospace"
-        android:textColor="#FFFFFF"
+        android:textColor="#01579B"
         android:text="Click on the + in order to add a new album,you can add up to 8 albums in total"
         />
 
@@ -70,7 +70,7 @@
         android:ems="10"
         android:layout_marginLeft="10dp"
         android:typeface="monospace"
-        android:textColor="#FFFFFF"
+        android:textColor="#01579B"
         android:text="You can navigate between parent and child mode by clicking on the lock, in child mode you can only view pictures, not edit any infromation."
         />
 
@@ -95,14 +95,9 @@
         android:ems="10"
         android:layout_marginLeft="10dp"
         android:typeface="monospace"
-        android:textColor="#FFFFFF"
+        android:textColor="#01579B"
         android:text="Albums can bedeleted and shared with other users, these functions will appear as you enter one of the albums when in parent mode."        />
 
-    <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:src="@drawable/bird"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:id="@+id/greenbird" />
+
+
 </RelativeLayout>
