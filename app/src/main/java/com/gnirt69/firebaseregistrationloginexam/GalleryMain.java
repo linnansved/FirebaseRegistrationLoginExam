@@ -400,7 +400,7 @@ public class GalleryMain extends AppCompatActivity {
 
     }
 
-    public void deleteAlbum(View view) {
+    public void deleteAlbum() {
         DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener(){
            @Override
             public void onClick(DialogInterface dialog, int which){
@@ -423,7 +423,7 @@ public class GalleryMain extends AppCompatActivity {
 
         };
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+        AlertDialog.Builder builder = new AlertDialog.Builder(mRecyclerView.getContext());
         builder.setMessage("Är du säker att du vill ta bort albumet? Ändringarna är permanenta")
                 .setPositiveButton("Ja", dialogClickListener)
                 .setNegativeButton("Nej", dialogClickListener).show();
