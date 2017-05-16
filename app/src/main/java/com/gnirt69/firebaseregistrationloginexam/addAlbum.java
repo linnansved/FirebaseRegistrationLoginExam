@@ -25,7 +25,8 @@ public class addAlbum extends AppCompatActivity {
     public int j = 0;
     private DatabaseReference userRef;
     public ArrayList<String> arrayDeckID = new ArrayList<String>();
-    public String deckID, albumName, len;
+    public String albumName, len;
+    public String deckID;
     public int length;
 
 
@@ -40,12 +41,13 @@ public class addAlbum extends AppCompatActivity {
         len=Integer.toString(length);
         Log.d("Här är längden", len);
     }
+
 //FIXA SÅ LOOPEN FUNKAR
     public void onClickCreateAlbum(View view) {
         if(length==8) {
             Toast.makeText(addAlbum.this, "You must delete an album in order to add a new one", Toast.LENGTH_LONG).show();
             Intent i = new Intent(addAlbum.this, ProfileActivity.class);
-            i.putExtra("deckID", deckID);
+            //i.putExtra("deckID", deckID);
             startActivity(i);
 
         }
@@ -58,12 +60,11 @@ public class addAlbum extends AppCompatActivity {
             arrayDeckID.add(j, deckID);
             Log.d("läggertilliarray","hej");
             j++;
-            //Skickar deckID till AddPhoto
-          //  Intent intent = new Intent(addAlbum.this, AddPhoto.class);
+
             Intent intent = new Intent(addAlbum.this, ProfileActivity.class);
-            intent.putExtra("deckID", deckID);
+            //intent.putExtra("deckID", deckID);
             startActivity(intent);
-            Log.d("skickatillprofile","hej");
+            //Log.d("skickatillprofile","hej");
         }
 
     }

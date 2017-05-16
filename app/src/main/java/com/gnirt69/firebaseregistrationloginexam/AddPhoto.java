@@ -70,8 +70,6 @@ public class AddPhoto extends AppCompatActivity {
     public String userID;
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,9 +80,10 @@ public class AddPhoto extends AppCompatActivity {
         storageReference = FirebaseStorage.getInstance().getReference();
         mDatabase = FirebaseDatabase.getInstance().getReference();
         //mDisplayDatabase = FirebaseDatabase.getInstance().getReference().child("Decks").child(deckID);
-        Intent intent = getIntent();
+
         //Tar emot deckID från addAlbum
-        deckID = intent.getExtras().getString("deckID");
+        deckID = getIntent().getExtras().getString("sendDeckID");
+        Log.d("deckID4", deckID);
 
         record = (ImageView) findViewById(R.id.recordView);
         record.setVisibility(View.GONE);

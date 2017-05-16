@@ -83,7 +83,6 @@ public class EditUser extends AppCompatActivity {
         Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath(),bmOptions);
         picView.setImageBitmap(bitmap);
 
-
         //get firebase auth instance
         auth = FirebaseAuth.getInstance();
 

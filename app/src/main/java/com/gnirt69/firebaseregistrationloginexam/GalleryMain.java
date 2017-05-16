@@ -88,6 +88,7 @@ public class GalleryMain extends AppCompatActivity {
 
         //Get DeckID
         deckID = getIntent().getExtras().getString("DeckId");
+        Log.d("DeckId2", deckID);
 
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user =  firebaseAuth.getCurrentUser();
@@ -240,7 +241,6 @@ public class GalleryMain extends AppCompatActivity {
         }
 
         if (id == R.id.action_add) {
-
             goToAddPhoto();
         }
 
@@ -399,7 +399,8 @@ public class GalleryMain extends AppCompatActivity {
 
     public void goToAddPhoto(){
         Intent intent = new Intent(GalleryMain.this, AddPhoto.class);
-        intent.putExtra("deckID", deckID);
+        intent.putExtra("sendDeckID", deckID);
+        Log.d("DeckId3", deckID);
         startActivity(intent);
     }
 

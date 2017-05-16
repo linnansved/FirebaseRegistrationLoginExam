@@ -205,6 +205,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 getDeck_string = dataSnapshot.getKey().toString();
                 DeckList.add(getDeck_string);
+                Log.d("deckList", String.valueOf(DeckList));
 
                 for ( int i = 0; i < DeckList.size(); i++) {
                     imageView = AlbumList.get(i);
@@ -213,7 +214,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                     imageView.setVisibility(View.VISIBLE);
                     DeckId1 = DeckList.get(i);
                     albumNameDatabaseRef = mDatabase.child("Decks").child(DeckId1).child("albumName");
-                    Log.d("Här kommer albumnamnet", String.valueOf(albumNameDatabaseRef));
                     albumNameDatabaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
@@ -239,8 +239,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
                     //AlbNameView.setText("hej");
 
-                    Log.d("Här är sista", String.valueOf(AlbumNames));
-
                 }
             }
             @Override
@@ -260,41 +258,42 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         LogOutBtn.setOnClickListener(this);
 
 
-
-
         //Get profilepic URL from database
         profilePicReference = FirebaseDatabase.getInstance().getReference().child("Users").child(userID).child("pic").child("URL");
         profilePicReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot4) {
                 picName = dataSnapshot4.getValue(String.class);
-                Log.v("picname", picName);
 
-
-
-                try {
-                    localFile = File.createTempFile("images", "jpg");
-                } catch (IOException e) {
-                    e.printStackTrace();
+                if (picName == null){
+                    ImageView img= (ImageView) findViewById(R.id.profile_image);
+                    img.setImageResource(R.drawable.alva);
                 }
+                else {
 
-                storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(picName);
-                storageReference.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-
-                        ImageView img= (ImageView) findViewById(R.id.profile_image);
-                        BitmapFactory.Options bmOptions = new BitmapFactory.Options();
-                        Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath(),bmOptions);
-                        img.setImageBitmap(bitmap);
+                    try {
+                        localFile = File.createTempFile("images", "jpg");
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception exception) {
-                        // Handle any errors
-                    }
-                });
 
+                    storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(picName);
+                    storageReference.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+
+                            ImageView img = (ImageView) findViewById(R.id.profile_image);
+                            BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+                            Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath(), bmOptions);
+                            img.setImageBitmap(bitmap);
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception exception) {
+                            // Handle any errors
+                        }
+                    });
+                }
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -306,7 +305,10 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     public void toGallery_Click(View v) {
         int id = v.getId();
+        Log.d("pos", String.valueOf(id));
         DeckId = DeckList.get(id);
+        Log.d("ArrayDeck", String.valueOf(DeckList));
+        Log.d("DeckId1", DeckId);
         Intent i = new Intent(ProfileActivity.this, GalleryMain.class);
         i.putExtra("DeckId", DeckId);
         i.putExtra("albumName", AlbumNames.get(id));
@@ -316,7 +318,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onClick(View view){
-
         if(view == LogOutBtn){
             firebaseAuth.signOut();;
             finish();
