@@ -3,6 +3,7 @@ package com.gnirt69.firebaseregistrationloginexam;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -15,11 +16,20 @@ import android.view.View;
 import android.widget.EditText;
 import android.content.Intent;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.*;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
+import java.io.IOException;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -34,6 +44,9 @@ public class UserInfo extends AppCompatActivity {
     public boolean visible;
     public File localFile = null;
     private CircleImageView picView;
+    private DatabaseReference profilePicReference;
+    private StorageReference storageReference;
+    public String picName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,12 +56,19 @@ public class UserInfo extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
 
         picView = (CircleImageView) findViewById(R.id.profile_image);
-        localFile = (File) getIntent().getExtras().get("localFile");
+        /*localFile = (File) getIntent().getExtras().get("localFile");
 
+        if (localFile == null){
+            picView= (CircleImageView) findViewById(R.id.profile_image);
+            picView.setImageResource(R.drawable.alva);
+        }
+        else{
         picView= (CircleImageView) findViewById(R.id.profile_image);
         BitmapFactory.Options bmOptions = new BitmapFactory.Options();
         Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath(),bmOptions);
         picView.setImageBitmap(bitmap);
+        }*/
+
 
         tvEmail = (TextView) findViewById(R.id.currentEmail);
         //tvEmail.setText("Your current email:"+ getIntent().getExtras().getString("Email"));
@@ -75,6 +95,52 @@ public class UserInfo extends AppCompatActivity {
             finish();
             startActivity(new Intent(this, LoginActivity.class));
         }
+
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        final String userID = user.getUid();
+
+        //Get profilepic URL from database
+        profilePicReference = FirebaseDatabase.getInstance().getReference().child("Users").child(userID).child("pic").child("URL");
+        profilePicReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot4) {
+                picName = dataSnapshot4.getValue(String.class);
+
+                if (picName == null){
+                    ImageView img= (ImageView) findViewById(R.id.profile_image);
+                    img.setImageResource(R.drawable.alva);
+                }
+                else {
+
+                    try {
+                        localFile = File.createTempFile("images", "jpg");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(picName);
+                    storageReference.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+
+                            CircleImageView img = (CircleImageView) findViewById(R.id.profile_image);
+                            BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+                            Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath(), bmOptions);
+                            img.setImageBitmap(bitmap);
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception exception) {
+                            // Handle any errors
+                        }
+                    });
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                //handle databaseError
+            }
+        });
 
     }
 

@@ -78,10 +78,16 @@ public class EditUser extends AppCompatActivity {
         picView = (CircleImageView) findViewById(R.id.profile_image);
         localFile = (File) getIntent().getExtras().get("localFile");
 
-        picView= (CircleImageView) findViewById(R.id.profile_image);
-        BitmapFactory.Options bmOptions = new BitmapFactory.Options();
-        Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath(),bmOptions);
-        picView.setImageBitmap(bitmap);
+        if (localFile == null){
+            picView= (CircleImageView) findViewById(R.id.profile_image);
+            picView.setImageResource(R.drawable.alva);
+        }
+        else{
+            picView= (CircleImageView) findViewById(R.id.profile_image);
+            BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+            Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath(),bmOptions);
+            picView.setImageBitmap(bitmap);
+        }
 
         //get firebase auth instance
         auth = FirebaseAuth.getInstance();

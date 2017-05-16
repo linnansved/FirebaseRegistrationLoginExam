@@ -305,10 +305,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     public void toGallery_Click(View v) {
         int id = v.getId();
-        Log.d("pos", String.valueOf(id));
         DeckId = DeckList.get(id);
-        Log.d("ArrayDeck", String.valueOf(DeckList));
-        Log.d("DeckId1", DeckId);
         Intent i = new Intent(ProfileActivity.this, GalleryMain.class);
         i.putExtra("DeckId", DeckId);
         i.putExtra("albumName", AlbumNames.get(id));
@@ -393,7 +390,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         Intent i = new Intent(ProfileActivity.this, UserInfo.class);
         i.putExtra("Email", firebaseAuth.getCurrentUser().getEmail());
         i.putExtra("Nickname", nickname);
-        i.putExtra("localFile", localFile);
+        //i.putExtra("localFile", localFile);
         startActivity(i);
     }
 
