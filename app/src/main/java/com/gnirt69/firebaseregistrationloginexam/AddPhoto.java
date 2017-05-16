@@ -85,7 +85,6 @@ public class AddPhoto extends AppCompatActivity {
         Intent intent = getIntent();
         //Tar emot deckID från addAlbum
         deckID = intent.getExtras().getString("deckID");
-        Log.v(LOG_TAG, "hejhej");
 
         record = (ImageView) findViewById(R.id.recordView);
         record.setVisibility(View.GONE);
@@ -105,6 +104,7 @@ public class AddPhoto extends AppCompatActivity {
         mRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
         mRecorder.setOutputFile(mAudioFilePath + "/" + mAudioName);
         mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+        record.setVisibility(View.VISIBLE);
         record.setVisibility(View.VISIBLE);
         //recordButton.setVisibility(View.GONE);
 
@@ -126,6 +126,7 @@ public class AddPhoto extends AppCompatActivity {
         if (booleanIsRecordAudioStarted) {
             mAudioName = "audio_" + generateRandom().toString() + ".3gp";
             startRecording(view);
+            record.setVisibility(View.VISIBLE);
             booleanIsRecordAudioStarted = false;
         } else {
             stopRecording(view);
