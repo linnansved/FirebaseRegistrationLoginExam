@@ -2,6 +2,7 @@ package com.gnirt69.firebaseregistrationloginexam;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
@@ -17,6 +18,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.google.android.gms.appinvite.AppInvite;
+import com.google.android.gms.appinvite.AppInviteInvitation;
+import com.google.android.gms.appinvite.AppInviteInvitationResult;
+import com.google.android.gms.appinvite.AppInviteReferral;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -33,7 +41,8 @@ import com.google.firebase.storage.StorageReference;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class GalleryMain extends AppCompatActivity {
+public class GalleryMain extends AppCompatActivity implements
+        GoogleApiClient.OnConnectionFailedListener{
 
     GalleryAdapter mAdapter;
     RecyclerView mRecyclerView;
@@ -46,7 +55,15 @@ public class GalleryMain extends AppCompatActivity {
     public Toolbar toolbar1;
     public TextView title;
 
-    private String removeCard;
+    private String cardID;
+
+    private GoogleApiClient mGoogleApiClient;
+    public String TAG = GalleryMain.class.getSimpleName();
+    public int REQUEST_INVITE = 1;
+
+    public String invitation_title = "Här kommer en fet app";
+    public String invitation_message;
+    public String invitation_deep_link = "http://4vector.com/i/free-vector-ramiras-earth-small-icon-clip-art_104864_Ramiras_Earth_Small_Icon_clip_art_medium.png";
 
 
     public FirebaseAuth firebaseAuth;
@@ -125,6 +142,35 @@ public class GalleryMain extends AppCompatActivity {
 
             }
         });
+
+        // Build GoogleApiClient with AppInvite API for receiving deep links
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this, this)
+                .addApi(AppInvite.API)
+                .build();
+
+
+        boolean autoLaunchDeepLink = false;
+        AppInvite.AppInviteApi.getInvitation(mGoogleApiClient, this, autoLaunchDeepLink)
+                .setResultCallback(
+                        new ResultCallback<AppInviteInvitationResult>() {
+                            @Override
+                            public void onResult(@NonNull AppInviteInvitationResult result) {
+                                if (result.getStatus().isSuccess()) {
+                                    // Extract deep link from Intent
+                                    Intent intent = result.getInvitationIntent();
+                                    String deepLink = AppInviteReferral.getDeepLink(intent);
+
+                                    // Handle the deep link. For example, open the linked
+                                    // content, or apply promotional credit to the user's
+                                    // account.
+
+                                    // Byt plats. ProfileActivity
+                                } else {
+                                    Log.d(TAG, "getInvitation: no deep link found.");
+                                }
+                            }
+                        });
     }
 
     public void getData(ArrayList CardID){
@@ -447,22 +493,55 @@ public class GalleryMain extends AppCompatActivity {
     }
 
     public void shareAlbum() {
-        // här lägger vi koden för att dela ett album
+        Intent intent = new AppInviteInvitation.IntentBuilder(invitation_title)
+                .setDeepLink(Uri.parse(invitation_deep_link))
+                .setMessage(invitation_message)
+                .setEmailHtmlContent("<html><body>"
+                        + "<p>Ladda ner den senaste appen för ditt barn</p>"
+                        + "%%APPINVITE_LINK_PLACEHOLDER%%"
+                        + "<p>Va med och skapa en bättre värld för dig, din familj och ditt barn</p>"
+                        + "</body></html>")
+                .setEmailSubject("XYZ Offer")
+                .build();
+        startActivityForResult(intent, REQUEST_INVITE);
+
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.d(TAG, "onActivityResult: requestCode=" + requestCode + ", resultCode=" + resultCode);
+
+        if (requestCode == REQUEST_INVITE) {
+            if (resultCode == RESULT_OK) {
+                // Get the invitation IDs of all sent messages
+                String[] ids = AppInviteInvitation.getInvitationIds(resultCode, data);
+                for (String id : ids) {
+                    Log.d(TAG, "onActivityResult: sent invitation " + id);
+                }
+            } else {
+                // Sending failed or it was canceled, show failure message to the user
+                // ...
+            }
+        }
+    }
+
+
     private void deleteDeckFromUser(){
         Log.d("DECKID: " + deckID, "hej")  ;
         mDatabase.child("Users").child(userID).child("Decks").child(deckID).removeValue();
 
     }
+
     private void deleteDeckFromDeck(){
 
         DecksCardsRef = mDatabase.child("Decks").child(deckID).child("Cards");
         DecksCardsRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                arrayCardsFromDecks.add(dataSnapshot.getKey().toString());
+                cardID = (dataSnapshot.getKey().toString());
                 Log.d("ArrayCardsDecks: " + arrayCardsFromDecks, "hej");
-                deleteCardsInDeck(arrayCardsFromDecks);
+                deleteCardsInDeck(cardID);
             }
 
             @Override
@@ -490,13 +569,14 @@ public class GalleryMain extends AppCompatActivity {
 
     }
 
-    private void deleteCardsInDeck(ArrayList<String> arrayCardsFromDecks) {
-        Log.d("Skitskaft","hej");
-        for (int i = 0; i < arrayCardsFromDecks.size(); i++) {
-            removeCard = arrayCardsFromDecks.get(i);
-            Log.d("RemoveCard: " + removeCard, "hej");
-            mDatabase.child("Cards").child(removeCard).removeValue();
+    private void deleteCardsInDeck(String cardID) {
+            mDatabase.child("Cards").child(cardID).removeValue();
         }
-    }
 
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+        Log.d(TAG, "onConnectionFailed:" + connectionResult);
+    }
 }
+
+

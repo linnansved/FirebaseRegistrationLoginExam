@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
 
 
     <application
@@ -31,7 +32,16 @@
         <activity android:name=".ForgotPassword" />
         <activity android:name=".UserInfo" />
         <activity android:name=".AddPhoto" />
-        <activity android:name=".GalleryMain" />
+        <activity android:name=".GalleryMain" >
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <category android:name="android.intent.category.LAUNCHER" />
+                <data
+                    android:host="example.com"
+                    android:scheme="https"/>
+            </intent-filter>
+        </activity>
         <activity
             android:name=".GalleryDetailActivity"
             android:label="@string/title_activity_detail" />
