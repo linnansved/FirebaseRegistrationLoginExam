@@ -73,13 +73,6 @@ public class GalleryDetailActivity extends AppCompatActivity {
         playSound(data.get(pos).getAudio());
 
 
-       /* mViewPager.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                playSound(data.get(pos).getAudio());
-            }
-        });*/
-
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -89,9 +82,12 @@ public class GalleryDetailActivity extends AppCompatActivity {
             @Override
             public void onPageSelected(int position) {
 
-                //noinspection ConstantConditions
-                setTitle(data.get(position).getName());
                 playSound(data.get(position).getAudio());
+                name = data.get(position).getName();
+                toolbar.setTitle(name);
+                setSupportActionBar(toolbar);
+                title.setText(toolbar.getTitle());
+                getSupportActionBar().setDisplayShowTitleEnabled(false);
             }
 
             @Override
