@@ -61,6 +61,7 @@ public class LoginActivity extends AppCompatActivity {
                             Intent i = new Intent(LoginActivity.this, ProfileActivity.class);
                             i.putExtra("Email", firebaseAuth.getCurrentUser().getEmail());
                             startActivity(i);
+                            finish();
 
                         } else {
                             Log.e("ERROR", task.getException().toString());
