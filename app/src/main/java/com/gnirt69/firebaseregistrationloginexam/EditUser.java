@@ -66,6 +66,7 @@ public class EditUser extends AppCompatActivity {
     public ImageView bubble;
     public boolean visible;
     public File localFile = null;
+    public ImageView homeBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +78,7 @@ public class EditUser extends AppCompatActivity {
 
         picView = (CircleImageView) findViewById(R.id.profile_image);
         localFile = (File) getIntent().getExtras().get("localFile");
+
 
         if (localFile == null){
             picView= (CircleImageView) findViewById(R.id.profile_image);
@@ -160,7 +162,6 @@ public class EditUser extends AppCompatActivity {
                 uploadPic.setVisibility(View.GONE);
             }
         });
-
 
         changeEmail.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -275,9 +276,6 @@ public class EditUser extends AppCompatActivity {
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if (task.isSuccessful()) {
                                             Toast.makeText(EditUser.this, "Nickname is updated!", Toast.LENGTH_SHORT).show();
-                                            Intent i = new Intent(EditUser.this, ProfileActivity.class);
-                                            i.putExtra("Nickname", newNick);
-                                            startActivity(i);
 
                                         } else {
                                             Toast.makeText(EditUser.this, "Failed to update nickname!", Toast.LENGTH_SHORT).show();
@@ -291,6 +289,20 @@ public class EditUser extends AppCompatActivity {
                 }
             }
         });
+
+
+        homeBtn = (ImageView) findViewById(R.id.home_button);
+        homeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(EditUser.this, ProfileActivity.class);
+                i.putExtra("Nickname", newNick);
+                startActivity(i);
+
+            }
+        });
+
+
 
     }
 
@@ -342,6 +354,7 @@ public class EditUser extends AppCompatActivity {
         addProfilePic.setVisibility(View.GONE);
         uploadPic.setVisibility(View.VISIBLE);
     }
+
     public void onClickProfileImage(View view) {
         if (view == addProfilePic) {
             addProfilePhoto();
