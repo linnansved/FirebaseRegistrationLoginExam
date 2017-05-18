@@ -18,7 +18,7 @@
         app:showAsAction="never" />
 
     <item android:id="@+id/action_deletealbum"
-        android:title="@string/action_delete"
+        android:title="Delete Album"
         android:icon="@drawable/trash"
         android:orderInCategory="100"
         app:showAsAction="never" />
