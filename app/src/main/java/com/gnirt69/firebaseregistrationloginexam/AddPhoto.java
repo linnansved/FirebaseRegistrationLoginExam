@@ -98,8 +98,8 @@ public class AddPhoto extends AppCompatActivity {
         deckID = getIntent().getExtras().getString("sendDeckID");
         Log.d("deckID4", deckID);
 
-        record = (ImageView) findViewById(R.id.recordView);
-        record.setVisibility(View.GONE);
+       // record = (ImageView) findViewById(R.id.recordView);
+      //  record.setVisibility(View.GONE);
 
         //recordButton = (Button) findViewById(R.id.RecordButton);
         //recordButton.setVisibility(View.VISIBLE);
@@ -116,8 +116,11 @@ public class AddPhoto extends AppCompatActivity {
         mRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
         mRecorder.setOutputFile(mAudioFilePath + "/" + mAudioName);
         mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
-        record.setVisibility(View.VISIBLE);
-        record.setVisibility(View.VISIBLE);
+        RecText.setVisibility(View.VISIBLE);
+        RecText1.setVisibility(View.VISIBLE);
+        RecInfo.setVisibility(View.VISIBLE);
+        //record.setVisibility(View.VISIBLE);
+        //record.setVisibility(View.VISIBLE);
         //recordButton.setVisibility(View.GONE);
 
         try {
@@ -142,9 +145,6 @@ public class AddPhoto extends AppCompatActivity {
             mAudioName = "audio_" + generateRandom().toString() + ".3gp";
             startRecording(view);
             //record.setVisibility(View.VISIBLE);
-            RecText.setVisibility(View.VISIBLE);
-            RecText1.setVisibility(View.VISIBLE);
-            RecInfo.setVisibility(View.VISIBLE);
             booleanIsRecordAudioStarted = false;
         } else {
             stopRecording(view);
