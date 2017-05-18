@@ -387,9 +387,10 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     public void seeUser_Click(View v) {
-        Intent i = new Intent(ProfileActivity.this, UserInfo.class);
+        Intent i = new Intent(ProfileActivity.this, EditUser.class);
         i.putExtra("Email", firebaseAuth.getCurrentUser().getEmail());
         i.putExtra("Nickname", nickname);
+        i.putExtra("localFile", localFile);
         //i.putExtra("localFile", localFile);
         startActivity(i);
     }
