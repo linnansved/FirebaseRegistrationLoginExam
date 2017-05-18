@@ -15,6 +15,7 @@ package com.gnirt69.firebaseregistrationloginexam;
         import android.widget.Button;
         import android.widget.EditText;
         import android.widget.ImageView;
+        import android.widget.TextView;
         import android.widget.Toast;
         import com.google.android.gms.tasks.OnFailureListener;
         import com.google.android.gms.tasks.OnSuccessListener;
@@ -63,6 +64,8 @@ public class AddPhoto extends AppCompatActivity {
     public String cardID;
     public int i = 0;
     public String deckID;
+    public ImageView RecInfo;
+    public TextView RecText, RecText1;
 
     private ImageView record;
     //private Button recordButton;
@@ -77,6 +80,16 @@ public class AddPhoto extends AppCompatActivity {
         mAudioFilePath = getExternalCacheDir().getAbsolutePath();
         imageView = (ImageView) findViewById(R.id.imageView);
         buttonImageChoose = (Button) findViewById(R.id.chooseImage);
+
+        RecInfo = (ImageView) findViewById(R.id.recordingInfo);
+        RecText = (TextView) findViewById(R.id.recText);
+        RecText1 = (TextView) findViewById(R.id.recText1);
+
+        RecText.setVisibility(View.GONE);
+        RecText1.setVisibility(View.GONE);
+        RecInfo.setVisibility(View.GONE);
+
+
         storageReference = FirebaseStorage.getInstance().getReference();
         mDatabase = FirebaseDatabase.getInstance().getReference();
         //mDisplayDatabase = FirebaseDatabase.getInstance().getReference().child("Decks").child(deckID);
@@ -118,14 +131,20 @@ public class AddPhoto extends AppCompatActivity {
         mRecorder.stop();
         mRecorder.release();
         mRecorder = null;
-        record.setVisibility(View.GONE);
+        //record.setVisibility(View.GONE);
         //recordButton.setVisibility(View.VISIBLE);
+        RecText.setVisibility(View.GONE);
+        RecText1.setVisibility(View.GONE);
+        RecInfo.setVisibility(View.GONE);
     }
     public void onClickRecord(View view) {
         if (booleanIsRecordAudioStarted) {
             mAudioName = "audio_" + generateRandom().toString() + ".3gp";
             startRecording(view);
-            record.setVisibility(View.VISIBLE);
+            //record.setVisibility(View.VISIBLE);
+            RecText.setVisibility(View.VISIBLE);
+            RecText1.setVisibility(View.VISIBLE);
+            RecInfo.setVisibility(View.VISIBLE);
             booleanIsRecordAudioStarted = false;
         } else {
             stopRecording(view);
