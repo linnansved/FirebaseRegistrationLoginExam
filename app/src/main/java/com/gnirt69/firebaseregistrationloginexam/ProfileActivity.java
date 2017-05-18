@@ -382,7 +382,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         }
         else {
 
-            Toast.makeText(ProfileActivity.this, "Wrong password", Toast.LENGTH_LONG).show();
+            Toast.makeText(ProfileActivity.this, "You typed the wrong word, retype parent to enter the admin pages", Toast.LENGTH_LONG).show();
         }
     }
 

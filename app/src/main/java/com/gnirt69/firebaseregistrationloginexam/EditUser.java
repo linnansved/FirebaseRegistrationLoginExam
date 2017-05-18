@@ -373,7 +373,7 @@ public class EditUser extends AppCompatActivity {
             picID = UUID.randomUUID().toString();
             uploadProfilePic();
         } else {
-            Toast.makeText(getApplicationContext(), "du måste lägga till bild och ljud", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "You must add a photo, sound and text to upload!", Toast.LENGTH_LONG).show();
         }
 
     }
@@ -386,7 +386,7 @@ public class EditUser extends AppCompatActivity {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         int x = 0;
-                        Toast.makeText(getApplicationContext(), "File Uploaded", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Your profile picture is updated!", Toast.LENGTH_LONG).show();
                         downloadPicUrl = taskSnapshot.getDownloadUrl();
                         picUrlList.add(x, downloadPicUrl);
                         uploadPicToDatabase();
