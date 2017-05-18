@@ -286,14 +286,14 @@ public class GalleryMain extends AppCompatActivity implements
 
         }
 
+        if (id == R.id.action_delete){
+            deletePhotos();
+        }
+
         if (id == R.id.action_add) {
             goToAddPhoto();
         }
 
-        if (id == R.id.action_delete) {
-
-            deletePhotos();
-        }
 
         if (id == R.id.action_deletealbum) {
 
