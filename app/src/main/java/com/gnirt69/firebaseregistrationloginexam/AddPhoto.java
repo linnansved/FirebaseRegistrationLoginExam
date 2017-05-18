@@ -2,6 +2,7 @@ package com.gnirt69.firebaseregistrationloginexam;
 
         import android.content.Intent;
         import android.graphics.Bitmap;
+        import android.graphics.Matrix;
         import android.media.Image;
         import android.media.MediaPlayer;
         import android.media.MediaRecorder;
@@ -190,12 +191,24 @@ public class AddPhoto extends AppCompatActivity {
             imageFilePath = data.getData();
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageFilePath);
+                rotateBitmap(bitmap,90);
                 imageView.setImageBitmap(bitmap);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
+
+    //HAR FÖRSÖKT FIXA ROTERING
+    public static Bitmap rotateBitmap(Bitmap source, float angle)
+    {
+        Matrix matrix = new Matrix();
+        matrix.postRotate(angle);
+        return Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(), matrix, true);
+    }
+
+
+
     public void onClickImage(View view) {
         if (view == buttonImageChoose) {
             chooseImage();
