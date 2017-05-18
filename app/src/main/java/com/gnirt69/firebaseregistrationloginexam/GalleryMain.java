@@ -485,7 +485,7 @@ public class GalleryMain extends AppCompatActivity implements
 
         };
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(mRecyclerView.getContext());
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Är du säker att du vill ta bort albumet? Ändringarna är permanenta")
                 .setPositiveButton("Ja", dialogClickListener)
                 .setNegativeButton("Nej", dialogClickListener).show();
