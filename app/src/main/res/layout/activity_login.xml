@@ -13,7 +13,7 @@
     <ImageView
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:src="@drawable/tapetaplogo"
+        android:src="@drawable/tapetaplogo1"
         android:layout_above="@+id/linear"
         android:id="@+id/tapetaplogo"
         android:layout_centerHorizontal="true"/>
