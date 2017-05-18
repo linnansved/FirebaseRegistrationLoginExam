@@ -479,6 +479,7 @@ public class GalleryMain extends AppCompatActivity implements
 
 
                    case DialogInterface.BUTTON_NEGATIVE:
+                       Toast.makeText(getApplicationContext(), "Ok", Toast.LENGTH_LONG).show();
 
                }
            }
