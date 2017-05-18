@@ -34,6 +34,7 @@ public class GalleryDetailActivity extends AppCompatActivity {
     int pos;
     public TextView title;
     public String name;
+    public ImageView homeBtn;
 
     Toolbar toolbar;
     MediaPlayer mPlayer;
@@ -114,6 +115,16 @@ public class GalleryDetailActivity extends AppCompatActivity {
                     }
                 }
                 return false;
+            }
+        });
+
+
+        homeBtn = (ImageView) findViewById(R.id.home_button);
+        homeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(GalleryDetailActivity.this, ProfileActivity.class);
+                startActivity(i);
             }
         });
     }
