@@ -48,7 +48,7 @@
     <ImageView
             android:id="@+id/imageView"
             android:layout_width="300dp"
-            android:layout_height="300dp"
+            android:layout_height="350dp"
             android:layout_below="@id/linLay"
             android:layout_centerHorizontal="true"
             tools:layout_editor_absoluteY="8dp"
@@ -69,7 +69,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="190dp"
+        android:layout_marginTop="180dp"
         android:text="RECORDING"
         android:textAlignment="center"
         android:typeface="monospace"
