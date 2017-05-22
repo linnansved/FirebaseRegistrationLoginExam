@@ -7,6 +7,7 @@ import android.content.Context;
         import android.view.View;
 
 public class RecyclerItemClickListener implements RecyclerView.OnItemTouchListener {
+
     private OnItemClickListener mListener;
 
     public interface OnItemClickListener {

@@ -16,6 +16,7 @@ import android.content.Context;
 public class GalleryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     Context context;
+
     List<GalleryImageModel> data = new ArrayList<>();
 
     public GalleryAdapter(Context context, List<GalleryImageModel> data) {

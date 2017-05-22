@@ -42,31 +42,42 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class EditUser extends AppCompatActivity {
 
+    private StorageReference storageReference;
+
+    private FirebaseAuth.AuthStateListener authListener;
+    private FirebaseAuth auth;
+
+    private DatabaseReference mDatabase;
+    private DatabaseReference nick;
+
     private Button btnChangeEmail, btnChangePassword, btnChangeNick, changeEmail, changePassword, changeNickname, addProfilePic, uploadPic;
 
     private EditText oldEmail, newEmail, password, newPassword, newNickname;
-    private FirebaseAuth.AuthStateListener authListener;
-    private FirebaseAuth auth;
-    private DatabaseReference mDatabase;
-    private DatabaseReference nick;
+
+    public ImageView homeBtn;
+    public ImageView bubble;
+
+
     public String userID;
     public String nickname, newNick;
-    private static final int PICK_IMAGE_REQUES = 234;
-    private Uri imageFilePath;
-    public ArrayList<String> arrayPicID = new ArrayList<String>();
-    public ArrayList<Uri> picUrlList = new ArrayList<>();
-    public int i = 0;
     public String picID;
-    private DatabaseReference picRef;
     private String picName;
-    private StorageReference storageReference;
+
+    private static final int PICK_IMAGE_REQUES = 234;
+    public int i = 0;
+
+    private Uri imageFilePath;
     public Uri downloadPicUrl;
+
+    public ArrayList<Uri> picUrlList = new ArrayList<>();
+
+
     private CircleImageView picView;
-    private static final String LOG_TAG = "EditUser";
-    public ImageView bubble;
+
     public boolean visible;
+
     public File localFile = null;
-    public ImageView homeBtn;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,7 +133,6 @@ public class EditUser extends AppCompatActivity {
         changeNickname= (Button) findViewById(R.id.changeNick);
         addProfilePic = (Button) findViewById(R.id.addProfilePic);
         uploadPic = (Button) findViewById(R.id.uploadPic);
-        //picView = (ImageView) findViewById(R.id.picView);
 
         oldEmail = (EditText) findViewById(R.id.old_email);
         newEmail = (EditText) findViewById(R.id.new_email);
@@ -141,7 +151,6 @@ public class EditUser extends AppCompatActivity {
         changeNickname.setVisibility(View.GONE);
         uploadPic.setVisibility(View.GONE);
 
-        //addProfilePic.setVisibility(View.GONE);
 
         btnChangeEmail.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -324,8 +333,7 @@ public class EditUser extends AppCompatActivity {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(intent, PICK_IMAGE_REQUES);
         intent.setType("images/jpg");
-        /*intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Select an Image"), PICK_IMAGE_REQUES);*/
+
 
     }
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -405,15 +413,6 @@ public class EditUser extends AppCompatActivity {
     private void uploadPicToDatabase() {
         mDatabase.child("Users").child(userID).child("pic").child("picID").setValue(picID);
         mDatabase.child("Users").child(userID).child("pic").child("URL").setValue(downloadPicUrl.toString());
-
-        /*Intent i = new Intent(EditUser.this, EditUser.class);
-        i.putExtra("picID", picID);
-        startActivity(i);*/
-    }
-
-
-    public ArrayList getUri(){
-        return picUrlList;
     }
 
 

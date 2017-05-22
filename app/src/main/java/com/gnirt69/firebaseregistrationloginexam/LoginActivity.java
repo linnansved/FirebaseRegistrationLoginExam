@@ -23,15 +23,14 @@ import java.util.Map;
 
 
 public class LoginActivity extends AppCompatActivity {
+
+    private FirebaseAuth firebaseAuth;
+
     private EditText txtEmailLogin;
     private EditText txtPwd;
-    private FirebaseAuth firebaseAuth;
-    private FirebaseAuth firebaseFindUid;
-    public String userID;
-    public ArrayList<String> arrayDeckID = new ArrayList<>();
-    public ArrayList<String> arrayUserID = new ArrayList<>();
-    private static final String LOG_TAG = "LoginActivity";
+
     public ImageView bubble;
+
     public boolean visible;
 
 
@@ -39,11 +38,16 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        firebaseAuth = FirebaseAuth.getInstance();
+
         txtEmailLogin = (EditText) findViewById(R.id.txtEmailLogin);
         txtPwd = (EditText) findViewById(R.id.txtPasswordLogin);
-        firebaseAuth = FirebaseAuth.getInstance();
+
         bubble = (ImageView) findViewById(R.id.prat);
+
         bubble.setVisibility(View.VISIBLE);
+
         visible = true;
     }
 

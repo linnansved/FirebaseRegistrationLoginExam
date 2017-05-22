@@ -4,13 +4,13 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 
 public class DepthPageTransformer implements ViewPager.PageTransformer {
+
     private static final float MIN_SCALE = 0.75f;
 
     public void transformPage(View view, float position) {
         int pageWidth = view.getWidth();
 
         if (position < -1) { // [-Infinity,-1)
-            // This page is way off-screen to the left.
             view.setAlpha(0);
 
         } else if (position <= 0) { // [-1,0]

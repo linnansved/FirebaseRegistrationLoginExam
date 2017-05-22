@@ -8,6 +8,7 @@ import android.view.View;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class ChildProfile extends AppCompatActivity {
+
     private FirebaseAuth firebaseAuth;
 
     @Override

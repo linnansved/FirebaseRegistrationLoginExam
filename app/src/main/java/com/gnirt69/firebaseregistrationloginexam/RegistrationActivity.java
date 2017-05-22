@@ -33,46 +33,42 @@ import java.util.UUID;
 
 public class RegistrationActivity extends AppCompatActivity {
 
+    private FirebaseAuth firebaseAuth;
+
     private EditText txtEmailAddress;
     private EditText txtPassword;
-    private FirebaseAuth firebaseAuth;
     private EditText txtPassword2;
     public EditText txtNickname;
-    private DatabaseReference storageNick;
+
     private DatabaseReference userRef;
     private DatabaseReference mDatabase;
-    public String userID;
-    String nickname;
+
     private static final String LOG_TAG = "AudioRecordTest";
+
     String pwd1;
     String pwd2;
-    /*private DatabaseReference userRef;
-    private DatabaseReference mDatabase;
-    public String userID;
-    public ArrayList<String> arrayDeckID = new ArrayList<>();
-    public ArrayList<String> arrayUserID = new ArrayList<>();*/
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        
         txtEmailAddress = (EditText) findViewById(R.id.txtEmailRegistration);
         txtPassword = (EditText) findViewById(R.id.txtPasswordRegistration);
         txtPassword2 = (EditText) findViewById(R.id.txtPasswordRegistration2);
         txtNickname = (EditText) findViewById(R.id.txtNicknameRegistration);
-        firebaseAuth = FirebaseAuth.getInstance();
-        mDatabase = FirebaseDatabase.getInstance().getReference();
+
 
 
     }
 
     public void btnRegistrationUser_Click(View v) {
-
-
         if (checkPass()) {
-
-
             final ProgressDialog progressDialog = ProgressDialog.show(RegistrationActivity.this, "Please wait...", "Processing...", true);
             (firebaseAuth.createUserWithEmailAndPassword(txtEmailAddress.getText().toString(), txtPassword.getText().toString()))
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -86,7 +82,6 @@ public class RegistrationActivity extends AppCompatActivity {
                                 FirebaseUser user = task.getResult().getUser();
                                 Log.d(LOG_TAG, "onComplete: uid =" + user.getUid());
                                 Toast.makeText(RegistrationActivity.this, "Registration successful!", Toast.LENGTH_LONG).show();
-                                //registerNick();
 
                                 uploadUserToDatabase();
 
@@ -123,10 +118,6 @@ public class RegistrationActivity extends AppCompatActivity {
 
 
 
-
-            /*arrayUserID.add(i, deckID);
-            i++;*/
-
         }
         catch (Exception e){
             Log.e(LOG_TAG, e.getMessage());
@@ -136,25 +127,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
 
 
-        //}
 
-
-   /* public void uploadUserToDatabase(){
-        userRef = mDatabase.child("Users").child(userID);
-        Map<String, String> decks = new HashMap<>();
-        for(int k = 0; k < arrayUserID.size(); ++k){
-            decks.put("DeckID"+k, arrayDeckID.get(k));
-            userRef.setValue(decks);
-        }
-    }*/
-
-
-
-   /* public void registerNick() {
-        txtNickname.getText().toString();
-    }*/
-
-    //  }
    private boolean checkPass() {
         pwd1 = txtPassword.getText().toString();
         pwd2 = txtPassword2.getText().toString();

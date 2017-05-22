@@ -19,52 +19,51 @@ import java.util.UUID;
 
 public class addAlbum extends AppCompatActivity {
 
+    public ArrayList<String> arrayDeckID = new ArrayList<String>();
+
     private DatabaseReference mDatabase;
     private DatabaseReference deckRef;
-    private static final String LOG_TAG = "AddAlbum";
-    public int j = 0;
     private DatabaseReference userRef;
-    public ArrayList<String> arrayDeckID = new ArrayList<String>();
+
     public String albumName, len;
     public String deckID;
-    public int length;
 
+    public int length;
+    public int j = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_album);
-        len = "";
+
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        deckID = UUID.randomUUID().toString();
-        length = getIntent().getExtras().getInt("Length");
+
+        len = "";
         len=Integer.toString(length);
-        Log.d("Här är längden", len);
+
+
+        deckID = UUID.randomUUID().toString();
+
+        length = getIntent().getExtras().getInt("Length");
+
+
     }
 
-//FIXA SÅ LOOPEN FUNKAR
     public void onClickCreateAlbum(View view) {
-        if(length==8) {
+        if(length == 8) {
             Toast.makeText(addAlbum.this, "You must delete an album in order to add a new one", Toast.LENGTH_LONG).show();
             Intent i = new Intent(addAlbum.this, ProfileActivity.class);
-            //i.putExtra("deckID", deckID);
             startActivity(i);
 
         }
         else{
             createAlbumToDb(view);
-            Log.d("funkarattladdatillDB","hej");
             createDeckIdUnderUserToDb();
-            Log.d("funkarattladdatillDB2","hej");
-            //makeAlbumVisibleInProfileActivity();
             arrayDeckID.add(j, deckID);
-            Log.d("läggertilliarray","hej");
             j++;
 
             Intent intent = new Intent(addAlbum.this, ProfileActivity.class);
-            //intent.putExtra("deckID", deckID);
             startActivity(intent);
-            //Log.d("skickatillprofile","hej");
         }
 
     }
@@ -73,7 +72,6 @@ public class addAlbum extends AppCompatActivity {
     public void createAlbumToDb(View view) {
             EditText editText = (EditText) findViewById(R.id.albumName);
             String message = editText.getText().toString();
-            Log.v(LOG_TAG, message);
             albumName = message.toString();
             deckRef = mDatabase.child("Decks").child(deckID);
             Map<String, String> string = new HashMap<>();
@@ -84,7 +82,6 @@ public class addAlbum extends AppCompatActivity {
     public void createDeckIdUnderUserToDb() {
         String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         Map<String, Boolean> decks = new HashMap<>();
-        Log.v(LOG_TAG, "SE HIT" + userID);
         userRef = mDatabase.child("Users").child(userID).child("Decks").child(deckID);
         decks.put(deckID, true);
         userRef.setValue(decks);

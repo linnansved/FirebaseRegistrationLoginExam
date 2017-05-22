@@ -39,48 +39,62 @@ package com.gnirt69.firebaseregistrationloginexam;
 
 
 public class AddPhoto extends AppCompatActivity {
-    private static final String LOG_TAG = "AudioRecordTest";
-    private MediaRecorder mRecorder = null;
-    private String mAudioName = null;
-    private boolean booleanIsRecordAudioStarted = true;
-    private MediaPlayer   mPlayer = null;
-    private boolean booleanIsAudioPlayed = true;
-    private Uri imageFilePath;
-    private String mAudioFilePath;
-    private ImageView imageView;
-    private static final int PICK_IMAGE_REQUES = 234;
-    public Button buttonImageChoose;
-    private String imageName;
+
     private StorageReference storageReference;
-    public Uri downloadImageUrl;
-    public Uri downloadAudioUrl;
 
     private DatabaseReference mDatabase;
     private DatabaseReference imageRef;
     private DatabaseReference audioRef;
     private DatabaseReference deckRef;
     private DatabaseReference stringRef;
+
     public FirebaseAuth firebaseAuth;
 
-    public String cardID;
-    public int i = 0;
+    private MediaRecorder mRecorder = null;
+    private MediaPlayer   mPlayer = null;
+
+    private String mAudioName = null;
+    private String mAudioFilePath;
+    private String imageName;
     public String deckID;
+    public String cardID;
+    public String userID;
+
+    private boolean booleanIsRecordAudioStarted = true;
+    private boolean booleanIsAudioPlayed = true;
+
+
+    private ImageView imageView;
+    private ImageView record;
     public ImageView RecInfo;
     public TextView RecText, RecText1;
 
-    private ImageView record;
-    //private Button recordButton;
+    private static final int PICK_IMAGE_REQUES = 234;
+    public int i = 0;
 
-    public String userID;
+    public Button buttonImageChoose;
+
+    public Uri downloadImageUrl;
+    public Uri downloadAudioUrl;
+    private Uri imageFilePath;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_photo);
+
         mAudioFilePath = getExternalCacheDir().getAbsolutePath();
+
         imageView = (ImageView) findViewById(R.id.imageView);
+
         buttonImageChoose = (Button) findViewById(R.id.chooseImage);
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        storageReference = FirebaseStorage.getInstance().getReference();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        FirebaseUser user =  firebaseAuth.getCurrentUser();
+
 
         RecInfo = (ImageView) findViewById(R.id.recordingInfo);
         RecText = (TextView) findViewById(R.id.recText);
@@ -90,25 +104,9 @@ public class AddPhoto extends AppCompatActivity {
         RecText1.setVisibility(View.GONE);
         RecInfo.setVisibility(View.GONE);
 
-
-        storageReference = FirebaseStorage.getInstance().getReference();
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-        //mDisplayDatabase = FirebaseDatabase.getInstance().getReference().child("Decks").child(deckID);
-
-        //Tar emot deckID från addAlbum
         deckID = getIntent().getExtras().getString("sendDeckID");
-        Log.d("deckID4", deckID);
 
-       // record = (ImageView) findViewById(R.id.recordView);
-      //  record.setVisibility(View.GONE);
-
-        //recordButton = (Button) findViewById(R.id.RecordButton);
-        //recordButton.setVisibility(View.VISIBLE);
-
-        firebaseAuth = FirebaseAuth.getInstance();
-        FirebaseUser user =  firebaseAuth.getCurrentUser();
         userID = user.getUid();
-
 
     }
     public void startRecording(View view) {
@@ -120,14 +118,10 @@ public class AddPhoto extends AppCompatActivity {
         RecText.setVisibility(View.VISIBLE);
         RecText1.setVisibility(View.VISIBLE);
         RecInfo.setVisibility(View.VISIBLE);
-        //record.setVisibility(View.VISIBLE);
-        //record.setVisibility(View.VISIBLE);
-        //recordButton.setVisibility(View.GONE);
 
         try {
             mRecorder.prepare();
         } catch (IOException e) {
-            Log.e(LOG_TAG, "prepare() failed");
         }
         mRecorder.start();
     }
@@ -135,8 +129,6 @@ public class AddPhoto extends AppCompatActivity {
         mRecorder.stop();
         mRecorder.release();
         mRecorder = null;
-        //record.setVisibility(View.GONE);
-        //recordButton.setVisibility(View.VISIBLE);
         RecText.setVisibility(View.GONE);
         RecText1.setVisibility(View.GONE);
         RecInfo.setVisibility(View.GONE);
@@ -145,7 +137,6 @@ public class AddPhoto extends AppCompatActivity {
         if (booleanIsRecordAudioStarted) {
             mAudioName = "audio_" + generateRandom().toString() + ".3gp";
             startRecording(view);
-            //record.setVisibility(View.VISIBLE);
             booleanIsRecordAudioStarted = false;
         } else {
             stopRecording(view);
@@ -159,7 +150,6 @@ public class AddPhoto extends AppCompatActivity {
             mPlayer.prepare();
             mPlayer.start();
         } catch (IOException e) {
-            Log.e(LOG_TAG, "prepare() failed");
         }
     }
     public void stopPlaying(View view) {
@@ -199,7 +189,6 @@ public class AddPhoto extends AppCompatActivity {
         }
     }
 
-    //HAR FÖRSÖKT FIXA ROTERING
     public static Bitmap rotateBitmap(Bitmap source, float angle)
     {
         Matrix matrix = new Matrix();
@@ -213,7 +202,6 @@ public class AddPhoto extends AppCompatActivity {
         if (view == buttonImageChoose) {
             chooseImage();
         } else {
-            Toast.makeText(getApplicationContext(), "hej", Toast.LENGTH_LONG).show();
         }
     }
     public void onClickUpload(View view) {
@@ -227,7 +215,7 @@ public class AddPhoto extends AppCompatActivity {
             i.putExtra("Email", firebaseAuth.getCurrentUser().getEmail());
             startActivity(i);
         } else {
-            Toast.makeText(getApplicationContext(), "du måste lägga till bild och ljud", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Du måste lägga till både bild och ljud", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -302,15 +290,11 @@ public class AddPhoto extends AppCompatActivity {
     private void uploadStringToDatabase(){
         EditText editText = (EditText) findViewById(R.id.picName);
         String message = editText.getText().toString();
-        Log.v(LOG_TAG, message);
         stringRef = mDatabase.child("Cards").child(cardID);
         Map<String, String> string = new HashMap<>();
         string.put("picName", message);
         stringRef.setValue(string);
 
     }
-
-
-
 
 }

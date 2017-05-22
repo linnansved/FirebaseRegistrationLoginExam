@@ -57,31 +57,32 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     private FirebaseAuth firebaseAuth;
 
     private DatabaseReference profilePicReference;
+    private DatabaseReference hej, getDeck, albumNameDatabaseRef;
+    private DatabaseReference mDatabase;
+
     private StorageReference storageReference;
 
     public ArrayList<String> DeckList = new ArrayList<>();
     public ArrayList<String> AlbumNames = new ArrayList<>();
-    public ArrayList<String> Arrays = new ArrayList<>();
     public ArrayList<ImageView> AlbumList = new ArrayList<>();
+    public ArrayList<TextView> AlbumName = new ArrayList<>();
 
     private Button LogOutBtn, editUserBtn, enterBtn;
 
     private ImageView unLocked, locked, imageView, addAlbum, instructions;
     private ImageView alb1, alb2, alb3, alb4, alb5, alb6, alb7, alb8;
 
-    private TextView tvEmail,tvNick, textSqParent, infoText, plusText;
+    private TextView tvNick, textSqParent, infoText, plusText;
+    private TextView alb1T, alb2T, alb3T, alb4T, alb5T, alb6T, alb7T, alb8T, AlbNameView;
+
     private EditText answerParent;
 
-    public String nickname, picName, setName;
+    public String nickname, picName;
     public String getDeck_string;
-    public ArrayList<TextView> AlbumName = new ArrayList<>();
-    private TextView alb1T, alb2T, alb3T, alb4T, alb5T, alb6T, alb7T, alb8T, AlbNameView;
     private String answer, DeckId, DeckId1, albumNameValue;
-    private DatabaseReference hej, getDeck, albumNameDatabaseRef;
-    private DatabaseReference mDatabase;
+
     public int length;
     public int counter;
-
 
     public File localFile = null;
 
@@ -96,15 +97,16 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         instructions = (ImageView) findViewById(R.id.album1);
         locked = (ImageView) findViewById(R.id.lock);
         addAlbum = (ImageView) findViewById(R.id.album2);
+
+        answerParent = (EditText) findViewById(R.id.answerParent);
+
         editUserBtn = (Button) findViewById(R.id.UserClick);
         enterBtn = (Button) findViewById(R.id.enterBtn);
+
         textSqParent = (TextView)findViewById(R.id.textSqParent);
-        answerParent = (EditText) findViewById(R.id.answerParent);
         tvNick = (TextView) findViewById(R.id.tvNickname);
         infoText = (TextView) findViewById(R.id.infoText);
         plusText = (TextView) findViewById(R.id.plusText);
-
-        CircleImageView i = (CircleImageView)findViewById(R.id.profile_image);
 
         //Tar in alla möjliga album
         alb1 = (ImageView) findViewById(R.id.AddAlbum1);
@@ -155,13 +157,11 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         unLocked.setVisibility(View.VISIBLE);
         instructions.setVisibility(View.VISIBLE);
         locked.setVisibility(View.GONE);
-        //LogOutBtn.setVisibility(View.VISIBLE);
         addAlbum.setVisibility(View.VISIBLE);
         editUserBtn.setVisibility(View.VISIBLE);
         enterBtn.setVisibility(View.GONE);
         textSqParent.setVisibility(View.GONE);
         answerParent.setVisibility(View.GONE);
-
 
         //Gör alla album & albumnamn osynliga tills vidare
         alb1.setVisibility(View.GONE);
@@ -205,7 +205,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 getDeck_string = dataSnapshot.getKey().toString();
                 DeckList.add(getDeck_string);
-                Log.d("deckList", String.valueOf(DeckList));
 
                 for ( int i = 0; i < DeckList.size(); i++) {
                     imageView = AlbumList.get(i);
@@ -219,26 +218,20 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             albumNameValue = dataSnapshot.getValue(String.class);
                             if (AlbumNames.contains(albumNameValue)) {
-                               // Log.d("finns redan", String.valueOf(AlbumNames));
+
                             }
                             else {
                                 AlbumNames.add(albumNameValue);
-                                AlbNameView=AlbumName.get(counter);
+                                AlbNameView = AlbumName.get(counter);
                                 AlbNameView.setText(albumNameValue);
                                 AlbNameView.setVisibility(View.VISIBLE);
                                 counter++;
                             }
-
-
                         }
                         @Override
                         public void onCancelled(DatabaseError databaseError) {
                         }
-
                     });
-
-                    //AlbNameView.setText("hej");
-
                 }
             }
             @Override
@@ -321,30 +314,22 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             startActivity(new Intent(this, LoginActivity.class));
         }
     }
-   /* public void editUser_Click(View v) {
-        Intent i = new Intent(ProfileActivity.this, UserInfo.class);
-        i.putExtra("Nickname", nickname);
-        startActivity(i);
-    }*/
+
 
     public void addCard_Click(View v) {
         Intent i = new Intent(ProfileActivity.this, addAlbum.class);
-        length =DeckList.size();
-        String len = Integer.toString(length);
-        Log.d("langden ar faktsikt", len);
-        i.putExtra("Length", (int)length);
+        length = DeckList.size();
+        i.putExtra("Length", length);
         startActivity(i);
     }
 
     public void toChild_Click(View v) {
-        Log.d("går till kids", "toChild_Click: ");
         unLocked.setVisibility(View.GONE);
         locked.setVisibility(View.VISIBLE);
         instructions.setVisibility(View.GONE);
         LogOutBtn.setVisibility(View.GONE);
         addAlbum.setVisibility(View.GONE);
         editUserBtn.setVisibility(View.GONE);
-        //tvEmail.setVisibility(View.GONE);
         tvNick.setText(nickname);
         tvNick.setVisibility(View.VISIBLE);
         infoText.setVisibility(View.GONE);
@@ -362,16 +347,13 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     public void testParent(View v) {
         answer = answerParent.getText().toString();
-
         answerParent.setText("");
 
         if(answer.equals("parent")){
             unLocked.setVisibility(View.VISIBLE);
             locked.setVisibility(View.GONE);
-            // LogOutBtn.setVisibility(View.VISIBLE);
             addAlbum.setVisibility(View.VISIBLE);
             editUserBtn.setVisibility(View.VISIBLE);
-            // tvEmail.setVisibility(View.GONE);
             textSqParent.setVisibility(View.GONE);
             answerParent.setVisibility(View.GONE);
             enterBtn.setVisibility(View.GONE);
@@ -391,14 +373,12 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         i.putExtra("Email", firebaseAuth.getCurrentUser().getEmail());
         i.putExtra("Nickname", nickname);
         i.putExtra("localFile", localFile);
-        //i.putExtra("localFile", localFile);
         startActivity(i);
     }
 
     public void toInstructions(View v){
         Intent i = new Intent(ProfileActivity.this, Instructions.class);
         startActivity(i);
-        Log.d("Här går det eh", "toInstructions: ");
     }
 
 

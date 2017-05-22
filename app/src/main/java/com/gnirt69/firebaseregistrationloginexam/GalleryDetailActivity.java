@@ -3,19 +3,19 @@ package com.gnirt69.firebaseregistrationloginexam;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-        import android.support.v4.app.Fragment;
-        import android.support.v4.app.FragmentManager;
-        import android.support.v4.app.FragmentPagerAdapter;
-        import android.support.v4.view.ViewPager;
-        import android.support.v7.app.AppCompatActivity;
-        import android.support.v7.widget.Toolbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
-        import android.view.Menu;
-        import android.view.MenuItem;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-        import android.view.ViewGroup;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -31,18 +31,21 @@ public class GalleryDetailActivity extends AppCompatActivity {
     private SectionsPagerAdapter mSectionsPagerAdapter;
 
     public ArrayList<GalleryImageModel> data = new ArrayList<>();
+
     int pos;
+
     public TextView title;
+
     public String name;
+    public String mAudioName;
+
     public ImageView homeBtn;
 
     Toolbar toolbar;
-    MediaPlayer mPlayer;
-    public String mAudioName;
 
-    /**
-     * The {@link ViewPager} that will host the section contents.
-     */
+    MediaPlayer mPlayer;
+
+
     private ViewPager mViewPager;
 
     @Override
@@ -60,8 +63,6 @@ public class GalleryDetailActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         title.setText(toolbar.getTitle());
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-
-        //setTitle(data.get(pos).getName());
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -137,7 +138,6 @@ public class GalleryDetailActivity extends AppCompatActivity {
             mPlayer.prepare();
             mPlayer.start();
         } catch (IOException e) {
-            Log.e("Går", "inte");
         }
     }
 
@@ -183,12 +183,11 @@ public class GalleryDetailActivity extends AppCompatActivity {
          * fragment.
          */
 
-        String name, url, audio;
+        String name, url;
         int pos;
         private static final String ARG_SECTION_NUMBER = "section_number";
         private static final String ARG_IMG_TITLE = "image_title";
         private static final String ARG_IMG_URL = "image_url";
-        //private static final String ARG_IMG_AUD = "audio_url";
 
 
         @Override
@@ -197,7 +196,6 @@ public class GalleryDetailActivity extends AppCompatActivity {
             this.pos = args.getInt(ARG_SECTION_NUMBER);
             this.name = args.getString(ARG_IMG_TITLE);
             this.url = args.getString(ARG_IMG_URL);
-          //  this.audio = args.getString(ARG_IMG_AUD);
         }
 
         /**
@@ -210,7 +208,6 @@ public class GalleryDetailActivity extends AppCompatActivity {
             args.putInt(ARG_SECTION_NUMBER, sectionNumber);
             args.putString(ARG_IMG_TITLE, name);
             args.putString(ARG_IMG_URL, url);
-          //  args.putString(ARG_IMG_AUD, audio);
             fragment.setArguments(args);
             return fragment;
         }

@@ -44,8 +44,15 @@ import java.util.HashMap;
 public class GalleryMain extends AppCompatActivity implements
         GoogleApiClient.OnConnectionFailedListener{
 
-    GalleryAdapter mAdapter;
-    RecyclerView mRecyclerView;
+    private StorageReference storageReference;
+
+    private DatabaseReference imageDatabaseNameRef;
+    private DatabaseReference audioDatabaseNameRef;
+    private DatabaseReference mDatabase;
+    public DatabaseReference DecksCardsRef;
+
+    public FirebaseAuth firebaseAuth;
+
     public String imageName;
     public String audioName;
     public String url_name;
@@ -56,36 +63,27 @@ public class GalleryMain extends AppCompatActivity implements
     public TextView title;
 
     private String cardID;
-
-    private GoogleApiClient mGoogleApiClient;
+    public String userID, albumNameValue;
     public String TAG = GalleryMain.class.getSimpleName();
-    public int REQUEST_INVITE = 1;
-
-    public String invitation_title = "Här kommer en fet app";
+    public String invitation_title = "Download this epic app :)";
     public String invitation_message;
     public String invitation_deep_link = "http://4vector.com/i/free-vector-ramiras-earth-small-icon-clip-art_104864_Ramiras_Earth_Small_Icon_clip_art_medium.png";
 
+    private GoogleApiClient mGoogleApiClient;
 
-    public FirebaseAuth firebaseAuth;
-    public String userID, albumNameValue;
+    public int REQUEST_INVITE = 1;
+    public Boolean delete = false;
 
     public ArrayList<String> CardID = new ArrayList<>();
     public ArrayList<GalleryImageModel> data = new ArrayList<>();
     public ArrayList<String> cardKey = new ArrayList<>();
-    public ArrayList<String> arrayCardsFromDecks = new ArrayList<>();
-
-    private StorageReference storageReference;
-
-    private DatabaseReference imageDatabaseNameRef;
-    private DatabaseReference audioDatabaseNameRef;
-    private DatabaseReference mDatabase;
-    public DatabaseReference DecksCardsRef;
-
-    public Boolean delete = false;
 
     public HashMap<String, String> Imagelist = new HashMap<>();
     public HashMap<String, String> AudioList = new HashMap<>();
     public HashMap<String, String> TextList = new HashMap<>();
+
+    GalleryAdapter mAdapter;
+    RecyclerView mRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,7 +103,6 @@ public class GalleryMain extends AppCompatActivity implements
 
         //Get DeckID
         deckID = getIntent().getExtras().getString("DeckId");
-        Log.d("DeckId2", deckID);
 
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user =  firebaseAuth.getCurrentUser();
@@ -117,7 +114,6 @@ public class GalleryMain extends AppCompatActivity implements
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 CardID.add(dataSnapshot.getKey().toString());
-                Log.d("card1", String.valueOf(CardID));
                 getData(CardID);
 
             }
@@ -187,7 +183,6 @@ public class GalleryMain extends AppCompatActivity implements
 
                     else{
                         Imagelist.put(this_turn, url_name);
-                        Log.d("ImageList", String.valueOf(Imagelist));
                     }
                 }
 
@@ -208,7 +203,6 @@ public class GalleryMain extends AppCompatActivity implements
                     }
                     else{
                         AudioList.put(this_turn, audio_name);
-                        Log.d("AudioList", String.valueOf(AudioList));
                     }
                 }
 
@@ -230,7 +224,6 @@ public class GalleryMain extends AppCompatActivity implements
                     }
                     else{
                         TextList.put(this_turn, text_name);
-                        Log.d("TextList", String.valueOf(TextList));
                         syncData();
                         createGallery();
                     }
@@ -248,16 +241,13 @@ public class GalleryMain extends AppCompatActivity implements
 
     public void syncData(){
         for (HashMap.Entry<String, String> entry : Imagelist.entrySet()) {
-            Log.d("imagelist", String.valueOf(Imagelist));
             GalleryImageModel imageModel = new GalleryImageModel();
             String key = entry.getKey();
-            Log.d("KEY: " + key, "ge mig");
             cardKey.add(key);
             imageModel.setUrl(entry.getValue());
             imageModel.setName(TextList.get(key));
             imageModel.setAudio(AudioList.get(key));
             data.add(imageModel);
-            Log.d("data", String.valueOf(data));
         }
     }
 
@@ -310,37 +300,34 @@ public class GalleryMain extends AppCompatActivity implements
 
         public void createGallery() {
 
+
             Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+            setSupportActionBar(toolbar);
 
             mRecyclerView = (RecyclerView) findViewById(R.id.list);
-        mRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
-        mRecyclerView.setHasFixedSize(true);
-        mAdapter = new GalleryAdapter(GalleryMain.this, data);
-        mRecyclerView.setAdapter(mAdapter);
+            mRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+            mRecyclerView.setHasFixedSize(true);
+            mAdapter = new GalleryAdapter(GalleryMain.this, data);
+            mRecyclerView.setAdapter(mAdapter);
 
-        mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this,
-                new RecyclerItemClickListener.OnItemClickListener() {
+            mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this,
+                    new RecyclerItemClickListener.OnItemClickListener() {
 
-                    @Override
-                    public void onItemClick(View view, final int position) {
-                        if (delete == false){
-                            Intent intent = new Intent(GalleryMain.this, GalleryDetailActivity.class);
-                            intent.putExtra("pos", position);
-                            intent.putParcelableArrayListExtra("data", data);
-                            startActivity(intent);
+                        @Override
+                        public void onItemClick(View view, final int position) {
+                            if (delete == false){
+                                Intent intent = new Intent(GalleryMain.this, GalleryDetailActivity.class);
+                                intent.putExtra("pos", position);
+                                intent.putParcelableArrayListExtra("data", data);
+                                startActivity(intent);
 
-                        }else {
-                            DialogInterface.OnClickListener dialogCklickListener = new DialogInterface.OnClickListener(){
+                            }else {
+                                DialogInterface.OnClickListener dialogCklickListener = new DialogInterface.OnClickListener(){
                                 @Override
                                 public void onClick(DialogInterface dialog, int which){
                                     switch (which){
                                         case DialogInterface.BUTTON_POSITIVE:
-                                            //mRecyclerView.setImageResource(android.R.color.transparent);
-                                            Log.d("pos:" + position ,"ge mig");
-
                                             String cardID = CardID.get(position);
-                                            Log.d("CARDID: " + cardID, "ge mig");
                                             getNameRemoveImgStorage(cardID);
                                             getNameRemoveAudStorage(cardID);
                                             removeDB(cardID);
@@ -362,12 +349,9 @@ public class GalleryMain extends AppCompatActivity implements
                             builder.setMessage("Är du säker att du vill ta bort bilden? Ändringarna är permanenta")
                                     .setPositiveButton("Ja", dialogCklickListener)
                                     .setNegativeButton("Nej", dialogCklickListener).show();
-
                         }
-
                     }
                 }));
-
         }
 
     private void removeStorageImage(String imageName) {
@@ -416,7 +400,6 @@ public class GalleryMain extends AppCompatActivity implements
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 imageName = dataSnapshot.getValue(String.class);
-                Log.d("imageName: " + imageName, "ge mig");
                 removeStorageImage(imageName);
             }
             @Override
@@ -432,7 +415,6 @@ public class GalleryMain extends AppCompatActivity implements
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 audioName = dataSnapshot.getValue(String.class);
-                Log.d("audioName: " + audioName, "ge mig");
                 removeStorageAudio(audioName);
             }
             @Override
@@ -446,7 +428,6 @@ public class GalleryMain extends AppCompatActivity implements
     public void goToAddPhoto(){
         Intent intent = new Intent(GalleryMain.this, AddPhoto.class);
         intent.putExtra("sendDeckID", deckID);
-        Log.d("DeckId3", deckID);
         startActivity(intent);
     }
 
@@ -468,7 +449,6 @@ public class GalleryMain extends AppCompatActivity implements
             public void onClick(DialogInterface dialog, int which){
                switch (which){
                    case DialogInterface.BUTTON_POSITIVE:
-                       Log.d("Delete album", "Hej") ;
                        deleteDeckFromUser();
                        deleteDeckFromDeck();
 
@@ -529,7 +509,6 @@ public class GalleryMain extends AppCompatActivity implements
 
 
     private void deleteDeckFromUser(){
-        Log.d("DECKID: " + deckID, "hej")  ;
         mDatabase.child("Users").child(userID).child("Decks").child(deckID).removeValue();
 
     }
@@ -541,7 +520,6 @@ public class GalleryMain extends AppCompatActivity implements
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 cardID = (dataSnapshot.getKey().toString());
-                Log.d("ArrayCardsDecks: " + arrayCardsFromDecks, "hej");
                 deleteCardsInDeck(cardID);
             }
 
@@ -562,7 +540,6 @@ public class GalleryMain extends AppCompatActivity implements
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Log.d("Nu blev det fel", "hej");
 
             }
         });

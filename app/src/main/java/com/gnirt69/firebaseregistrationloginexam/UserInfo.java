@@ -56,22 +56,10 @@ public class UserInfo extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
 
         picView = (CircleImageView) findViewById(R.id.profile_image);
-        /*localFile = (File) getIntent().getExtras().get("localFile");
 
-        if (localFile == null){
-            picView= (CircleImageView) findViewById(R.id.profile_image);
-            picView.setImageResource(R.drawable.alva);
-        }
-        else{
-        picView= (CircleImageView) findViewById(R.id.profile_image);
-        BitmapFactory.Options bmOptions = new BitmapFactory.Options();
-        Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath(),bmOptions);
-        picView.setImageBitmap(bitmap);
-        }*/
 
 
         tvEmail = (TextView) findViewById(R.id.currentEmail);
-        //tvEmail.setText("Your current email:"+ getIntent().getExtras().getString("Email"));
         tvEmail.setText(getIntent().getExtras().getString("Email"));
 
         tvNick = (TextView) findViewById(R.id.currentNickname);
