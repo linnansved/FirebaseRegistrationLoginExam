@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.gnirt69.firebaseregistrationloginexam.RegistrationActivity"
+    android:background="@drawable/background"
+    >
+
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/tapetaplogo"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/linear"
+        android:id="@+id/tapetaplogo"/>
+
+    <LinearLayout
+        android:id="@+id/linear"
+        android:layout_width="550dp"
+        android:layout_height="400dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/cloud2">
+
+        <ImageView
+            android:id="@+id/whitesq2"
+            android:layout_width="250dp"
+            android:layout_height="300dp"
+            android:layout_marginLeft="150dp"
+            android:background="@android:color/transparent" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/bannerplane"
+        android:layout_width="500dp"
+        android:layout_height="500dp"
+        android:src="@drawable/get_started"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="0dp" />
+
+    <EditText
+        android:id="@+id/txtEmailRegistration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tapetaplogo"
+        android:layout_marginTop="60dp"
+        android:layout_centerInParent="true"
+        android:ems="10"
+        android:hint="Enter your email"
+        android:textSize="25dp"
+        android:inputType="textEmailAddress"
+        android:textAlignment="center"
+        android:typeface="monospace"/>
+
+    <EditText
+        android:id="@+id/txtPasswordRegistration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_below="@id/txtEmailRegistration"
+        android:layout_marginTop="15dp"
+        android:ems="10"
+        android:hint="Enter password"
+        android:textSize="25dp"
+        android:textAlignment="center"
+        android:inputType="textPassword" />
+
+    <EditText
+        android:id="@+id/txtPasswordRegistration2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_below="@id/txtPasswordRegistration"
+        android:layout_marginTop="15dp"
+        android:ems="10"
+        android:hint="Repeat password"
+        android:textSize="25dp"
+        android:textAlignment="center"
+        android:inputType="textPassword" />
+
+    <EditText
+        android:id="@+id/txtNicknameRegistration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_below="@id/txtPasswordRegistration2"
+        android:layout_marginTop="15dp"
+        android:ems="10"
+        android:hint="Set nickname"
+        android:textSize="25dp"
+        android:textAlignment="center"
+        android:inputType="textPersonName"
+        android:typeface="monospace"/>
+
+    <Button
+        android:id="@+id/btnRegistrationUser"
+        android:layout_width="170dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/linear"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/blue_but"
+        android:text="Register"
+        android:textSize="20dp"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:onClick="btnRegistrationUser_Click" />
+</RelativeLayout>

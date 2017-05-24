@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.gnirt69.firebaseregistrationloginexam.addAlbum"
+    android:background="@drawable/background">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/cloud2"
+        android:layout_centerInParent="true"
+        />
+
+    <TextView
+        android:id="@+id/info"
+        android:layout_width="450dp"
+        android:layout_height="350dp"
+        android:background="@android:color/transparent"
+        android:ems="20"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="150dp"
+        android:text="Add a new album and start filling it with fun photos! Maximum length of album name is 10 characters"
+        android:textAlignment="center"
+        android:textSize="30dp"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:typeface="monospace"
+        />
+    <Button
+        android:id="@+id/createAlbumBtn"
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="90dp"
+        android:text="Create Album"
+        android:onClick="onClickCreateAlbum"
+        tools:layout_editor_absoluteX="107dp"
+        android:background="@drawable/blue_but"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:textSize="25dp"
+        android:layout_centerInParent="true"/>
+    <EditText
+        android:id="@+id/albumName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Enter album name"
+        android:textSize="30dp"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        android:typeface="monospace"
+        android:textColor="#0080ff"
+        android:layout_alignBottom="@+id/createAlbumBtn"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="120dp"
+        android:maxLength="10"/>
+
+
+
+</RelativeLayout>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.gnirt69.firebaseregistrationloginexam.Instructions"
+    android:background="@drawable/background">
+
+
+    <TextView
+        android:id="@+id/head"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:background="@android:color/transparent"
+        android:ems="10"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="80dp"
+        android:text="INSTRUCTIONS"
+        android:textSize="30dp"
+        android:textAlignment="center"
+        android:textColor="#01579B"
+        android:textStyle="bold"
+        android:typeface="monospace"
+        />
+
+    <ImageView
+        android:id="@+id/leaf1"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:src="@drawable/leaf"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="70dp"
+        android:layout_below="@id/head"
+        android:layout_marginLeft="40dp"/>
+
+    <TextView
+        android:id="@+id/info1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/leaf1"
+        android:layout_below="@id/head"
+        android:layout_marginTop="70dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:ems="10"
+        android:textSize="25dp"
+        android:layout_marginLeft="10dp"
+        android:typeface="monospace"
+        android:textColor="#01579B"
+        android:text="Click on the + in order to add a new album,you can add up to 8 albums in total."
+        />
+
+    <ImageView
+        android:id="@+id/leaf2"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:src="@drawable/leaf"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/info1"
+        android:layout_marginLeft="40dp"/>
+
+    <TextView
+        android:id="@+id/info2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/leaf1"
+        android:layout_below="@id/info1"
+        android:layout_marginTop="10dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:ems="10"
+        android:textSize="25dp"
+        android:layout_marginLeft="10dp"
+        android:typeface="monospace"
+        android:textColor="#01579B"
+        android:text="You can navigate between parent and child mode by clicking on the lock, in child mode you can only view pictures, not edit any infromation."
+        />
+
+    <ImageView
+        android:id="@+id/leaf3"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:src="@drawable/leaf"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/info2"
+        android:layout_marginLeft="40dp"/>
+
+    <TextView
+        android:id="@+id/info3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/leaf1"
+        android:layout_below="@id/info2"
+        android:layout_marginTop="10dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:ems="10"
+        android:textSize="25dp"
+        android:layout_marginLeft="10dp"
+        android:typeface="monospace"
+        android:textColor="#01579B"
+        android:text="Albums can bedeleted and shared with other users, these functions will appear as you enter one of the albums when in parent mode."        />
+
+</RelativeLayout>
